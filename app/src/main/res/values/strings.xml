@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Juridex_v1.3</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <array name="tab_name">
+        <item>Home</item>
+        <item>Profile</item>
+        <item>Premium</item>
+    </array>
+
+</resources>
