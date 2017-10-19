@@ -62,7 +62,6 @@ import views.FragNavController;
 
     public class MainActivity extends BaseActivity implements BaseFragment.FragmentNavigation, FragNavController.TransactionListener, FragNavController.RootFragmentListener {
 
-
         @BindView(R.id.content_frame)
         FrameLayout contentFrame;
 
