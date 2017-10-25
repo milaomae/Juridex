@@ -26,11 +26,11 @@ public class HomeFragment extends BaseFragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View view = inflater.inflate(R.layout.fragment_premium, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         ButterKnife.bind(this, view);
 
-        ( (MainActivity)getActivity()).updateToolbarTitle("Premium");
+        ( (MainActivity)getActivity()).updateToolbarTitle("Home");
 
 
         return view;
