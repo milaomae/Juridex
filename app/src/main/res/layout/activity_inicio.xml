@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fundo">
+
+    <RelativeLayout
+        android:layout_width="310dp"
+        android:layout_height="470dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@color/rectBorder"
+        android:layout_marginTop="50dp">
+
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="460dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:background="@color/rect"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Juridex"
+                android:gravity="center"
+                android:fontFamily=""
+                android:id="@+id/txtTitulo"
+                android:textColor="@color/rectBorder"
+                android:textSize="40dp"/>
+
+            <ImageView
+                android:layout_width="291dp"
+                android:layout_height="290dp"
+                android:background="@drawable/juridex"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:background="@color/rectBorder">
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="começar"
+                android:fontFamily="cursive"
+                android:textSize="25dp"
+                android:id="@+id/btnComecar"
+                android:textStyle="bold"
+
+                android:background="#F4FFDE"
+                />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

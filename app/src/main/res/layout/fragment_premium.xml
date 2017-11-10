@@ -3,7 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="layout.PremiumFragment"
+
     android:layout_gravity="center"
+    android:orientation="vertical"
+    android:background="@drawable/fundo">
+
+    <RelativeLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="310dp"
+        android:layout_height="470dp"
+        android:layout_gravity="center"
+    android:gravity="center"
     android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
@@ -13,6 +23,165 @@
         android:text="Premium Fragment"
         android:textSize="25sp"
         android:layout_gravity="center"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:background="@color/rectBorder"
+       android:layout_marginTop="15dp"
+        />
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:background="@color/rect"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/verdeCl">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Premium"
+                    android:textColor="@color/bluebr"
+                    android:textSize="30dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textStyle="bold"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@color/bluebr"
+                    android:layout_gravity="bottom"/>
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="415dp"
+                android:orientation="vertical"
+                android:layout_marginTop="45dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:text="Mensal"
+                android:textColor="@color/bluebr"
+                android:gravity="center_horizontal"
+                />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/valores_mensal"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                android:textSize="25dp"
+                android:textColor="@color/bluebr"
+                />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp">
+            <Button
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:background="@drawable/designroundbutton"
+                android:text="$"
+                android:textSize="45dp"
+                android:textColor="@color/bluebr"/>
+            <Button
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:background="@drawable/designroundbutton"
+                android:text="$"
+                android:textSize="45dp"
+                android:textAlignment="center"
+                android:layout_marginLeft="100dp"
+                android:textColor="@color/bluebr"/>
+            <Button
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:background="@drawable/designroundbutton"
+                android:text="$"
+                android:textSize="45dp"
+                android:layout_marginLeft="200dp"
+                android:gravity="center"
+                android:textColor="@color/bluebr"/>
+
+            </RelativeLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@color/bluebr"
+                android:layout_gravity="center_vertical"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:text="Anual"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/bluebr"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/valores_mensal"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                android:textSize="25dp"
+                android:textColor="@color/bluebr"
+                />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp">
+                <Button
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:background="@drawable/designroundbutton"
+                    android:text="$"
+                    android:textSize="45dp"
+                    android:textColor="@color/bluebr"/>
+                <Button
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:background="@drawable/designroundbutton"
+                    android:text="$"
+                    android:textSize="45dp"
+                    android:textAlignment="center"
+                    android:layout_marginLeft="100dp"
+                    android:textColor="@color/bluebr"/>
+                <Button
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:background="@drawable/designroundbutton"
+                    android:text="$"
+                    android:textSize="45dp"
+                    android:layout_marginLeft="200dp"
+                    android:gravity="center"
+                    android:textColor="@color/bluebr"/>
+
+            </RelativeLayout>
+            </LinearLayout>
+
+
+        </FrameLayout>
+
+    </RelativeLayout>
+
+
 
 </LinearLayout>

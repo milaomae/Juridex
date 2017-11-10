@@ -41,5 +41,16 @@
     <color name="grey_trans">#c7c7c7</color>
 
 
+    <!-- cores app -->
     <color name="green">#70c050</color>
+
+    <color name="rect">#64ffffff</color>
+
+    <color name="rectBorder">#64203b50</color>
+
+    <color name="bluebr">#203b50</color>
+
+    <color name="yellowbr">#FFA60A</color>
+
+    <color name="verdeCl">#F4FFDE</color>
 </resources>

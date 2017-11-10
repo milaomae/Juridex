@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.lucas.juridex_v13.MainActivity"
-    android:orientation="vertical"
-   >
+    android:background="@color/chrome_grey"
+    android:gravity="center"
+    android:orientation="vertical">
+
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -21,7 +22,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0dp"
         android:background="@drawable/bottom_shadow" />
 
 
@@ -38,7 +39,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0dp"
         android:background="@drawable/bottom_shadow" />
 
 
@@ -50,15 +51,8 @@
         android:layout_weight="1"
         android:background="@color/white" />
 
-
-
-    <!--<android.support.design.widget.BottomNavigationView
-        android:id="@+id/bottom_menu"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:menu="@menu/bottom_bar"
-        app:itemIconTint="@android:color/holo_red_dark"
-        app:itemTextColor="@android:color/holo_red_dark"/>  -->
-
+        android:layout_height="4dp"
+        android:background="@color/yellowbr"/>
 </LinearLayout>

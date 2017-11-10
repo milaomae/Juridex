@@ -30,8 +30,7 @@ import java.util.Stack;
  * Nic.Capdevila@gmail.com
  * <p>
  * Originally Created March 2016
- */
-@SuppressWarnings("RestrictedApi")
+ */@SuppressWarnings("RestrictedApi")
 public class FragNavController {
     //Declare the constants  There is a maximum of 5 tabs, this is per Material Design's Bottom Navigation's design spec.
     public static final int NO_TAB = -1;

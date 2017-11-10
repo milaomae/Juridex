@@ -14,11 +14,6 @@ import android.support.v7.widget.Toolbar;
 
 
 
-
-/**
- * Created by f22labs on 07/03/17.
- */
-
 public class BaseActivity extends AppCompatActivity {
 
     @Override

@@ -11,4 +11,6 @@
         <item>Premium</item>
     </array>
 
+    <string name="valores_mensal">R$6,70 / €1,72/ $2,00</string>
+
 </resources>

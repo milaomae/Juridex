@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.lucas.juridex_v13.InicioActivity;
 import com.example.lucas.juridex_v13.MainActivity;
 import com.example.lucas.juridex_v13.R;
 
@@ -30,7 +31,7 @@ public class ProfileFragment extends BaseFragment {
 
         ButterKnife.bind(this, view);
 
-        ( (MainActivity)getActivity()).updateToolbarTitle("Profile");
+        ( (InicioActivity)getActivity()).updateToolbarTitle("Profile");
 
 
         return view;
