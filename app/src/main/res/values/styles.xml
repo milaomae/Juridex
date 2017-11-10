@@ -1,7 +1,10 @@
 <resources>
 
+    <style name="AppTheme" parent="AppTheme.Base">
+
     <!-- Base application theme. -->
     <!--parent="Theme.AppCompat.Light.DarkActionBar"-->
+<<<<<<< HEAD
     <style name="AppTheme" parent="AppTheme.Base">
         <!-- Customize your theme here. -->
        <!-- <item name="colorPrimary">@color/colorPrimary</item>
@@ -9,7 +12,11 @@
         <item name="colorAccent">@color/colorAccent</item>
    -->
     </style>
+=======
+>>>>>>> 4b3af3a267e67594933610dd3c1f7886f409ab98
 
+
+    </style>
 
     <style name="AppTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="windowNoTitle">true</item>
@@ -32,4 +39,12 @@
 
     </style>
 
+<<<<<<< HEAD
+=======
+    
+
+=======
+>>>>>>> 3fdbe9901c4de18dc7a8d6ae0069bb331b75b7fa
+
+>>>>>>> 4b3af3a267e67594933610dd3c1f7886f409ab98
 </resources>

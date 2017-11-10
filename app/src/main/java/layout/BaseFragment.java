@@ -33,7 +33,7 @@ import android.support.v4.app.Fragment;
 
 public class BaseFragment extends Fragment {
 
-    public static final String ARGS_INSTANCE = "com.example.lucas.juridex_v13";
+    public static final String ARGS_INSTANCE = "com.f22labs.instalikefragmenttransaction";
 
 
     FragmentNavigation mFragmentNavigation;

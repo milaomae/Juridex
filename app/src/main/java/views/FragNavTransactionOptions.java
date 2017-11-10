@@ -13,7 +13,6 @@ import java.util.List;
  *
  */
 
-
 public class FragNavTransactionOptions {
     List<Pair<View, String>> sharedElements;
     @FragNavController.Transit
@@ -112,3 +111,4 @@ public class FragNavTransactionOptions {
         }
     }
 }
+
