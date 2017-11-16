@@ -1,46 +1,54 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:context="layout.PremiumFragment"
+    android:orientation="vertical"
     android:background="@drawable/fundo">
 
-    <RelativeLayout
+
+<RelativeLayout
+        android:layout_marginTop="20dp"
         android:layout_width="310dp"
         android:layout_height="470dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:background="@color/rectBorder"
-        >
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/roundcornerborda">
 
 
         <FrameLayout
-            android:layout_width="300dp"
-            android:layout_height="460dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:layout_gravity="center"
-            android:background="@color/rect"
+            android:background="@drawable/roundcorner"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="35dp"
+
+            <ImageButton
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginLeft="90dp"
+                android:id="@+id/facilUm"
+                android:tooltipText="1"
                 android:background="@drawable/button"/>
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+
+            <ImageButton
+                android:layout_width="90dp"
+                android:layout_height="90dp"
                 android:layout_marginLeft="90dp"
-                android:layout_marginTop="185dp"
+                android:layout_marginTop="195dp"
+                android:id="@+id/medioUm"
                 android:background="@drawable/button"/>
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+            <ImageButton
+                android:layout_width="90dp"
+                android:layout_height="90dp"
                 android:layout_marginLeft="90dp"
-                android:layout_marginTop="345dp"
+                android:layout_marginTop="340dp"
+                android:id="@+id/dificilUm"
                 android:background="@drawable/button"/>
 
 
@@ -48,17 +56,16 @@
 
     </RelativeLayout>
 
-
     <ImageView
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:background="@drawable/pano_lvl"
-        android:layout_marginTop="20dp"
         />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="35dp"
         android:layout_marginLeft="20dp"
         android:textSize="30dp"
         android:text="F"
@@ -67,7 +74,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="57dp"
+        android:layout_marginTop="37dp"
         android:layout_marginLeft="45dp"
         android:textSize="30dp"
         android:text="Á"
@@ -76,7 +83,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="70dp"
         android:textSize="30dp"
         android:text="C"
@@ -85,7 +92,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="43dp"
+        android:layout_marginTop="23dp"
         android:layout_marginLeft="100dp"
         android:textSize="30dp"
         android:text="I"
@@ -94,7 +101,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginLeft="120dp"
         android:textSize="30dp"
         android:text="L"
@@ -106,12 +113,12 @@
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:background="@drawable/pano_lvl"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="145dp"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="205dp"
+        android:layout_marginTop="185dp"
         android:layout_marginLeft="20dp"
         android:textSize="30dp"
         android:text="M"
@@ -120,7 +127,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="208dp"
+        android:layout_marginTop="188dp"
         android:layout_marginLeft="50dp"
         android:textSize="30dp"
         android:text="É"
@@ -129,7 +136,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="180dp"
         android:layout_marginLeft="74dp"
         android:textSize="30dp"
         android:text="D"
@@ -138,7 +145,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="193dp"
+        android:layout_marginTop="173dp"
         android:layout_marginLeft="100dp"
         android:textSize="30dp"
         android:text="I"
@@ -147,7 +154,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="190dp"
+        android:layout_marginTop="170dp"
         android:layout_marginLeft="120dp"
         android:textSize="30dp"
         android:text="O"
@@ -160,12 +167,12 @@
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:background="@drawable/pano_lvl"
-        android:layout_marginTop="330dp"
+        android:layout_marginTop="288dp"
         />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="365dp"
+        android:layout_marginTop="320dp"
         android:layout_marginLeft="20dp"
         android:textSize="30dp"
         android:text="D"
@@ -174,7 +181,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="368dp"
+        android:layout_marginTop="318dp"
         android:layout_marginLeft="53dp"
         android:textSize="30dp"
         android:text="I"
@@ -183,7 +190,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="360dp"
+        android:layout_marginTop="310dp"
         android:layout_marginLeft="73dp"
         android:textSize="30dp"
         android:text="F"
@@ -192,7 +199,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="358dp"
+        android:layout_marginTop="308dp"
         android:layout_marginLeft="100dp"
         android:textSize="30dp"
         android:text="Í"
@@ -201,11 +208,29 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="355dp"
-        android:layout_marginLeft="120dp"
+        android:layout_marginTop="308dp"
+        android:layout_marginLeft="110dp"
         android:textSize="30dp"
-        android:text="L"
+        android:text="C"
         android:id="@+id/tres3333"
         android:textColor="@color/rectBorder"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="308dp"
+        android:layout_marginLeft="130dp"
+        android:textSize="30dp"
+        android:text="I"
+        android:id="@+id/tres33333"
+        android:textColor="@color/rectBorder"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="315dp"
+        android:layout_marginLeft="150dp"
+        android:textSize="30dp"
+        android:text="L"
+        android:id="@+id/tres333333"
+        android:textColor="@color/rectBorder"/>
 
-</FrameLayout>
+</RelativeLayout>

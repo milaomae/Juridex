@@ -31,7 +31,7 @@ public class PremiumFragment extends BaseFragment {
 
         ButterKnife.bind(this, view);
 
-        ((InicioActivity)getActivity()).updateToolbarTitle("Premium");
+      //  ((InicioActivity)getActivity()).updateToolbarTitle("Premium");
 
 
         return view;
