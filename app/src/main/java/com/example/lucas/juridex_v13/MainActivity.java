@@ -32,12 +32,18 @@ public class MainActivity extends AppCompatActivity {
 
     Button btnEntrar;
     Intent principal;
+    TextView txtTitulo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        txtTitulo = (TextView)findViewById(R.id.txtTitulo);
+
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/BerkshireSwash-Regular.ttf");
+
+        txtTitulo.setTypeface(custom_font);
 
         btnEntrar = (Button) findViewById(R.id.btnEntrar);
         btnEntrar.setOnClickListener(new View.OnClickListener() {
