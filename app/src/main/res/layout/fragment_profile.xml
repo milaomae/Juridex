@@ -1,17 +1,49 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="layout.ProfileFragment"
+    tools:context="layout.PremiumFragment"
+    android:orientation="vertical"
+    android:background="@drawable/fundo">
 
-    android:gravity="center">
-   <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Profile Fragment"
-        android:textSize="25sp"
-        android:layout_gravity="center"
-        android:gravity="center"/>
 
-</LinearLayout>
+<RelativeLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="310dp"
+        android:layout_height="470dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/roundcornerborda">
+
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fillViewport="true">
+    
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:background="@drawable/roundcorner"
+            android:orientation="vertical">
+
+                <ImageButton
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
+                    android:background="@drawable/circlebutton"
+                             />
+                
+               
+
+
+        </FrameLayout>
+    
+    </ScrollView>
+
+    </RelativeLayout>
+
+    
+
+</RelativeLayout>
