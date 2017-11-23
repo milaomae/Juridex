@@ -3,7 +3,9 @@ package com.example.lucas.juridex_v13;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,74 +34,32 @@ public class InicioActivity extends BaseActivity implements BaseFragment.Fragmen
   //  @BindView(R.id.toolbar)
   //  Toolbar toolbar;
 
-    private int[] mTabIconsSelected = {
-            R.drawable.ic_action_home,
-            R.drawable.ic_action_perfil,
-            R.drawable.ic_action_premium};
-
-
-
-    @BindArray(R.array.tab_name)
-    String[] TABS;
-
-    @BindView(R.id.bottom_tab_layout)
-    TabLayout bottomTabLayout;
-
-    private FragNavController mNavController;
-
-    private FragmentHistory fragmentHistory;
+    private static final String TAG = "Inicio activity";
+    private SectionsPageAdapter mSectionsPageAdapter;
+    private ViewPager mViewPager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Log.d(TAG, "onCreate: Starting.");
 
-        ButterKnife.bind(this);
+        mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
 
+        mViewPager = (ViewPager) findViewById(R.id.container);
+        setupViewPager(mViewPager);
 
-      //  initToolbar();
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
+    }
 
-        initTab();
-
-        fragmentHistory = new FragmentHistory();
-
-
-        mNavController = FragNavController.newBuilder(savedInstanceState, getSupportFragmentManager(), R.id.content_frame)
-                .transactionListener(this)
-                .rootFragmentListener(this, TABS.length)
-                .build();
-
-
-        switchTab(0);
-
-        bottomTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-
-                fragmentHistory.push(tab.getPosition());
-
-                switchTab(tab.getPosition());
-
-
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-                mNavController.clearStack();
-
-                switchTab(tab.getPosition());
-
-
-            }
-        });
-
+    private void setupViewPager(ViewPager viewPager){
+        SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
+        adapter.addFragment(new HomeFragment(), "home");
+        adapter.addFragment(new PremiumFragment(), "premium");
+        adapter.addFragment(new ProfileFragment(), "profile");
+        viewPager.setAdapter(adapter);
     }
 
    // private void initToolbar() {
