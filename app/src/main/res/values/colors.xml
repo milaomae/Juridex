@@ -53,5 +53,8 @@
     <color name="yellowbr">#FFA60A</color>
 
     <color name="verdeCl">#F4FFDE</color>
+    
     <color name="accent_material_dark_1">#80cbc4</color>
+    
+    <color name="bluegrey">#47525E</color>
 </resources>
