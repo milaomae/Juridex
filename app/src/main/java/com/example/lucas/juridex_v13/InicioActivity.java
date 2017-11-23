@@ -29,8 +29,8 @@ public class InicioActivity extends BaseActivity implements BaseFragment.Fragmen
     @BindView(R.id.content_frame)
     FrameLayout contentFrame;
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+  //  @BindView(R.id.toolbar)
+  //  Toolbar toolbar;
 
     private int[] mTabIconsSelected = {
             R.drawable.ic_action_home,
@@ -58,7 +58,7 @@ public class InicioActivity extends BaseActivity implements BaseFragment.Fragmen
         ButterKnife.bind(this);
 
 
-        initToolbar();
+      //  initToolbar();
 
         initTab();
 
@@ -102,11 +102,11 @@ public class InicioActivity extends BaseActivity implements BaseFragment.Fragmen
 
     }
 
-    private void initToolbar() {
-        setSupportActionBar(toolbar);
+   // private void initToolbar() {
+    //    setSupportActionBar(toolbar);
 
 
-    }
+   // }
 
     private void initTab() {
         if (bottomTabLayout != null) {
@@ -246,16 +246,16 @@ public class InicioActivity extends BaseActivity implements BaseFragment.Fragmen
         if (getSupportActionBar() != null && mNavController != null) {
 
 
-            updateToolbar();
+          //  updateToolbar();
 
         }
     }
 
-    private void updateToolbar() {
+  /*  private void updateToolbar() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(!mNavController.isRootFragment());
         getSupportActionBar().setDisplayShowHomeEnabled(!mNavController.isRootFragment());
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back);
-    }
+    }*/
 
 
     @Override
@@ -264,7 +264,7 @@ public class InicioActivity extends BaseActivity implements BaseFragment.Fragmen
         // If we have a backstack, show the back button
         if (getSupportActionBar() != null && mNavController != null) {
 
-            updateToolbar();
+           // updateToolbar();
 
         }
     }
@@ -294,11 +294,11 @@ public class InicioActivity extends BaseActivity implements BaseFragment.Fragmen
 //    }
 
 
-    public void updateToolbarTitle(String title) {
+   /* public void updateToolbarTitle(String title) {
 
 
         getSupportActionBar().setTitle(title);
 
-    }
+    }*/
 }
 

@@ -22,7 +22,7 @@ public class BaseActivity extends AppCompatActivity {
 
     }
 
-    public void initToolbar(Toolbar toolbar, boolean isBackEnabled) {
+    /*public void initToolbar(Toolbar toolbar, boolean isBackEnabled) {
         setSupportActionBar(toolbar);
 
         if(isBackEnabled) {
@@ -31,9 +31,9 @@ public class BaseActivity extends AppCompatActivity {
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back);
 
         }
-    }
+    }*/
 
-    public void initToolbar(Toolbar toolbar, String title, boolean isBackEnabled) {
+   /* public void initToolbar(Toolbar toolbar, String title, boolean isBackEnabled) {
 
         setSupportActionBar(toolbar);
 
@@ -48,7 +48,7 @@ public class BaseActivity extends AppCompatActivity {
 
 
 
-    }
+    }*/
 
 
 

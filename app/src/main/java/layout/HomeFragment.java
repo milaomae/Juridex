@@ -3,12 +3,15 @@ package layout;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.lucas.juridex_v13.BaseActivity;
+import com.example.lucas.juridex_v13.InicioActivity;
 import com.example.lucas.juridex_v13.MainActivity;
 import com.example.lucas.juridex_v13.R;
 
@@ -21,8 +24,8 @@ import butterknife.ButterKnife;
 
 public class HomeFragment extends BaseFragment {
 
-
-    Button btnClickMe;
+    //@BindView(R.id.facilUm)
+    //Button btnFacilUm;
 
     int fragCount;
 
@@ -55,7 +58,6 @@ public class HomeFragment extends BaseFragment {
 
         View view = inflater.inflate(R.layout.fragment_niveis, container, false);
 
-
         ButterKnife.bind(this, view);
 
         Bundle args = getArguments();
@@ -63,16 +65,26 @@ public class HomeFragment extends BaseFragment {
             fragCount = args.getInt(ARGS_INSTANCE);
         }
 
-      //  View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-     //   ButterKnife.bind(this, view);
-
-      //  ( (MainActivity)getActivity()).updateToolbarTitle("Home");
-
-
+        //( (InicioActivity)getActivity()).updateToolbarTitle("Niveis");
 
         return view;
     }
+
+    /*@Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        btnFacilUm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (mFragmentNavigation != null) {
+                    mFragmentNavigation.pushFragment(HomeFragment.newInstance(fragCount + 1));
+
+                }
+            }
+        });
+
+    }*/
     @Override
     public void onDestroyView() {
         super.onDestroyView();

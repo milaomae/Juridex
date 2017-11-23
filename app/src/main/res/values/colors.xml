@@ -13,7 +13,7 @@
     <color name="orange">#F07B3F</color>
 
     <color name="grey">#949494</color>
-    <color name="red">#FE3824</color>
+    <color name="red">#64dd17</color>
     <color name="red_logout">#E95354</color>
 
     <color name="white">#FFFFFF</color>
@@ -53,4 +53,5 @@
     <color name="yellowbr">#FFA60A</color>
 
     <color name="verdeCl">#F4FFDE</color>
+    <color name="accent_material_dark_1">#80cbc4</color>
 </resources>
