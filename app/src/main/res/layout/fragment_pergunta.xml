@@ -77,25 +77,29 @@
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:background="@drawable/roundcorner"/>
+                    android:background="@drawable/roundcorner"
+                    android:id="@+id/btnA"/>
 
                 <Button
                     android:layout_marginTop="65dp"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:background="@drawable/roundcorner"/>
+                    android:background="@drawable/roundcorner"
+                    android:id="@+id/btnB"/>
 
                 <Button
                     android:layout_marginTop="130dp"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:background="@drawable/roundcorner"/>
+                    android:background="@drawable/roundcorner"
+                    android:id="@+id/btnC"/>
 
                 <Button
                     android:layout_marginTop="195dp"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:background="@drawable/roundcorner"/>
+                    android:background="@drawable/roundcorner"
+                    android:id="@+id/btnD"/>
 
 
             </RelativeLayout>

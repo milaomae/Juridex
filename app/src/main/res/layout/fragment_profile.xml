@@ -33,7 +33,8 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/ic_settings_black_24dp"
-            android:tint="@color/white"/>
+            android:tint="@color/white"
+            />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -41,66 +42,169 @@
             android:layout_marginTop="60dp"
             >
 
-            <TextView
+            <utils.MyTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nome: "
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="150dp"
+                android:textSize="20dp"
                 android:id="@+id/txtnomenpc"/>
 
-            <TextView
+            <utils.MyTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginLeft="210dp"
+                android:textSize="20dp"
                 android:id="@+id/txtnome_profile"/>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
+                android:layout_height="3dp"
                 android:background="@color/bluebr"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="80dp"
                 />
-
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp">
             <ImageButton
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:background="@drawable/circlebutton"/>
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/circlebutton"
+                android:translationZ="5dp"/>
 
             <utils.MyTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Experiência: "
-                android:layout_marginTop="55dp"
-                android:layout_marginLeft="130dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginLeft="145dp"
                 android:textSize="15dp"
                 android:textColor="@color/bluegrey"/>
 
-            <FrameLayout
+            <utils.MyTextView
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtExperiencia"
+                android:layout_marginTop="70dp"
+                android:layout_marginLeft="265dp"
+                android:text="1200/2000"/>
+
+            <FrameLayout
+                android:layout_width="250dp"
                 android:layout_height="20dp"
-                android:layout_marginTop="75dp"
-                android:layout_marginLeft="90dp">
+                android:layout_marginTop="90dp"
+                android:layout_marginLeft="105dp">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp">
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:background="@color/bluebr">
 
                 </LinearLayout>
             </FrameLayout>
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="130dp">
+
+                    <utils.MyTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Testes Realizados:"
+                    android:textSize="15dp"
+                        />
+
+                    <utils.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="Total:"
+                        android:textSize="13dp"/>
+
+                    <utils.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginLeft="50dp"
+                        android:text="100"
+                        android:textSize="13dp"/>
+
+                    <utils.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="22dp"
+                        android:layout_marginLeft="165dp"
+                        android:text="30"
+                        android:textSize="13dp"/>
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="190dp"
+                        android:background="@drawable/circlebutton"
+                        android:backgroundTint="@color/green"/>
+
+                    <utils.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="22dp"
+                        android:layout_marginLeft="235dp"
+                        android:text="30"
+                        android:textSize="13dp"
+                        />
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="260dp"
+                        android:background="@drawable/circlebutton"
+                        android:backgroundTint="@color/yellow"/>
+
+                    <utils.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="22dp"
+                        android:layout_marginLeft="305dp"
+                        android:text="30"
+                        android:textSize="13dp"/>
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="330dp"
+                        android:background="@drawable/circlebutton"
+                        android:backgroundTint="@color/red_logout"/>
+
+
+                </RelativeLayout>
+
+            </RelativeLayout>
 
         </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="280dp">
         <View
             android:layout_width="match_parent"
-            android:layout_height="5dp"
+            android:layout_height="3dp"
             android:background="@color/bluebr"
-            android:layout_marginTop="200dp"
             />
 
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="205dp">
+            >
     <ScrollView
     android:layout_height="200dp"
     android:layout_width="match_parent">
@@ -135,7 +239,7 @@
 
         </LinearLayout>
 
-
+        </RelativeLayout>
 
     </RelativeLayout>
 

@@ -30,17 +30,7 @@ public class HomeFragment extends Fragment {
     //@BindView(R.id.facilUm)
     //Button btnFacilUm;
     ImageButton btnfacilUm, btnmedioUm, btndificilUm;
-
-    int fragCount;
-
-
-    public static HomeFragment newInstance(int instance) {
-        Bundle args = new Bundle();
-        args.putInt(ARGS_INSTANCE, instance);
-        HomeFragment fragment = new HomeFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
+    private InicioActivity activity;
 
 
     public HomeFragment() {
@@ -63,16 +53,6 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_niveis, container, false);
 
 
-
-        ButterKnife.bind(this, view);
-
-        Bundle args = getArguments();
-        if (args != null) {
-            fragCount = args.getInt(ARGS_INSTANCE);
-        }
-
-        //( (InicioActivity)getActivity()).updateToolbarTitle("Niveis");
-
         return view;
     }
 
@@ -85,11 +65,9 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-
-                if (mFragmentNavigation != null) {
-                    mFragmentNavigation.pushFragment(HomeFragment.newInstance(fragCount + 1));
-
-                }
+                activity.getSupportFragmentManager().beginTransaction()
+                        .add(R.id.principal_container, new CadastroFragment())
+                        .commit();
             }
         });
 
@@ -97,5 +75,11 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+    }
+
+
+    public void onAttach(InicioActivity activity)    {
+        super.onAttach(activity);
+        this.activity = activity;
     }
 }

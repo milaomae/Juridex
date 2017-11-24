@@ -23,14 +23,14 @@
         android:gravity="center"
         android:background="@drawable/roundcorner"
         android:orientation="vertical"
+           android:id="@+id/principal_container"
            >
 
-           <TextView
+           <utils.MyTextView
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:text="Juridex"
                android:gravity="center_horizontal"
-               android:fontFamily=""
                android:id="@+id/txtTitulo"
                android:textColor="@color/bluebr"
                android:textSize="30dp"/>
@@ -81,7 +81,7 @@
                android:layout_width="270dp"
                android:layout_height="wrap_content"
                android:text="Cadastre-se"
-               android:id="@+id/cadastrar"
+               android:id="@+id/btnCadastrar"
                android:background="@drawable/designbutton"/>
 
     </LinearLayout>

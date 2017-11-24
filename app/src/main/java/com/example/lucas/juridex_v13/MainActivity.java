@@ -20,6 +20,7 @@ import butterknife.BindArray;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import layout.BaseFragment;
+import layout.CadastroFragment;
 import layout.HomeFragment;
 import layout.PremiumFragment;
 import layout.ProfileFragment;
@@ -30,8 +31,8 @@ import views.FragNavController;
 public class MainActivity extends AppCompatActivity {
 
 
-    Button btnEntrar;
-    Intent principal;
+    Button btnEntrar, btnCadastrar;
+    Intent principal, cadastro;
     TextView txtTitulo;
 
     @Override
@@ -51,6 +52,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 principal = new Intent(MainActivity.this, InicioActivity.class);
                 startActivity(principal);
+            }
+        });
+
+        btnCadastrar = (Button) findViewById(R.id.btnCadastrar);
+        btnCadastrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.principal_container, new CadastroFragment())
+                        .commit();
             }
         });
 
