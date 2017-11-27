@@ -19,6 +19,7 @@ public class SectionsStatePagerAdapter extends FragmentStatePagerAdapter{
     private final HashMap<Fragment, Integer> mFragmemts = new HashMap<>();
     private final HashMap<String, Integer> mFragmemtsNumbers = new HashMap<>();
     private final HashMap<Integer, String> mFragmemtsNames = new HashMap<>();
+    private final List<Integer> mNiveis = new ArrayList<>();
 
 
     public SectionsStatePagerAdapter(FragmentManager fm) {
@@ -40,7 +41,14 @@ public class SectionsStatePagerAdapter extends FragmentStatePagerAdapter{
         mFragmemts.put(fragment, mFragmentList.size()-1);
         mFragmemtsNumbers.put(fragmentName, mFragmentList.size()-1);
         mFragmemtsNames.put(mFragmentList.size()-1, fragmentName);
+    }
 
+    public void addFragment(Fragment fragment, String fragmentName, int nivel){
+        mFragmentList.add(fragment);
+        mFragmemts.put(fragment, mFragmentList.size()-1);
+        mFragmemtsNumbers.put(fragmentName, mFragmentList.size()-1);
+        mFragmemtsNames.put(mFragmentList.size()-1, fragmentName);
+        mNiveis.add(nivel);
     }
 
     public Integer getFragmentNumber(String fragmentName){

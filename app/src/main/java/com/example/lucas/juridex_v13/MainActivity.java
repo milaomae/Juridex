@@ -5,31 +5,17 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.TabLayout;
 
 
 import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import com.example.lucas.juridex_v13.Game.GameActivity;
 
-import layout.BaseFragment;
 import layout.CadastroFragment;
-import layout.HomeFragment;
-import layout.PremiumFragment;
-import layout.ProfileFragment;
-import utils.FragmentHistory;
-import utils.Utils;
-import views.FragNavController;
 
 public class MainActivity extends AppCompatActivity {
 

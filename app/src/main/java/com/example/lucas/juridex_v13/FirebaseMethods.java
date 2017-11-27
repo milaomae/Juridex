@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.lucas.juridex_v13.Common.Common;
 import com.example.lucas.juridex_v13.models.Question;
 import com.example.lucas.juridex_v13.models.User;
 import com.example.lucas.juridex_v13.models.UserAccountSettings;
@@ -36,6 +37,7 @@ public class FirebaseMethods {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;
 
+
     private Context mContext;
 
     public FirebaseMethods(Context context) {
@@ -49,17 +51,21 @@ public class FirebaseMethods {
         }
     }
 
-    public List<Question> loadQuestions(String nivel,DataSnapshot dataSnapshot) {
-        Log.d(TAG, "loadQuestions: loading questions from database");
-        List<Question> arrayQuestions = new ArrayList<Question>();
+    public void loadQuestion(String nivel, int cont,DataSnapshot dataSnapshot) {
+        Log.d(TAG, "loadQuestions: loading a question from database");
         Question question = new Question();
-        int cont = 1;
-        while(dataSnapshot.child("questions").child(nivel).child(cont + "").hasChildren()){
-            arrayQuestions.add(dataSnapshot.child("questions").child(nivel).child(cont + "").getValue(Question.class));
-            cont++;
+        for(DataSnapshot ds : dataSnapshot.child("questions").getChildren()){
+            if(ds.getKey().equals(nivel)){
+                question.setQuestion(ds.child(cont + "").getValue(Question.class).getQuestion());
+                question.setAnswera(ds.child(cont + "").getValue(Question.class).getAnswera());
+                question.setAnswerb(ds.child(cont + "").getValue(Question.class).getAnswerb());
+                question.setAnswerc(ds.child(cont + "").getValue(Question.class).getAnswerc());
+                question.setAnswerd(ds.child(cont + "").getValue(Question.class).getAnswerd());
+                question.setCorrect(ds.child(cont + "").getValue(Question.class).getCorrect());
+                question.setJustificativa(ds.child(cont + "").getValue(Question.class).getJustificativa());
+                Common.questionList.add(question);
+            }
         }
-
-    return arrayQuestions;
 
 }
 

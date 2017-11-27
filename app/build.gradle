@@ -47,10 +47,10 @@ dependencies {
     //Circle ImageView
     compile 'de.hdodenhof:circleimageview:2.2.0'
     //dialog
-
     compile 'com.afollestad.material-dialogs:core:0.9.6.0'
 
     testCompile 'junit:junit:4.12'
     androidTestCompile 'junit:junit:4.12'
+
 }
 apply plugin: 'com.google.gms.google-services'

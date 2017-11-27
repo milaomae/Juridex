@@ -1,0 +1,36 @@
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/toolbar_question">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:background="@color/white"
+        >
+
+        <com.example.lucas.juridex_v13.Utils.MyTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtnivelAtual"
+            android:textSize="20dp"
+            android:text="nivel"
+            android:layout_marginLeft="130dp"
+            />
+
+        <com.example.lucas.juridex_v13.Utils.MyTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtperguntaInfo"
+            android:textSize="20dp"
+            android:text="2/15"
+            android:layout_marginLeft="20dp"
+            />
+
+    </android.support.v7.widget.Toolbar>
+
+</RelativeLayout>
+
+</merge>

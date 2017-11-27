@@ -10,13 +10,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
 import com.example.lucas.juridex_v13.Login.LoginActivity;
-import com.example.lucas.juridex_v13.Profile.EditProfileFragment;
-import com.example.lucas.juridex_v13.Profile.SignOutFragment;
 import com.example.lucas.juridex_v13.R;
 import com.example.lucas.juridex_v13.Utils.SectionsStatePagerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -65,11 +62,27 @@ public class GameActivity extends AppCompatActivity{
             }
         });
 
+        btnMedioUm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setViewPager(1);
+            }
+        });
+
+        btnDifilUm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setViewPager(2);
+            }
+        });
+
     }
 
     private void setupFragments(){
         pagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
-        pagerAdapter.addFragment(new QuestaoFragment(), "questao1"); //fragment 0
+        pagerAdapter.addFragment(new QuestaoFacilFragment(), "questaoF"); //fragment 0
+        pagerAdapter.addFragment(new QuestaoFacilFragment(), "questaoM"); //fragment 1
+        pagerAdapter.addFragment(new QuestaoFacilFragment(), "questaoH"); //fragment 2
     }
 
     private void setViewPager(int fragmentNumber){
@@ -125,15 +138,6 @@ public class GameActivity extends AppCompatActivity{
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
-    }
-
-    private void setupViewPager(ViewPager viewPager){
-        SectionsStatePagerAdapter adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new NiveisFragment(), "niveis");
-
-
-        //adicionando icones em um tablayout
-        //tabLayout.getTabAt(0).setIcon(R.drawable.ic_action_home);
     }
 
     private void setupBottomNavigationView(){

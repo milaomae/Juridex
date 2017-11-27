@@ -1,20 +1,11 @@
 package com.example.lucas.juridex_v13;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.FrameLayout;
 
-import com.example.lucas.juridex_v13.Game.GameActivity;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
-import layout.HomeFragment;
-import layout.PremiumFragment;
-import layout.ProfileFragment;
 import com.example.lucas.juridex_v13.Utils.BottomNavigationViewHelper;
 
 /**

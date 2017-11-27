@@ -7,40 +7,28 @@
     android:orientation="vertical"
     android:background="@drawable/fundo"
     android:id="@+id/tela_questao_container"
+
     >
-
-
-    <android.support.v7.widget.Toolbar
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="25dp"
-        android:background="@color/white">
+        android:layout_height="match_parent">
 
-        <com.example.lucas.juridex_v13.Utils.MyTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtnivelAtual"
-            android:textSize="20dp"
-            android:text="nivel"
-            android:layout_marginLeft="130dp"
-            />
+        <include layout="@layout/layout_content_viewpager"/>
 
-        <com.example.lucas.juridex_v13.Utils.MyTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtperguntaAtual"
-            android:textSize="20dp"
-            android:text="2/15"
-            android:layout_marginLeft="20dp"
-            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <include layout="@layout/snipper_top_question"/>
+        </RelativeLayout>
 
-    </android.support.v7.widget.Toolbar>
 
             <RelativeLayout
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="35dp"
                 android:layout_width="310dp"
                 android:layout_height="200dp"
                 android:background="@drawable/roundcornerborda"
-                android:layout_centerHorizontal="true">
+                android:layout_centerHorizontal="true"
+                android:id="@+id/relLayout1">
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -54,8 +42,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/txtQuestion"
-                        android:layout_gravity="center_vertical"/>
-
+                        android:layout_gravity="center"/>
 
 
                 </FrameLayout>
@@ -63,7 +50,8 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_marginTop="237.5dp"
+                android:layout_below="@id/relLayout1"
+                android:layout_marginTop="10dp"
                 android:layout_width="310dp"
                 android:layout_height="match_parent"
                 android:layout_centerHorizontal="true">
@@ -74,22 +62,26 @@
                     android:background="@drawable/roundcorner"
                     android:id="@+id/btnA"/>
 
+
                 <Button
-                    android:layout_marginTop="65dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/btnA"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:background="@drawable/roundcorner"
                     android:id="@+id/btnB"/>
 
                 <Button
-                    android:layout_marginTop="130dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/btnB"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:background="@drawable/roundcorner"
                     android:id="@+id/btnC"/>
 
                 <Button
-                    android:layout_marginTop="195dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/btnC"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:background="@drawable/roundcorner"
@@ -98,10 +90,7 @@
 
             </RelativeLayout>
 
-
-            
-
-
+    </RelativeLayout>
 
 
 </RelativeLayout>

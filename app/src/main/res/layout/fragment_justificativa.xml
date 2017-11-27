@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     tools:context="layout.PremiumFragment"
     android:orientation="vertical"
-    android:background="@drawable/fundo">
+    android:background="@drawable/fundo"
+    android:id="@+id/tela_justificativa">
 
 
     <RelativeLayout
