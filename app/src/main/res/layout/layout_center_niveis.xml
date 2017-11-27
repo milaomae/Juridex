@@ -1,0 +1,242 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+   >
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/coordLayout1"
+        android:background="@drawable/fundo"
+        >
+
+        <include layout="@layout/layout_content_viewpager"/>
+
+        <RelativeLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="310dp"
+            android:layout_height="470dp"
+            android:background="@drawable/roundcornerborda"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/relLayout1">
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:background="@drawable/roundcorner"
+                android:orientation="vertical"
+                android:id="@+id/framLayout1">
+
+
+                <ImageButton
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginLeft="90dp"
+                    android:id="@+id/btnfacilUm"
+                    android:tooltipText="1"
+                    android:background="@drawable/button"/>
+
+
+                <ImageButton
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_marginLeft="90dp"
+                    android:layout_marginTop="195dp"
+                    android:id="@+id/btnmedioUm"
+                    android:background="@drawable/button"/>
+
+                <ImageButton
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_marginLeft="90dp"
+                    android:layout_marginTop="340dp"
+                    android:id="@+id/btndificilUm"
+                    android:background="@drawable/button"/>
+
+
+            </FrameLayout>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:background="@drawable/pano_lvl"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="30dp"
+            android:text="F"
+            android:id="@+id/um"
+            android:textColor="@color/rectBorder"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="37dp"
+            android:layout_marginLeft="45dp"
+            android:textSize="30dp"
+            android:text="Á"
+            android:id="@+id/um1"
+            android:textColor="@color/rectBorder"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="70dp"
+            android:textSize="30dp"
+            android:text="C"
+            android:id="@+id/um11"
+            android:textColor="@color/rectBorder"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            android:layout_marginLeft="100dp"
+            android:textSize="30dp"
+            android:text="I"
+            android:id="@+id/um111"
+            android:textColor="@color/rectBorder"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="120dp"
+            android:textSize="30dp"
+            android:text="L"
+            android:id="@+id/um1111"
+            android:textColor="@color/rectBorder"/>
+
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:background="@drawable/pano_lvl"
+            android:layout_marginTop="145dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="185dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="30dp"
+            android:text="M"
+            android:id="@+id/dois"
+            android:textColor="@color/rectBorder"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="188dp"
+            android:layout_marginLeft="50dp"
+            android:textSize="30dp"
+            android:text="É"
+            android:id="@+id/dois2"
+            android:textColor="@color/rectBorder"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="180dp"
+            android:layout_marginLeft="74dp"
+            android:textSize="30dp"
+            android:text="D"
+            android:id="@+id/dois22"
+            android:textColor="@color/rectBorder"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="173dp"
+            android:layout_marginLeft="100dp"
+            android:textSize="30dp"
+            android:text="I"
+            android:id="@+id/dois222"
+            android:textColor="@color/rectBorder"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="170dp"
+            android:layout_marginLeft="120dp"
+            android:textSize="30dp"
+            android:text="O"
+            android:id="@+id/dois2222"
+            android:textColor="@color/rectBorder"/>
+
+
+
+        <ImageView
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            android:background="@drawable/pano_lvl"
+            android:layout_marginTop="288dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="320dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="30dp"
+            android:text="D"
+            android:id="@+id/tres"
+            android:textColor="@color/rectBorder"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="318dp"
+            android:layout_marginLeft="53dp"
+            android:textSize="30dp"
+            android:text="I"
+            android:id="@+id/tres3"
+            android:textColor="@color/rectBorder"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="310dp"
+            android:layout_marginLeft="73dp"
+            android:textSize="30dp"
+            android:text="F"
+            android:id="@+id/tres33"
+            android:textColor="@color/rectBorder"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="308dp"
+            android:layout_marginLeft="100dp"
+            android:textSize="30dp"
+            android:text="Í"
+            android:id="@+id/tres333"
+            android:textColor="@color/rectBorder"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="308dp"
+            android:layout_marginLeft="110dp"
+            android:textSize="30dp"
+            android:text="C"
+            android:id="@+id/tres3333"
+            android:textColor="@color/rectBorder"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="308dp"
+            android:layout_marginLeft="130dp"
+            android:textSize="30dp"
+            android:text="I"
+            android:id="@+id/tres33333"
+            android:textColor="@color/rectBorder"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="315dp"
+            android:layout_marginLeft="150dp"
+            android:textSize="30dp"
+            android:text="L"
+            android:id="@+id/tres333333"
+            android:textColor="@color/rectBorder"/>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</merge>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:padding="30dp"
+    android:background="@drawable/fundo"
+    >
+
+
+    <RelativeLayout
+        android:layout_width="315dp"
+        android:layout_height="475dp"
+        android:gravity="center"
+        android:background="@drawable/roundcornerborda"
+        android:id="@+id/principal_container"
+
+        >
+
+        <LinearLayout
+            android:layout_width="300dp"
+            android:layout_height="460dp"
+            android:gravity="center"
+            android:background="@drawable/roundcorner"
+            android:orientation="vertical"
+
+            >
+
+            <com.example.lucas.juridex_v13.Utils.MyTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Juridex"
+                android:gravity="center_horizontal"
+                android:id="@+id/txtTitulo"
+                android:textColor="@color/bluebr"
+                android:textSize="30dp"/>
+
+            <ImageView
+                android:layout_width="121dp"
+                android:layout_height="120dp"
+                android:background="@drawable/juridex"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:hint="E-mail"
+                    android:id="@+id/input_email"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:hint="Username"
+                    android:id="@+id/input_username"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:hint="Senha"
+                    android:id="@+id/input_senha"/>
+            </android.support.design.widget.TextInputLayout>
+
+
+
+            <Button
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:text="Cadastrar"
+                android:id="@+id/btnRegistrar"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/designbutton"/>
+
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:id="@+id/loginRequestLoadingProgressbar"
+            android:layout_centerInParent="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please wait..."
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_alignBottom="@+id/loginRequestLoadingProgressbar"
+            android:layout_alignRight="@+id/loginRequestLoadingProgressbar"
+            android:layout_alignLeft="@+id/loginRequestLoadingProgressbar"
+            android:id="@+id/pleaseWait"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

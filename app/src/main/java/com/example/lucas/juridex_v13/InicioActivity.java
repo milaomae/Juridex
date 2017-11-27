@@ -2,42 +2,30 @@ package com.example.lucas.juridex_v13;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 
-import butterknife.BindArray;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import layout.BaseFragment;
+import com.example.lucas.juridex_v13.Game.GameActivity;
+import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
+
 import layout.HomeFragment;
 import layout.PremiumFragment;
 import layout.ProfileFragment;
-import utils.FragmentHistory;
-import utils.Utils;
-import views.FragNavController;
+import com.example.lucas.juridex_v13.Utils.BottomNavigationViewHelper;
 
 /**
  * Created by Lucas on 04/11/2017.
  */
 
 public class InicioActivity extends AppCompatActivity{
-    @BindView(R.id.content_frame)
-    FrameLayout contentFrame;
 
   //  @BindView(R.id.toolbar)
   //  Toolbar toolbar;
-
-    private static final String TAG = "Inicio activity";
-    private SectionsPageAdapter mSectionsPageAdapter;
-    private ViewPager mViewPager;
+    private static final String TAG = "InicioActivity";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,22 +34,18 @@ public class InicioActivity extends AppCompatActivity{
 
         Log.d(TAG, "onCreate: Starting.");
 
-        mSectionsPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
 
-        mViewPager = (ViewPager) findViewById(R.id.content_frame);
-        setupViewPager(mViewPager);
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.bottom_tab_layout);
-        tabLayout.setupWithViewPager(mViewPager);
+        setupBottomNavigationView();
     }
 
-    private void setupViewPager(ViewPager viewPager){
-        SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new HomeFragment(), "home", R.drawable.ic_action_home);
-        adapter.addFragment(new ProfileFragment(), "Profile", R.drawable.ic_action_perfil);
-        adapter.addFragment(new PremiumFragment(), "Premium", R.drawable.ic_action_premium);
-        viewPager.setAdapter(adapter);
+
+    private void setupBottomNavigationView(){
+        Log.d(TAG, "setupBottomNavigationView setting up BottomNavigationView");
+        BottomNavigationViewEx bottomNavigationViewEx = (BottomNavigationViewEx) findViewById(R.id.bottomNavViewBar);
+        BottomNavigationViewHelper.setupBottomNavigationView(bottomNavigationViewEx);
+
     }
+
 
 
 }

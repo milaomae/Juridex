@@ -42,7 +42,7 @@
             android:layout_marginTop="60dp"
             >
 
-            <utils.MyTextView
+            <com.example.lucas.juridex_v13.Utils.MyTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nome: "
@@ -51,7 +51,7 @@
                 android:textSize="20dp"
                 android:id="@+id/txtnomenpc"/>
 
-            <utils.MyTextView
+            <com.example.lucas.juridex_v13.Utils.MyTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
@@ -76,7 +76,7 @@
                 android:background="@drawable/circlebutton"
                 android:translationZ="5dp"/>
 
-            <utils.MyTextView
+            <com.example.lucas.juridex_v13.Utils.MyTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Experiência: "
@@ -85,7 +85,7 @@
                 android:textSize="15dp"
                 android:textColor="@color/bluegrey"/>
 
-            <utils.MyTextView
+            <com.example.lucas.juridex_v13.Utils.MyTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtExperiencia"
@@ -112,14 +112,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="130dp">
 
-                    <utils.MyTextView
+                    <com.example.lucas.juridex_v13.Utils.MyTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Testes Realizados:"
                     android:textSize="15dp"
                         />
 
-                    <utils.MyTextView
+                    <com.example.lucas.juridex_v13.Utils.MyTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30dp"
@@ -127,7 +127,7 @@
                         android:text="Total:"
                         android:textSize="13dp"/>
 
-                    <utils.MyTextView
+                    <com.example.lucas.juridex_v13.Utils.MyTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30dp"
@@ -135,7 +135,7 @@
                         android:text="100"
                         android:textSize="13dp"/>
 
-                    <utils.MyTextView
+                    <com.example.lucas.juridex_v13.Utils.MyTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="22dp"
@@ -151,7 +151,7 @@
                         android:background="@drawable/circlebutton"
                         android:backgroundTint="@color/green"/>
 
-                    <utils.MyTextView
+                    <com.example.lucas.juridex_v13.Utils.MyTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="22dp"
@@ -168,7 +168,7 @@
                         android:background="@drawable/circlebutton"
                         android:backgroundTint="@color/yellow"/>
 
-                    <utils.MyTextView
+                    <com.example.lucas.juridex_v13.Utils.MyTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="22dp"
@@ -211,7 +211,7 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <utils.MyTextView
+                <com.example.lucas.juridex_v13.Utils.MyTextView
                     android:text="Ranking: "
                     android:textColor="@color/bluebr"
                     android:textSize="18dp"/>

@@ -1,11 +1,15 @@
 package com.example.lucas.juridex_v13;
 
+
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
+
+
+import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -16,9 +20,8 @@ import android.widget.ImageView;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
-import butterknife.BindArray;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import com.example.lucas.juridex_v13.Game.GameActivity;
+
 import layout.BaseFragment;
 import layout.CadastroFragment;
 import layout.HomeFragment;
@@ -50,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                principal = new Intent(MainActivity.this, InicioActivity.class);
+                principal = new Intent(MainActivity.this, GameActivity.class);
                 startActivity(principal);
             }
         });
@@ -59,9 +62,16 @@ public class MainActivity extends AppCompatActivity {
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getSupportFragmentManager().beginTransaction()
-                        .add(R.id.principal_container, new CadastroFragment())
-                        .commit();
+                FragmentTransaction transaction = getFragmentManager()
+                        .beginTransaction();
+                Fragment cadastro = new CadastroFragment();
+                // essa linha é responsável por adicionar o fragment ao stack
+                transaction.addToBackStack(null);
+                transaction.replace(R.id.principal_container, cadastro);
+                transaction.commit();
+
+
+
             }
         });
 

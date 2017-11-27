@@ -12,7 +12,6 @@ import com.example.lucas.juridex_v13.InicioActivity;
 import com.example.lucas.juridex_v13.MainActivity;
 import com.example.lucas.juridex_v13.R;
 
-import butterknife.ButterKnife;
 
 
 public class PremiumFragment extends BaseFragment {
@@ -28,8 +27,6 @@ public class PremiumFragment extends BaseFragment {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_premium, container, false);
-
-        ButterKnife.bind(this, view);
 
       //  ((InicioActivity)getActivity()).updateToolbarTitle("Premium");
 

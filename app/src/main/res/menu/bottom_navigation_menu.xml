@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/ic_home"
+        android:icon="@drawable/ic_action_home"
+        android:title="Home"
+        android:iconTint="@color/yellowbr">
+    </item>
+    <item
+        android:id="@+id/ic_profile"
+        android:icon="@drawable/ic_action_perfil"
+        android:title="Profile"
+        android:iconTint="@color/yellowbr">
+    </item>
+    <item
+        android:id="@+id/ic_premium"
+        android:icon="@drawable/ic_action_premium"
+        android:title="Premium"
+        android:iconTint="@color/yellowbr">
+    </item>
+
+</menu>

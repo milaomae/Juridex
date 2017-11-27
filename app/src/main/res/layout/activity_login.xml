@@ -14,6 +14,7 @@
        android:layout_height="475dp"
        android:gravity="center"
        android:background="@drawable/roundcornerborda"
+       android:id="@+id/principal_container"
 
        >
 
@@ -23,10 +24,10 @@
         android:gravity="center"
         android:background="@drawable/roundcorner"
         android:orientation="vertical"
-           android:id="@+id/principal_container"
+
            >
 
-           <utils.MyTextView
+           <com.example.lucas.juridex_v13.Utils.MyTextView
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:text="Juridex"
@@ -40,35 +41,37 @@
                android:layout_height="120dp"
                android:background="@drawable/juridex"/>
 
-           <TextView
-               android:id="@+id/textView"
+           <android.support.design.widget.TextInputLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center_horizontal"
+           android:layout_marginTop="8dp"
+           android:layout_marginBottom="8dp">
+
+           <EditText
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:layout_marginLeft="15dp"
-               android:text="Usuário:"
-               android:textColor="@color/bluebr"
-               android:textSize="20dp"/>
+               android:inputType="textEmailAddress"
+               android:hint="E-mail"
+               android:id="@+id/input_email"/>
+       </android.support.design.widget.TextInputLayout>
 
-           <EditText
-               android:id="@+id/user"
-               android:layout_width="270dp"
+           <android.support.design.widget.TextInputLayout
+               android:layout_width="match_parent"
                android:layout_height="wrap_content"
-               android:layout_marginBottom="5dp"/>
+               android:layout_gravity="center_horizontal"
+               android:layout_marginTop="8dp"
+               android:layout_marginBottom="8dp">
 
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_gravity="left"
-               android:layout_marginLeft="15dp"
-               android:text="Senha:"
-               android:textColor="@color/bluebr"
-               android:textSize="20dp"/>
+               <EditText
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:inputType="textPassword"
+                   android:hint="Senha"
+                   android:id="@+id/input_senha"/>
+           </android.support.design.widget.TextInputLayout>
 
-           <EditText
-               android:layout_width="270dp"
-               android:layout_height="wrap_content"
-               android:id="@+id/senha"
-               android:layout_marginBottom="5dp"/>
+
 
            <Button
                android:layout_width="270dp"
@@ -85,6 +88,23 @@
                android:background="@drawable/designbutton"/>
 
     </LinearLayout>
+
+       <ProgressBar
+           android:layout_width="150dp"
+           android:layout_height="150dp"
+           android:id="@+id/loginRequestLoadingProgressbar"
+           android:layout_centerInParent="true"/>
+       
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Please wait..."
+           android:textColor="@color/black"
+           android:textSize="20dp"
+           android:layout_alignBottom="@+id/loginRequestLoadingProgressbar"
+           android:layout_alignRight="@+id/loginRequestLoadingProgressbar"
+           android:layout_alignLeft="@+id/loginRequestLoadingProgressbar"
+           android:id="@+id/pleaseWait"/>
 
    </RelativeLayout>
 

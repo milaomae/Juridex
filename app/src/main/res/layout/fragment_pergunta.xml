@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     tools:context="layout.PremiumFragment"
     android:orientation="vertical"
-    android:background="@drawable/fundo">
+    android:background="@drawable/fundo"
+    android:id="@+id/tela_questao_container"
+    >
 
 
     <android.support.v7.widget.Toolbar
@@ -13,7 +15,7 @@
         android:layout_height="25dp"
         android:background="@color/white">
 
-        <utils.MyTextView
+        <com.example.lucas.juridex_v13.Utils.MyTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txtnivelAtual"
@@ -22,29 +24,13 @@
             android:layout_marginLeft="130dp"
             />
 
-        <utils.MyTextView
+        <com.example.lucas.juridex_v13.Utils.MyTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txtperguntaAtual"
             android:textSize="20dp"
-            android:text="2"
+            android:text="2/15"
             android:layout_marginLeft="20dp"
-            />
-        <utils.MyTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="/"
-            android:textSize="20dp"
-            android:layout_marginLeft="5dp"
-            />
-
-        <utils.MyTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtnumeroTotalPerguntas"
-            android:textSize="20dp"
-            android:text="15"
-            android:layout_marginLeft="5dp"
             />
 
     </android.support.v7.widget.Toolbar>
@@ -63,6 +49,14 @@
                     android:layout_gravity="center"
                     android:background="@drawable/roundcorner"
                     android:orientation="vertical">
+
+                    <com.example.lucas.juridex_v13.Utils.MyTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/txtQuestion"
+                        android:layout_gravity="center_vertical"/>
+
+
 
                 </FrameLayout>
 

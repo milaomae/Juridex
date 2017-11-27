@@ -3,8 +3,10 @@ package layout;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +20,7 @@ import com.example.lucas.juridex_v13.InicioActivity;
 import com.example.lucas.juridex_v13.MainActivity;
 import com.example.lucas.juridex_v13.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 
 /**
  * Created by Lucas on 02/10/2017.
@@ -60,16 +61,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        btnfacilUm = (ImageButton) view.findViewById(R.id.btnfacilUm);
-        btnfacilUm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                activity.getSupportFragmentManager().beginTransaction()
-                        .add(R.id.principal_container, new CadastroFragment())
-                        .commit();
-            }
-        });
 
     }
     @Override

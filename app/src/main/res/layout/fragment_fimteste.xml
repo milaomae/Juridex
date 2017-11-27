@@ -25,7 +25,7 @@
                 android:orientation="vertical"
                 android:background="@drawable/roundcorner">
 
-                <utils.MyTextView
+                <com.example.lucas.juridex_v13.Utils.MyTextView
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:text="Resultado:"
@@ -33,21 +33,21 @@
                     />
 
 
-                <utils.MyTextView
+                <com.example.lucas.juridex_v13.Utils.MyTextView
                     android:layout_width="20dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/txtResultado"
                     android:layout_marginTop="50dp"
                     android:text="3"/>
 
-                <utils.MyTextView
+                <com.example.lucas.juridex_v13.Utils.MyTextView
                     android:layout_width="20dp"
                     android:layout_marginTop="50dp"
                     android:layout_marginLeft="30dp"
                     android:layout_height="wrap_content"
                     android:text="/"/>
 
-                <utils.MyTextView
+                <com.example.lucas.juridex_v13.Utils.MyTextView
                     android:layout_width="20dp"
                     android:layout_marginTop="50dp"
                     android:layout_marginLeft="60dp"
@@ -55,7 +55,7 @@
                     android:id="@+id/txtQtdPerguntas"
                     android:text="10"/>
 
-                <utils.MyTextView
+                <com.example.lucas.juridex_v13.Utils.MyTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Está quase lá"

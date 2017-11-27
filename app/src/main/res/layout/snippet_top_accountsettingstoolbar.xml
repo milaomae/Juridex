@@ -1,0 +1,59 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@color/bluebr"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/backArrow"
+                        android:src="@drawable/ic_arrow_back"
+                        android:tint="@color/white"/>
+
+                    <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                    android:text="Options"
+                    android:textColor="@color/white"
+                    android:textSize="25dp"
+                    android:layout_marginLeft="50dp"
+                    />
+
+
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.Toolbar>
+
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/ic_settings_black_24dp"
+                android:tint="@color/white"
+                />
+        </android.support.design.widget.AppBarLayout>
+
+
+    </RelativeLayout>
+</merge>

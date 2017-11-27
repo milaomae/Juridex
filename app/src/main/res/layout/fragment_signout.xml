@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:id="@+id/txtConfirmSignOut"
+            android:text="Tem certeza que deseja sair?"/>
+        
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textSize="20dp"
+            android:id="@+id/btnConfirmSignOut"
+            android:layout_below="@+id/txtConfirmSignOut"
+            android:text="Sair"
+            android:background="@drawable/designbutton"
+            android:layout_marginTop="20dp"/>
+
+    </RelativeLayout>
+
+    <ProgressBar
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/progressBar"/>
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Saindo..."
+        android:textSize="30dp"
+        android:layout_alignBottom="@+id/progressBar"
+        android:layout_alignParentRight="@+id/progressBar"
+        android:layout_alignLeft="@+id/progressBar"
+        android:id="@+id/txtSignOut"
+        />
+    
+
+</RelativeLayout>

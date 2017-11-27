@@ -13,4 +13,15 @@
 
     <string name="valores_mensal">R$6,70 / €1,72/ $2,00</string>
 
+    <string name="editprofile">Editar Perfil</string>
+    <string name="signout">Sair</string>
+
+    <!-- firebase messages -->
+    <string name="auth_failed">Autenticação falhou</string>
+    <string name="auth_success">Autenticaçao foi bem sucedida</string>
+
+    <!-- firebase database fields -->
+    <string name="dbname_users">users</string>
+    <string name="dbname_users_account_settings">users_account_settings</string>
+
 </resources>
