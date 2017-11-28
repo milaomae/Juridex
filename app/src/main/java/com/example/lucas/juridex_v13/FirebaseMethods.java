@@ -20,6 +20,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
@@ -58,6 +60,7 @@ public class FirebaseMethods {
             arrayQuestions.add(dataSnapshot.child("questions").child(nivel).child(cont + "").getValue(Question.class));
             cont++;
         }
+        Collections.shuffle(arrayQuestions);
 
     return arrayQuestions;
 

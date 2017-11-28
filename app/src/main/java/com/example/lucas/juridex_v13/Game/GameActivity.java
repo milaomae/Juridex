@@ -70,9 +70,10 @@ public class GameActivity extends AppCompatActivity{
     private void setupFragments(){
         pagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
         pagerAdapter.addFragment(new QuestaoFragment(), "questao1"); //fragment 0
+        pagerAdapter.addFragment(new JustificativaFragment(), "justificativa"); //fragment 1
     }
 
-    private void setViewPager(int fragmentNumber){
+    public void setViewPager(int fragmentNumber){
         mRelativeLayout.setVisibility(View.GONE);
         Log.d(TAG, "setupViewPager: navigation to fragment #:" + fragmentNumber);
         mViewPager.setAdapter(pagerAdapter);

@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.lucas.juridex_v13.FirebaseMethods;
 import com.example.lucas.juridex_v13.Login.LoginActivity;
@@ -27,6 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -34,11 +36,14 @@ import java.util.Random;
  * Created by Lucas on 25/11/2017.
  */
 
-public class QuestaoFragment extends Fragment {
+public class QuestaoFragment extends Fragment implements View.OnClickListener{
     private static final String TAG = "QuestaoFragment";
 
     private Button btnA, btnB, btnC, btnD;
     private MyTextView txtQuestion;
+    private List<Question> questoes;
+    private int questaoLista;
+    private MaterialDialog dialog;
 
     //firebase
     private FirebaseAuth mAuth;
@@ -68,14 +73,75 @@ public class QuestaoFragment extends Fragment {
 
 
         setupFirebaseAuth();
-        /*if()
-        new MaterialDialog.Builder(this)
-                .title("")
-                .content(R.string.content)
-                .positiveText(R.string.agree)
-                .negativeText(R.string.disagree)
-                .show();*/
+
+
+        btnA.setOnClickListener(this);
+        btnB.setOnClickListener(this);
+        btnC.setOnClickListener(this);
+        btnD.setOnClickListener(this);
+
+
         return view;
+    }
+
+    @Override
+    public void onClick(View view) {
+        Button btnGeneric = (Button) view;
+
+
+        if(btnGeneric.getText().equals(questoes.get(questaoLista).getCorrect())){
+            dialog = new MaterialDialog.Builder(getActivity())
+                    .title("Você acertou!")
+                    .content("")
+                    .positiveText("Próxima")
+                    .negativeText("Ver Justificativa")
+                    .show();
+        }
+        else{
+            dialog = new MaterialDialog.Builder(getActivity())
+                    .title("Você errou!")
+                    .content("")
+                    .positiveText("Próxima")
+                    .negativeText("Ver Justificativa")
+                    .show();
+
+        }
+
+        dialog.getActionButton(DialogAction.POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+
+
+            }
+        });
+        dialog.getActionButton(DialogAction.NEGATIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+               // justificativa = questaoF.getJustificativa();
+                ((GameActivity)getActivity()).setViewPager(1);
+                Toast.makeText(getActivity(), "justificativa", Toast.LENGTH_SHORT ).show();
+            }
+        });
+    }
+
+    public void setQuestions(){
+        //chossing random question
+        Random gerador = new Random();
+        gerador.nextInt(questoes.size());
+        questaoLista = gerador.nextInt(questoes.size());
+
+        Question question = questoes.get(questaoLista);
+
+        //initialize components
+        txtQuestion.setText(question.getQuestion());
+        btnA.setText(question.getAnswera());
+        btnB.setText(question.getAnswerb());
+        btnC.setText(question.getAnswerc());
+        btnD.setText(question.getAnswerd());
+
+
     }
 
     private void checkCurrentUser(FirebaseUser user){
@@ -111,53 +177,9 @@ public class QuestaoFragment extends Fragment {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             Log.d(TAG, "onDataChange: loading question and choosing one");
-                            List<Question> nivelF = firebase.loadQuestions("cdc_easy", dataSnapshot);
-                            //List<Question> nivelM = firebase.loadQuestions("cdc_medium", dataSnapshot);
-                            //List<Question> nivelH = firebase.loadQuestions("cdc_hard", dataSnapshot);
-
-                            //chossing random question
-                            Random gerador = new Random();
-                            gerador.nextInt(nivelF.size());
-
-                            Question question = nivelF.get(gerador.nextInt(nivelF.size()));
-
-                            //initialize components
-                            txtQuestion.setText(question.getQuestion());
-                            btnA.setText(question.getAnswera());
-                            btnB.setText(question.getAnswerb());
-                            btnC.setText(question.getAnswerc());
-                            btnD.setText(question.getAnswerd());
-
-                            //click A
-                            btnA.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    Toast.makeText(getActivity(), "A clicked", Toast.LENGTH_SHORT ).show();
-                                }
-                            });
-
-                            //click B
-                            btnB.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    Toast.makeText(getActivity(), "B clicked", Toast.LENGTH_SHORT ).show();
-                                }
-                            });
-                            //click C
-                            btnC.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    Toast.makeText(getActivity(), "C clicked", Toast.LENGTH_SHORT ).show();
-                                }
-                            });
-                            //click D
-                            btnD.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    Toast.makeText(getActivity(), "D clicked", Toast.LENGTH_SHORT ).show();
-                                }
-                            });
-
+                            questoes = new ArrayList<>();
+                            questoes = firebase.loadQuestions("cdc_easy", dataSnapshot);
+                            setQuestions();
                         }
 
                         @Override
@@ -190,4 +212,6 @@ public class QuestaoFragment extends Fragment {
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
+
+
 }
