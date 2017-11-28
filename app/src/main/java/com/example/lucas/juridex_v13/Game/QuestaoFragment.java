@@ -40,11 +40,12 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
     private static final String TAG = "QuestaoFragment";
 
     private Button btnA, btnB, btnC, btnD;
-    private MyTextView txtQuestion;
+    private MyTextView txtQuestion, txtQuestaoAtual, txtNivelAtual;
     private List<Question> questoes;
     private int questaoLista;
     private MaterialDialog dialog;
     private List<Integer> questoesJaLidas;
+    private int questoesCorretas, score, questaoAtual;
 
     //firebase
     private FirebaseAuth mAuth;
@@ -66,6 +67,11 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
         questoes.clear();
         questoesJaLidas.clear();
 
+        //iniciar variáveis
+        score = 0;
+        questaoAtual = 0;
+        questoesCorretas = 0;
+
         mAuth = FirebaseAuth.getInstance();
         firebase = new FirebaseMethods(getActivity());
 
@@ -79,7 +85,11 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
         btnC = (Button) view.findViewById(R.id.btnC);
         btnD = (Button) view.findViewById(R.id.btnD);
         txtQuestion = (MyTextView) view.findViewById(R.id.txtQuestion);
+        txtQuestaoAtual = (MyTextView) view.findViewById(R.id.txtperguntaAtual);
+        txtNivelAtual = (MyTextView) view.findViewById(R.id.txtnivelAtual);
 
+        //if(nivel.equals("cdc_easy"))
+        txtNivelAtual.setText("Fácil");
 
         setupFirebaseAuth();
 
@@ -96,7 +106,6 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         Button btnGeneric = (Button) view;
-
 
         if(btnGeneric.getText().equals(questoes.get(questaoLista).getCorrect())){
             dialog = new MaterialDialog.Builder(getActivity())
@@ -144,12 +153,13 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
     public void setQuestions(){
         //chossing random question
         Random gerador = new Random();
-
+        int qtdQuestao = 0;
 
         questaoLista = gerador.nextInt(questoes.size());
 
         if(!questoesJaLidas.contains(questaoLista)) {
-
+            qtdQuestao++;
+            txtQuestaoAtual.setText(qtdQuestao + "  /  " + questoes.size());
             questoesJaLidas.add(questaoLista);
 
             Question question = questoes.get(questaoLista);
@@ -200,6 +210,7 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
                             Log.d(TAG, "onDataChange: loading question and choosing one");
                             questoes = firebase.loadQuestions("cdc_easy", dataSnapshot);
                             setQuestions();
+
                         }
 
                         @Override
