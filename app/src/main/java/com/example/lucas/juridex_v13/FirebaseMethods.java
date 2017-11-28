@@ -17,8 +17,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,32 +52,30 @@ public class FirebaseMethods {
         if (mAuth.getCurrentUser() != null) {
             userID = mAuth.getCurrentUser().getUid();
         }
+
     }
 
-    public void loadQuestion(String nivel, DataSnapshot dataSnapshot) {
+    public List<Question> loadQuestion(DataSnapshot dataSnapshot) {
         Log.d(TAG, "loadQuestions: loading a question from database");
-        Question question = new Question();
-        int cont = 1;
+        final List<Question> listquestion = new ArrayList<>();
+
+
         //limpando lista
-        if(Common.questionList.size() > 0)
-            Common.questionList.clear();
+        if(listquestion.size() > 0)
+            listquestion.clear();
 
-        for(DataSnapshot ds : dataSnapshot.child("questions").getChildren()){
-            if(ds.getKey().equals(nivel)){
-                question.setQuestion(ds.child(cont + "").getValue(Question.class).getQuestion());
-                question.setAnswera(ds.child(cont + "").getValue(Question.class).getAnswera());
-                question.setAnswerb(ds.child(cont + "").getValue(Question.class).getAnswerb());
-                question.setAnswerc(ds.child(cont + "").getValue(Question.class).getAnswerc());
-                question.setAnswerd(ds.child(cont + "").getValue(Question.class).getAnswerd());
-                question.setCorrect(ds.child(cont + "").getValue(Question.class).getCorrect());
-                question.setJustificativa(ds.child(cont + "").getValue(Question.class).getJustificativa());
-                Common.questionList.add(question);
+        int cont = 1;
+        while (dataSnapshot.child("cdc_easy").hasChildren()){
+                Log.d(TAG, "onDataChange: " + dataSnapshot.child(cont + "").getValue(Question.class).getQuestion());
+                listquestion.add(dataSnapshot.child(cont + "").getValue(Question.class));
                 cont++;
-            }
-        }
-        //random list
-        Collections.shuffle(Common.questionList);
 
+        }
+
+        //random list
+        Collections.shuffle(listquestion);
+        Log.d(TAG, "loadQuestion: " + listquestion.get(0).getQuestion());
+        return  listquestion;
 
 }
 

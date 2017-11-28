@@ -33,6 +33,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Timer;
@@ -58,6 +59,7 @@ public class QuestaoFacilFragment extends Fragment implements View.OnClickListen
     private Question questaoF;
     private CountDownTimer mCountDown;
     private int index, score, correctAnswer, questaoAtual;
+    private List<Question> questoes;
 
     private SectionsStatePagerAdapter pagerAdapter;
     private ViewPager mViewPager;
@@ -67,6 +69,9 @@ public class QuestaoFacilFragment extends Fragment implements View.OnClickListen
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private String userID;
+    private FirebaseMethods firebaseMethods;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference myRef;
 
 
     @Nullable
@@ -81,10 +86,13 @@ public class QuestaoFacilFragment extends Fragment implements View.OnClickListen
             userID = mAuth.getCurrentUser().getUid();
         }
 
+        firebaseMethods = new FirebaseMethods(getActivity());
+
         index = 1;
         score = 0;
         correctAnswer = 0;
         questaoAtual = 0;
+        questoes = new ArrayList<>();
 
         mViewPager = view.findViewById(R.id.container);
         mRelativeLayout = view.findViewById(R.id.tela_questao_container);
@@ -100,6 +108,8 @@ public class QuestaoFacilFragment extends Fragment implements View.OnClickListen
         txtNivelAtual = view.findViewById(R.id.txtnivelAtual);
         txtPerguntaInfo = view.findViewById(R.id.txtperguntaInfo);
 
+        setQuestion(questoes.get(0));
+
         //onClick das alternativas
         btnA.setOnClickListener(this);
         btnB.setOnClickListener(this);
@@ -110,7 +120,7 @@ public class QuestaoFacilFragment extends Fragment implements View.OnClickListen
     }
     @Override
     public void onClick(View view) {
-        mCountDown.cancel();
+
         if(index < totalQuestoes){
             Button clickedButton = (Button) view;
 
@@ -118,7 +128,6 @@ public class QuestaoFacilFragment extends Fragment implements View.OnClickListen
             if(clickedButton.getText().equals(Common.questionList.get(index).getCorrect())){
                 score += 10;
                 correctAnswer++;
-                showQuestion(++index);
                 dialog = new MaterialDialog.Builder(getActivity())
                         .title("Você acertou!")
                         .content("")
@@ -159,45 +168,24 @@ public class QuestaoFacilFragment extends Fragment implements View.OnClickListen
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
 
-        totalQuestoes = Common.questionList.size();
-        mCountDown = new CountDownTimer(10000, 3000) {
-            @Override
-            public void onTick(long l) {
+    private void setQuestion(Question q){
 
-            }
+        txtQuestion.setText(q.getQuestion());
+        btnA.setText(q.getAnswera());
+        btnB.setText(q.getAnswerb());
+        btnC.setText(q.getAnswerc());
+        btnD.setText(q.getAnswerd());
 
-            @Override
-            public void onFinish() {
-                mCountDown.cancel();
-                showQuestion(++index);
-            }
-        };
-        showQuestion(++index);
-    }
-
-    public void showQuestion(int i){
-        if(index < totalQuestoes){
-            questaoAtual++;
-            txtPerguntaInfo.setText(questaoAtual + " / " + totalQuestoes);
-
-            txtQuestion.setText(Common.questionList.get(index).getQuestion());
-            btnA.setText(Common.questionList.get(index).getAnswera());
-            btnB.setText(Common.questionList.get(index).getAnswerb());
-            btnC.setText(Common.questionList.get(index).getAnswerc());
-            btnD.setText(Common.questionList.get(index).getAnswerd());
-
-            mCountDown.start(); //start timer
-        }
     }
 
     private void setupFirebaseAuth(){
         Log.d(TAG, "setupFirebaseAuth: setting up firebaseAuth");
 
         mAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getReference("questions");
+
         mAuthListener = new FirebaseAuth.AuthStateListener() {
 
             @Override
@@ -216,6 +204,18 @@ public class QuestaoFacilFragment extends Fragment implements View.OnClickListen
                 // ...
             }
         };
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                questoes = firebaseMethods.loadQuestion(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
 

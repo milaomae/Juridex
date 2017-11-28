@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
+import com.example.lucas.juridex_v13.Common.Common;
 import com.example.lucas.juridex_v13.FirebaseMethods;
 import com.example.lucas.juridex_v13.Login.LoginActivity;
 import com.example.lucas.juridex_v13.R;
@@ -63,9 +64,11 @@ public class GameActivity extends AppCompatActivity{
         btnMedioUm =  findViewById(R.id.btnmedioUm);
         btnDifilUm =  findViewById(R.id.btndificilUm);
 
-
         firebaseMethods = new FirebaseMethods(GameActivity.this);
+
         setupFirebaseAuth();
+
+
         setupBottomNavigationView();
         setupFragments();
 
@@ -132,19 +135,23 @@ public class GameActivity extends AppCompatActivity{
         Log.d(TAG, "setupFirebaseAuth: setting up firebaseAuth");
 
         mAuth = FirebaseAuth.getInstance();
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = mFirebaseDatabase.getReference("questions");
+
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
 
+                mFirebaseDatabase = FirebaseDatabase.getInstance();
+                myRef = mFirebaseDatabase.getReference("questions");
+
                 //check if the user is logged in
                 checkCurrentUser(user);
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+
+
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -153,17 +160,8 @@ public class GameActivity extends AppCompatActivity{
             }
         };
 
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                firebaseMethods.loadQuestion(nivelstring, dataSnapshot);
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
 
-            }
-        });
     }
 
     @Override
