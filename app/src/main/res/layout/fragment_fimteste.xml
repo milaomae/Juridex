@@ -47,18 +47,20 @@
 
 
                 <com.example.lucas.juridex_v13.Utils.MyTextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Está quase lá"
                     android:layout_marginTop="20dp"
-                    android:gravity="center_horizontal"
+                    android:layout_centerHorizontal="true"
+                    android:padding="10dp"
                     android:id="@+id/txtMensagem"
                     android:textSize="25dp"
+                    android:background="@drawable/designbutton"
                     android:layout_below="@+id/txtResultado"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="85dp"
                     android:layout_below="@id/txtMensagem"
                     android:layout_marginTop="50dp"
                     android:orientation="horizontal"
@@ -66,24 +68,22 @@
                     >
 
                     <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="65dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:background="@drawable/ic_refresh"
                     android:id="@+id/btnReiniciarTeste"
-
-
                     />
 
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="65dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:background="@drawable/ic_back"
                     android:id="@+id/btnVoltarTelaNiveis"
                     />
 
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="65dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:background="@drawable/ic_forward"
                     android:id="@+id/btnProximoTeste"
                     />

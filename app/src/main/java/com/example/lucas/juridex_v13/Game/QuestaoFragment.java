@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.example.lucas.juridex_v13.Common.Common;
 import com.example.lucas.juridex_v13.FirebaseMethods;
 import com.example.lucas.juridex_v13.Login.LoginActivity;
 import com.example.lucas.juridex_v13.R;
@@ -71,9 +72,11 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
         questoesJaLidas.clear();
 
         //iniciar variáveis
-        score = 0;
+        score = 10;
         questaoAtual = 0;
         questoesCorretas = 0;
+
+        Common.setScore(score);
 
         mAuth = FirebaseAuth.getInstance();
         firebase = new FirebaseMethods(getActivity());
