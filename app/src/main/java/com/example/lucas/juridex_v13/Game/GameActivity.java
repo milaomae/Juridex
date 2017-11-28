@@ -13,11 +13,17 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
+import com.example.lucas.juridex_v13.FirebaseMethods;
 import com.example.lucas.juridex_v13.Login.LoginActivity;
 import com.example.lucas.juridex_v13.R;
 import com.example.lucas.juridex_v13.Utils.SectionsStatePagerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import com.example.lucas.juridex_v13.Utils.BottomNavigationViewHelper;
@@ -33,11 +39,17 @@ public class GameActivity extends AppCompatActivity{
     //firebase
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseMethods firebaseMethods;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference myRef;
 
     private ImageButton btnFacilUm, btnMedioUm, btnDifilUm;
     private SectionsStatePagerAdapter pagerAdapter;
     private ViewPager mViewPager;
     private RelativeLayout mRelativeLayout;
+
+    private DataFromActivityToFragment nivel;
+    private String nivelstring;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,13 +63,17 @@ public class GameActivity extends AppCompatActivity{
         btnMedioUm =  findViewById(R.id.btnmedioUm);
         btnDifilUm =  findViewById(R.id.btndificilUm);
 
+
+        firebaseMethods = new FirebaseMethods(GameActivity.this);
         setupFirebaseAuth();
         setupBottomNavigationView();
         setupFragments();
 
+
         btnFacilUm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                nivelstring = "cdc_easy";
                 setViewPager(0);
             }
         });
@@ -65,6 +81,7 @@ public class GameActivity extends AppCompatActivity{
         btnMedioUm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                nivelstring = "cdc_medium";
                 setViewPager(1);
             }
         });
@@ -72,20 +89,30 @@ public class GameActivity extends AppCompatActivity{
         btnDifilUm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                nivelstring = "cdc_hard";
                 setViewPager(2);
             }
         });
 
+        final Runnable r = new Runnable() {
+            public void run() {
+                nivel.sendData(nivelstring);
+            }
+        };
+
     }
 
     private void setupFragments(){
+        QuestaoFacilFragment fragmentQ = new QuestaoFacilFragment();
+        nivel = (DataFromActivityToFragment) fragmentQ;
         pagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
-        pagerAdapter.addFragment(new QuestaoFacilFragment(), "questaoF"); //fragment 0
+        pagerAdapter.addFragment(fragmentQ, "questaoF"); //fragment 0
         pagerAdapter.addFragment(new QuestaoFacilFragment(), "questaoM"); //fragment 1
         pagerAdapter.addFragment(new QuestaoFacilFragment(), "questaoH"); //fragment 2
+        pagerAdapter.addFragment(new JustificativaFragment(), "justificativa"); //fragment 3
     }
 
-    private void setViewPager(int fragmentNumber){
+    public void setViewPager(int fragmentNumber){
         mRelativeLayout.setVisibility(View.GONE);
         Log.d(TAG, "setupViewPager: navigation to fragment #:" + fragmentNumber);
         mViewPager.setAdapter(pagerAdapter);
@@ -105,6 +132,8 @@ public class GameActivity extends AppCompatActivity{
         Log.d(TAG, "setupFirebaseAuth: setting up firebaseAuth");
 
         mAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getReference("questions");
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -123,6 +152,18 @@ public class GameActivity extends AppCompatActivity{
                 // ...
             }
         };
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                firebaseMethods.loadQuestion(nivelstring, dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -148,5 +189,10 @@ public class GameActivity extends AppCompatActivity{
         Menu menu = bottomNavigationViewEx.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
+    }
+
+    //transferir dados para o fragment
+    public interface DataFromActivityToFragment {
+        void sendData(String data);
     }
 }

@@ -44,7 +44,7 @@ import javax.sql.CommonDataSource;
  * Created by Lucas on 25/11/2017.
  */
 
-public class QuestaoFacilFragment extends Fragment implements View.OnClickListener{
+public class QuestaoFacilFragment extends Fragment implements View.OnClickListener, GameActivity.DataFromActivityToFragment{
     private static final String TAG = "QuestaoFacilFragment";
 
     private Button btnA, btnB, btnC, btnD;
@@ -66,31 +66,30 @@ public class QuestaoFacilFragment extends Fragment implements View.OnClickListen
     //firebase
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private FirebaseMethods firebaseMethods;
-    private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference myRef;
     private String userID;
-    private FirebaseMethods firebase;
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pergunta, container, false);
+
+        //inicia variáveis
         mAuth = FirebaseAuth.getInstance();
-        firebase = new FirebaseMethods(getActivity());
-        setRetainInstance(true);
+
+        if(mAuth.getCurrentUser() != null){
+            userID = mAuth.getCurrentUser().getUid();
+        }
 
         index = 1;
         score = 0;
         correctAnswer = 0;
         questaoAtual = 0;
 
-        if(mAuth.getCurrentUser() != null){
-            userID = mAuth.getCurrentUser().getUid();
-        }
-
         mViewPager = view.findViewById(R.id.container);
         mRelativeLayout = view.findViewById(R.id.tela_questao_container);
+
+        setupFirebaseAuth();
 
         btnA = view.findViewById(R.id.btnA);
         btnB = view.findViewById(R.id.btnB);
@@ -101,13 +100,11 @@ public class QuestaoFacilFragment extends Fragment implements View.OnClickListen
         txtNivelAtual = view.findViewById(R.id.txtnivelAtual);
         txtPerguntaInfo = view.findViewById(R.id.txtperguntaInfo);
 
+        //onClick das alternativas
         btnA.setOnClickListener(this);
         btnB.setOnClickListener(this);
         btnC.setOnClickListener(this);
         btnD.setOnClickListener(this);
-
-        setupFirebaseAuth();
-        setupFragments();
 
         return view;
     }
@@ -154,16 +151,13 @@ public class QuestaoFacilFragment extends Fragment implements View.OnClickListen
                 public void onClick(View view) {
                     dialog.dismiss();
                     justificativa = questaoF.getJustificativa();
-                    setViewPager(0);
+                    ((GameActivity)getActivity()).setViewPager(3);
                     Toast.makeText(getActivity(), "justificativa", Toast.LENGTH_SHORT ).show();
                 }
             });
 
         }
     }
-
-
-
 
     @Override
     public void onResume() {
@@ -204,11 +198,8 @@ public class QuestaoFacilFragment extends Fragment implements View.OnClickListen
         Log.d(TAG, "setupFirebaseAuth: setting up firebaseAuth");
 
         mAuth = FirebaseAuth.getInstance();
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = mFirebaseDatabase.getReference("questions");
-        final String nivel = "";
-
         mAuthListener = new FirebaseAuth.AuthStateListener() {
+
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -226,7 +217,6 @@ public class QuestaoFacilFragment extends Fragment implements View.OnClickListen
             }
         };
 
-
     }
 
     @Override
@@ -243,38 +233,9 @@ public class QuestaoFacilFragment extends Fragment implements View.OnClickListen
         }
     }
 
-    public int gerator(){
-        Random gerador = new Random();
-        return gerador.nextInt();
+    @Override
+    public void sendData(String data) {
+        if(data != null)
+            txtNivelAtual.setText(data);
     }
-
-
-    public void setQuestion(final Question question, int num, int totalQuestoes){
-        Log.d(TAG, "setQuestion: settings question " + question +  "\n" + num +  "\n"  +totalQuestoes);
-        //initialize components
-        txtQuestion.setText(question.getQuestion());
-        btnA.setText(question.getAnswera());
-        btnB.setText(question.getAnswerb());
-        btnC.setText(question.getAnswerc());
-        btnD.setText(question.getAnswerd());
-        txtPerguntaInfo.setText(num + " / " + totalQuestoes);
-
-        numero++;
-    }
-
-    private void setupFragments(){
-        pagerAdapter = new SectionsStatePagerAdapter(getActivity().getSupportFragmentManager());
-        pagerAdapter.addFragment(new JustificativaFragment(justificativa), "justificativa"); //fragment 0
-        Log.d(TAG, "setupFragments: "+ pagerAdapter.getFragmentNumber(new JustificativaFragment()) );
-    }
-
-    private void setViewPager(int fragmentNumber){
-        mRelativeLayout.setVisibility(View.GONE);
-        Log.d(TAG, "setupViewPager: navigation to fragment #:" + fragmentNumber);
-        mViewPager.setAdapter(pagerAdapter);
-        mViewPager.setCurrentItem(fragmentNumber);
-    }
-
-
-
 }

@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
@@ -51,9 +52,14 @@ public class FirebaseMethods {
         }
     }
 
-    public void loadQuestion(String nivel, int cont,DataSnapshot dataSnapshot) {
+    public void loadQuestion(String nivel, DataSnapshot dataSnapshot) {
         Log.d(TAG, "loadQuestions: loading a question from database");
         Question question = new Question();
+        int cont = 1;
+        //limpando lista
+        if(Common.questionList.size() > 0)
+            Common.questionList.clear();
+
         for(DataSnapshot ds : dataSnapshot.child("questions").getChildren()){
             if(ds.getKey().equals(nivel)){
                 question.setQuestion(ds.child(cont + "").getValue(Question.class).getQuestion());
@@ -64,8 +70,12 @@ public class FirebaseMethods {
                 question.setCorrect(ds.child(cont + "").getValue(Question.class).getCorrect());
                 question.setJustificativa(ds.child(cont + "").getValue(Question.class).getJustificativa());
                 Common.questionList.add(question);
+                cont++;
             }
         }
+        //random list
+        Collections.shuffle(Common.questionList);
+
 
 }
 
