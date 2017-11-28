@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="layout.PremiumFragment"
-    android:orientation="vertical"
     android:background="@drawable/fundo">
 
 
@@ -15,75 +14,80 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/roundcornerborda">
 
-
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:layout_gravity="center"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
                 android:orientation="vertical"
                 android:background="@drawable/roundcorner">
+
 
                 <com.example.lucas.juridex_v13.Utils.MyTextView
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:text="Resultado:"
-                    android:textSize="30dp"
+                    android:textSize="35dp"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="80dp"
+                    android:id="@+id/result"
                     />
 
 
                 <com.example.lucas.juridex_v13.Utils.MyTextView
-                    android:layout_width="20dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/txtResultado"
+                    android:layout_below="@+id/result"
+                    android:gravity="center_horizontal"
                     android:layout_marginTop="50dp"
-                    android:text="3"/>
+                    android:textSize="30dp"
+                    android:text="3 / 10"/>
 
-                <com.example.lucas.juridex_v13.Utils.MyTextView
-                    android:layout_width="20dp"
-                    android:layout_marginTop="50dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_height="wrap_content"
-                    android:text="/"/>
 
-                <com.example.lucas.juridex_v13.Utils.MyTextView
-                    android:layout_width="20dp"
-                    android:layout_marginTop="50dp"
-                    android:layout_marginLeft="60dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/txtQtdPerguntas"
-                    android:text="10"/>
 
                 <com.example.lucas.juridex_v13.Utils.MyTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Está quase lá"
-                    android:layout_marginTop="90dp"
-                    android:id="@+id/txtMensagem"/>
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_horizontal"
+                    android:id="@+id/txtMensagem"
+                    android:textSize="25dp"
+                    android:layout_below="@+id/txtResultado"/>
 
-                <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_refresh"
-                android:id="@+id/btnReiniciarTeste"
-                android:layout_marginTop="120dp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtMensagem"
+                    android:layout_marginTop="50dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal"
+                    >
+
+                    <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_refresh"
+                    android:id="@+id/btnReiniciarTeste"
+
+
+                    />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_back"
                     android:id="@+id/btnVoltarTelaNiveis"
-                    android:layout_marginTop="120dp"
-                    android:layout_marginLeft="70dp"/>
+                    />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/ic_forward"
                     android:id="@+id/btnProximoTeste"
-                    android:layout_marginTop="120dp"
-                    android:layout_marginLeft="140dp"/>
+                    />
+                </LinearLayout>
             </RelativeLayout>
 
 
