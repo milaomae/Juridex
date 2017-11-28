@@ -71,6 +71,7 @@ public class GameActivity extends AppCompatActivity{
         pagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
         pagerAdapter.addFragment(new QuestaoFragment(), "questao1"); //fragment 0
         pagerAdapter.addFragment(new JustificativaFragment(), "justificativa"); //fragment 1
+        pagerAdapter.addFragment(new FimJogoFragment(), "fim"); //fragment 2
     }
 
     public void setViewPager(int fragmentNumber){

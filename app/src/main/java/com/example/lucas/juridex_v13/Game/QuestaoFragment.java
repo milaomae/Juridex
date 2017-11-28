@@ -44,6 +44,7 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
     private List<Question> questoes;
     private int questaoLista;
     private MaterialDialog dialog;
+    private List<Integer> questoesJaLidas;
 
     //firebase
     private FirebaseAuth mAuth;
@@ -58,8 +59,16 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pergunta, container, false);
+        questoes = new ArrayList<>();
+        questoesJaLidas = new ArrayList<>();
+
+        //limpar listas
+        questoes.clear();
+        questoesJaLidas.clear();
+
         mAuth = FirebaseAuth.getInstance();
         firebase = new FirebaseMethods(getActivity());
+
 
         if(mAuth.getCurrentUser() != null){
             userID = mAuth.getCurrentUser().getUid();
@@ -111,6 +120,12 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
+                //quando terminar as questoes da lista
+                if(questoesJaLidas.size() != questoes.size()){
+                    setQuestions();
+                }
+                else
+                    ((GameActivity)getActivity()).setViewPager(2);
 
 
             }
@@ -129,17 +144,23 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
     public void setQuestions(){
         //chossing random question
         Random gerador = new Random();
-        gerador.nextInt(questoes.size());
+
+
         questaoLista = gerador.nextInt(questoes.size());
 
-        Question question = questoes.get(questaoLista);
+        if(!questoesJaLidas.contains(questaoLista)) {
 
-        //initialize components
-        txtQuestion.setText(question.getQuestion());
-        btnA.setText(question.getAnswera());
-        btnB.setText(question.getAnswerb());
-        btnC.setText(question.getAnswerc());
-        btnD.setText(question.getAnswerd());
+            questoesJaLidas.add(questaoLista);
+
+            Question question = questoes.get(questaoLista);
+
+            //initialize components
+            txtQuestion.setText(question.getQuestion());
+            btnA.setText(question.getAnswera());
+            btnB.setText(question.getAnswerb());
+            btnC.setText(question.getAnswerc());
+            btnD.setText(question.getAnswerd());
+        }
 
 
     }
@@ -177,7 +198,6 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             Log.d(TAG, "onDataChange: loading question and choosing one");
-                            questoes = new ArrayList<>();
                             questoes = firebase.loadQuestions("cdc_easy", dataSnapshot);
                             setQuestions();
                         }
