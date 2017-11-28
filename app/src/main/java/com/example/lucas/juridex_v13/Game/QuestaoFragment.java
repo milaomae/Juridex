@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +47,8 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
     private MaterialDialog dialog;
     private List<Integer> questoesJaLidas;
     private int questoesCorretas, score, questaoAtual;
+    private ProgressBar mProgressBar;
+    private TextView mPleaseWait;
 
     //firebase
     private FirebaseAuth mAuth;
@@ -87,6 +90,8 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
         txtQuestion = (MyTextView) view.findViewById(R.id.txtQuestion);
         txtQuestaoAtual = (MyTextView) view.findViewById(R.id.txtperguntaAtual);
         txtNivelAtual = (MyTextView) view.findViewById(R.id.txtnivelAtual);
+        mProgressBar = view.findViewById(R.id.perguntaRequestLoadingProgressbar);
+        mPleaseWait = view.findViewById(R.id.pleaseWait);
 
         //if(nivel.equals("cdc_easy"))
         txtNivelAtual.setText("Fácil");
@@ -106,7 +111,7 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         Button btnGeneric = (Button) view;
-
+        
         if(btnGeneric.getText().equals(questoes.get(questaoLista).getCorrect())){
             dialog = new MaterialDialog.Builder(getActivity())
                     .title("Você acertou!")
@@ -131,6 +136,7 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
                 dialog.dismiss();
                 //quando terminar as questoes da lista
                 if(questoesJaLidas.size() != questoes.size()){
+                    Log.d(TAG, "onClick: proxima pergunta");
                     setQuestions();
                 }
                 else
@@ -153,13 +159,12 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
     public void setQuestions(){
         //chossing random question
         Random gerador = new Random();
-        int qtdQuestao = 0;
+
 
         questaoLista = gerador.nextInt(questoes.size());
 
         if(!questoesJaLidas.contains(questaoLista)) {
-            qtdQuestao++;
-            txtQuestaoAtual.setText(qtdQuestao + "  /  " + questoes.size());
+            txtQuestaoAtual.setText((questoesJaLidas.size() + 1) + "  /  " + questoes.size());
             questoesJaLidas.add(questaoLista);
 
             Question question = questoes.get(questaoLista);
@@ -170,7 +175,10 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
             btnB.setText(question.getAnswerb());
             btnC.setText(question.getAnswerc());
             btnD.setText(question.getAnswerd());
+
         }
+        mProgressBar.setVisibility(View.GONE);
+        mPleaseWait.setVisibility(View.GONE);
 
 
     }

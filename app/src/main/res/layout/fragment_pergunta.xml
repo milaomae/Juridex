@@ -98,6 +98,22 @@
 
             </RelativeLayout>
 
+    <ProgressBar
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/perguntaRequestLoadingProgressbar"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please wait..."
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:layout_alignBottom="@+id/perguntaRequestLoadingProgressbar"
+        android:layout_alignRight="@+id/perguntaRequestLoadingProgressbar"
+        android:layout_alignLeft="@+id/perguntaRequestLoadingProgressbar"
+        android:id="@+id/pleaseWait"/>
 
             
 
