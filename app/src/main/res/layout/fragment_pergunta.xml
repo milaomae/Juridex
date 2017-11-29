@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/txtnivelAtual"
             android:textSize="20dp"
-            android:text="nivel"
+            android:text=""
             android:layout_marginLeft="130dp"
             />
 
@@ -29,13 +29,19 @@
             android:layout_height="wrap_content"
             android:id="@+id/txtperguntaAtual"
             android:textSize="20dp"
-            android:text="2/15"
+            android:text=""
             android:layout_marginLeft="20dp"
             />
 
     </android.support.v7.widget.Toolbar>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-            <RelativeLayout
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <RelativeLayout
                 android:layout_marginTop="30dp"
                 android:layout_width="310dp"
                 android:layout_height="200dp"
@@ -54,7 +60,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/txtQuestion"
-                        android:layout_gravity="center_vertical"/>
+                        android:layout_gravity="center"
+                        android:gravity="center"/>
 
 
 
@@ -68,35 +75,49 @@
                 android:layout_height="match_parent"
                 android:layout_centerHorizontal="true">
 
-                <Button
+                <com.example.lucas.juridex_v13.Utils.MyButton
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="60dp"
                     android:background="@drawable/roundcorner"
-                    android:id="@+id/btnA"/>
+                    android:id="@+id/btnA"
+                    android:textSize="15dp"
+                    android:textAllCaps="false"/>
 
-                <Button
+                <com.example.lucas.juridex_v13.Utils.MyButton
                     android:layout_marginTop="65dp"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="60dp"
                     android:background="@drawable/roundcorner"
-                    android:id="@+id/btnB"/>
+                    android:id="@+id/btnB"
+                    android:textSize="15dp"
+                    android:textAllCaps="false"/>
 
-                <Button
+                <com.example.lucas.juridex_v13.Utils.MyButton
                     android:layout_marginTop="130dp"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="60dp"
                     android:background="@drawable/roundcorner"
-                    android:id="@+id/btnC"/>
+                    android:id="@+id/btnC"
+                    android:textSize="15dp"
+                    android:textAllCaps="false"/>
 
-                <Button
+                <com.example.lucas.juridex_v13.Utils.MyButton
                     android:layout_marginTop="195dp"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="60dp"
                     android:background="@drawable/roundcorner"
-                    android:id="@+id/btnD"/>
+                    android:id="@+id/btnD"
+                    android:textSize="15dp"
+                    android:textAllCaps="false"/>
 
 
             </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
 
     <ProgressBar
         android:layout_width="150dp"
@@ -115,7 +136,7 @@
         android:layout_alignLeft="@+id/perguntaRequestLoadingProgressbar"
         android:id="@+id/pleaseWait"/>
 
-            
+
 
 
 

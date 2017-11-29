@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="layout.PremiumFragment"
     android:orientation="vertical"
     android:background="@drawable/fundo">
 
@@ -19,27 +18,31 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/roundcorner">
+            android:background="@drawable/roundcorner"
+            >
 
             <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:layout_gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+                android:layout_gravity="center">
 
                 <com.example.lucas.juridex_v13.Utils.MyTextView
                 android:id="@+id/txtJustificativa"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                    android:text="Justificativa"/>
+                    android:text="Justificativa"
+                    android:gravity="center"
+                    android:textSize="20dp"/>
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Voltar"
+                    android:background="@drawable/designbutton"
                     android:id="@+id/btnVoltarJustificativa"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="30dp"/>
             </LinearLayout>
 
 

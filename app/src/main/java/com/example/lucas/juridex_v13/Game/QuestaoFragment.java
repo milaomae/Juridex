@@ -1,6 +1,8 @@
 package com.example.lucas.juridex_v13.Game;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,6 +22,7 @@ import com.example.lucas.juridex_v13.Common.Common;
 import com.example.lucas.juridex_v13.FirebaseMethods;
 import com.example.lucas.juridex_v13.Login.LoginActivity;
 import com.example.lucas.juridex_v13.R;
+import com.example.lucas.juridex_v13.Utils.MyButton;
 import com.example.lucas.juridex_v13.Utils.MyTextView;
 import com.example.lucas.juridex_v13.models.Question;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,13 +44,11 @@ import java.util.Random;
 public class QuestaoFragment extends Fragment implements View.OnClickListener{
     private static final String TAG = "QuestaoFragment";
 
-    private Button btnA, btnB, btnC, btnD;
+    private MyButton btnA, btnB, btnC, btnD;
     private MyTextView txtQuestion, txtQuestaoAtual, txtNivelAtual;
-    private List<Question> questoes;
-    private int questaoLista;
+    private int numQuestaoLista;
     private MaterialDialog dialog;
-    private List<Integer> questoesJaLidas;
-    private int questoesCorretas, score, questaoAtual;
+    private int questoesCorretas, score;
     private ProgressBar mProgressBar;
     private TextView mPleaseWait;
 
@@ -64,19 +65,11 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pergunta, container, false);
-        questoes = new ArrayList<>();
-        questoesJaLidas = new ArrayList<>();
 
-        //limpar listas
-        questoes.clear();
-        questoesJaLidas.clear();
 
         //iniciar variáveis
-        score = 10;
-        questaoAtual = 0;
+        score = 0;
         questoesCorretas = 0;
-
-        Common.setScore(score);
 
         mAuth = FirebaseAuth.getInstance();
         firebase = new FirebaseMethods(getActivity());
@@ -86,10 +79,10 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
             userID = mAuth.getCurrentUser().getUid();
         }
 
-        btnA = (Button) view.findViewById(R.id.btnA);
-        btnB = (Button) view.findViewById(R.id.btnB);
-        btnC = (Button) view.findViewById(R.id.btnC);
-        btnD = (Button) view.findViewById(R.id.btnD);
+        btnA = (MyButton) view.findViewById(R.id.btnA);
+        btnB = (MyButton) view.findViewById(R.id.btnB);
+        btnC = (MyButton) view.findViewById(R.id.btnC);
+        btnD = (MyButton) view.findViewById(R.id.btnD);
         txtQuestion = (MyTextView) view.findViewById(R.id.txtQuestion);
         txtQuestaoAtual = (MyTextView) view.findViewById(R.id.txtperguntaAtual);
         txtNivelAtual = (MyTextView) view.findViewById(R.id.txtnivelAtual);
@@ -115,7 +108,8 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         Button btnGeneric = (Button) view;
         
-        if(btnGeneric.getText().equals(questoes.get(questaoLista).getCorrect())){
+        if(btnGeneric.getText().equals(Common.getListaQuestoes().get(numQuestaoLista).getCorrect())){
+
             dialog = new MaterialDialog.Builder(getActivity())
                     .title("Você acertou!")
                     .content("")
@@ -124,6 +118,7 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
                     .show();
         }
         else{
+
             dialog = new MaterialDialog.Builder(getActivity())
                     .title("Você errou!")
                     .content("")
@@ -138,12 +133,17 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
             public void onClick(View view) {
                 dialog.dismiss();
                 //quando terminar as questoes da lista
-                if(questoesJaLidas.size() != questoes.size()){
+                if(Common.getQuestoesJaLidas().size() != Common.getListaQuestoes().size()){
                     Log.d(TAG, "onClick: proxima pergunta");
+                    score += 10;
+                    questoesCorretas++;
                     setQuestions();
+
                 }
-                else
-                    ((GameActivity)getActivity()).setViewPager(2);
+                else{
+                    Common.setScore(score);
+                    Common.setAcertos(questoesCorretas);
+                    ((GameActivity)getActivity()).setViewPager(2);}
 
 
             }
@@ -162,15 +162,15 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
     public void setQuestions(){
         //chossing random question
         Random gerador = new Random();
+        boolean encontrou = false;
+        numQuestaoLista = gerador.nextInt(Common.getListaQuestoes().size());
+        while(!encontrou){
+        if(!Common.getQuestoesJaLidas().contains(numQuestaoLista)) {
+            txtQuestaoAtual.setText((Common.getQuestoesJaLidas().size() + 1) + "  /  " + Common.getListaQuestoes().size());
+            Common.getQuestoesJaLidas().add(numQuestaoLista);
 
-
-        questaoLista = gerador.nextInt(questoes.size());
-
-        if(!questoesJaLidas.contains(questaoLista)) {
-            txtQuestaoAtual.setText((questoesJaLidas.size() + 1) + "  /  " + questoes.size());
-            questoesJaLidas.add(questaoLista);
-
-            Question question = questoes.get(questaoLista);
+            Question question = Common.getListaQuestoes().get(numQuestaoLista);
+            Common.setQuestaoAtual(question);
 
             //initialize components
             txtQuestion.setText(question.getQuestion());
@@ -178,7 +178,8 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
             btnB.setText(question.getAnswerb());
             btnC.setText(question.getAnswerc());
             btnD.setText(question.getAnswerd());
-
+            encontrou = true;
+        }
         }
         mProgressBar.setVisibility(View.GONE);
         mPleaseWait.setVisibility(View.GONE);
@@ -219,7 +220,7 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             Log.d(TAG, "onDataChange: loading question and choosing one");
-                            questoes = firebase.loadQuestions("cdc_easy", dataSnapshot);
+                            Common.setListaQuestoes(firebase.loadQuestions("cdc_easy", dataSnapshot));
                             setQuestions();
 
                         }

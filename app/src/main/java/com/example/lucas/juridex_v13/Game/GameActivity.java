@@ -129,15 +129,6 @@ public class GameActivity extends AppCompatActivity{
         }
     }
 
-    private void setupViewPager(ViewPager viewPager){
-        SectionsStatePagerAdapter adapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new NiveisFragment(), "niveis");
-
-
-        //adicionando icones em um tablayout
-        //tabLayout.getTabAt(0).setIcon(R.drawable.ic_action_home);
-    }
-
     private void setupBottomNavigationView(){
         Log.d(TAG, "setupBottomNavigationView setting up BottomNavigationView");
         BottomNavigationViewEx bottomNavigationViewEx = findViewById(R.id.bottomNavViewBar);

@@ -57,4 +57,8 @@
     <color name="accent_material_dark_1">#80cbc4</color>
     
     <color name="bluegrey">#47525E</color>
+
+    <color name="errou">#FF0005</color>
+
+    <color name="acertou">#3C8B1C</color>
 </resources>

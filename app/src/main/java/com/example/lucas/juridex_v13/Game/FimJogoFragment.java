@@ -8,7 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.lucas.juridex_v13.Common.Common;
 import com.example.lucas.juridex_v13.R;
 import com.example.lucas.juridex_v13.Utils.MyTextView;
@@ -20,8 +24,9 @@ import com.example.lucas.juridex_v13.Utils.MyTextView;
 public class FimJogoFragment extends Fragment{
     private static final String TAG = "FimJogoFragment";
 
-    private MyTextView txtMensagem, result;
+    private TextView txtMensagem, txtResultado;
     private Button btnProximoTeste, btnVoltarTelaNiveis, btnReiniciarTeste;
+    private MaterialDialog dialog;
 
     @Nullable
     @Override
@@ -31,9 +36,9 @@ public class FimJogoFragment extends Fragment{
 
         //iniciar variaveis
         txtMensagem = view.findViewById(R.id.txtMensagem);
-        result = view.findViewById(R.id.result);
+        txtResultado = view.findViewById(R.id.txtResultado);
         btnProximoTeste = view.findViewById(R.id.btnProximoTeste);
-        btnVoltarTelaNiveis = view.findViewById(R.id.btnVoltarJustificativa);
+        btnVoltarTelaNiveis = view.findViewById(R.id.btnVoltarTelaNiveis);
         btnReiniciarTeste = view.findViewById(R.id.btnReiniciarTeste);
         
         //set textos
@@ -48,8 +53,21 @@ public class FimJogoFragment extends Fragment{
 
         return view;
     }
+
+    public void limpaCommonVariaveis(){
+        Common.setListaQuestoes(null);
+        Common.setQuestaoAtual(null);
+        Common.setAcertos(0);
+        Common.setNivel(null);
+        Common.setQtdTestesDificeis(0);
+        Common.setQtdTestesFaceis(0);
+        Common.setQtdTestesMedios(0);
+        Common.setQuestoesJaLidas(null);
+        Common.setQuestoesTotais(0);
+        Common.setScore(0);
+    }
     
-    public vois setTxts(){        
+    public void setTxts(){
         if(Common.getAcertos() == Common.getQuestoesTotais())
             txtMensagem.setText("UOU"); //acertou tudo
         else    
@@ -57,8 +75,8 @@ public class FimJogoFragment extends Fragment{
                 txtMensagem.setText("Esta bom, mas pode melhorar!"); //acertou metade ou mais que a metade
             else
                 txtMensagem.setText("Poxa, está quase lá!"); //acertou menos que a metade
-        
-        result.setText(Common.getAcertos() + "  /  " + Common.getQuestoesTotais());
+
+        txtResultado.setText(Common.getAcertos() + "  /  " + Common.getQuestoesTotais());
         
     }
 
@@ -82,7 +100,7 @@ public class FimJogoFragment extends Fragment{
                     else
                         if(Common.getNivel().equals("cdc_hard")){
                             //dialog, esperar próximos níveis
-                            MaterialDialog dialog = new MaterialDialog.Builder(getActivity())
+                             dialog = new MaterialDialog.Builder(getActivity())
                                 .title("Você já fez todos os testes!")
                                 .content("Aguarde novos e envie sugestões (:")
                                 .positiveText("Fechar")
