@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="layout.PremiumFragment"
     android:orientation="vertical"
     android:background="@drawable/fundo"
     android:id="@+id/tela_questao_container"
@@ -61,6 +60,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/txtQuestion"
                         android:layout_gravity="center"
+                        android:layout_margin="15dp"
                         android:gravity="center"/>
 
 
@@ -75,44 +75,130 @@
                 android:layout_height="match_parent"
                 android:layout_centerHorizontal="true">
 
-                <com.example.lucas.juridex_v13.Utils.MyButton
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="60dp"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
                     android:background="@drawable/roundcorner"
-                    android:id="@+id/btnA"
-                    android:textSize="15dp"
-                    android:textAllCaps="false"/>
+                    android:id="@+id/linLayout1">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:minHeight="60dp"
+                        android:layout_weight="20"
+                        android:text="A"
+                        android:textStyle="bold"
+                        android:textSize="25dp"
+                        android:textColor="@color/greenbr"
+                        android:gravity="center"
+                        android:background="@drawable/letters_background"/>
 
                 <com.example.lucas.juridex_v13.Utils.MyButton
-                    android:layout_marginTop="65dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="80"
                     android:minHeight="60dp"
+                    android:id="@+id/btnA"
+                    android:background="none"
+                    android:textSize="15dp"
+                    android:textAllCaps="false"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/linLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
                     android:background="@drawable/roundcorner"
+                    android:id="@+id/linLayout2">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:minHeight="60dp"
+                    android:layout_weight="20"
+                    android:text="B"
+                    android:textStyle="bold"
+                    android:textSize="25dp"
+                    android:textColor="@color/greenbr"
+                    android:gravity="center"
+                    android:background="@drawable/letters_background"/>
+                <com.example.lucas.juridex_v13.Utils.MyButton
+                    android:layout_weight="80"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:minHeight="60dp"
+                    android:background="none"
                     android:id="@+id/btnB"
                     android:textSize="15dp"
                     android:textAllCaps="false"/>
+                </LinearLayout>
 
-                <com.example.lucas.juridex_v13.Utils.MyButton
-                    android:layout_marginTop="130dp"
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/linLayout2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="60dp"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
                     android:background="@drawable/roundcorner"
-                    android:id="@+id/btnC"
-                    android:textSize="15dp"
-                    android:textAllCaps="false"/>
+                    android:id="@+id/linLayout3">
 
-                <com.example.lucas.juridex_v13.Utils.MyButton
-                    android:layout_marginTop="195dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:minHeight="60dp"
+                    android:layout_weight="20"
+                    android:text="C"
+                    android:textStyle="bold"
+                    android:textSize="25dp"
+                    android:textColor="@color/greenbr"
+                    android:gravity="center"
+                    android:background="@drawable/letters_background"/>
+
+                    <com.example.lucas.juridex_v13.Utils.MyButton
+                        android:layout_weight="80"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:minHeight="60dp"
+                        android:background="none"
+                        android:id="@+id/btnC"
+                        android:textSize="15dp"
+                        android:textAllCaps="false"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/linLayout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
                     android:background="@drawable/roundcorner"
-                    android:id="@+id/btnD"
-                    android:textSize="15dp"
-                    android:textAllCaps="false"/>
+                    android:id="@+id/linLayout4">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:minHeight="60dp"
+                        android:layout_weight="20"
+                        android:textStyle="bold"
+                        android:textSize="25dp"
+                        android:textColor="@color/greenbr"
+                        android:text="D"
+                        android:gravity="center"
+                        android:background="@drawable/letters_background"/>
+
+                    <com.example.lucas.juridex_v13.Utils.MyButton
+                        android:layout_weight="80"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:minHeight="60dp"
+                        android:background="none"
+                        android:id="@+id/btnD"
+                        android:textSize="15dp"
+                        android:textAllCaps="false"/>
+
+                </LinearLayout>
 
 
             </RelativeLayout>

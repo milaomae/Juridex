@@ -30,6 +30,7 @@
                     android:gravity="center_horizontal"
                     android:layout_marginTop="80dp"
                     android:id="@+id/result"
+                    android:textColor="@color/bluebr"
                     />
 
 
@@ -41,20 +42,23 @@
                     android:gravity="center_horizontal"
                     android:layout_marginTop="50dp"
                     android:textSize="30dp"
+                    android:textColor="@color/bluebr"
                     android:text="3 / 10"/>
 
 
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <com.example.lucas.juridex_v13.Utils.MyTextView
+                    android:layout_width="225dp"
                     android:layout_height="wrap_content"
                     android:text="Está quase lá"
                     android:layout_marginTop="20dp"
                     android:layout_centerHorizontal="true"
                     android:padding="10dp"
                     android:id="@+id/txtMensagem"
-                    android:textSize="25dp"
+                    android:textSize="30dp"
                     android:background="@drawable/designbutton"
+                    android:gravity="center"
+                    android:textColor="@color/bluebr"
                     android:layout_below="@+id/txtResultado"/>
 
                 <LinearLayout
@@ -66,26 +70,47 @@
                     android:gravity="center_horizontal"
                     >
 
-                    <Button
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="@drawable/ic_refresh"
-                    android:id="@+id/btnReiniciarTeste"
-                    />
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/designbutton">
+                        <Button
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@drawable/ic_refresh"
+                            android:id="@+id/btnReiniciarTeste"
+                            android:backgroundTint="@color/bluebr"
+                         />
+                    </RelativeLayout>
 
-                <Button
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="@drawable/ic_back"
-                    android:id="@+id/btnVoltarTelaNiveis"
-                    />
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/designbutton"
+                        android:layout_marginLeft="10dp">
+                        <Button
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@drawable/ic_back"
+                            android:id="@+id/btnVoltarTelaNiveis"
+                            android:backgroundTint="@color/bluebr"
+                        />
+                    </RelativeLayout>
 
-                <Button
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:background="@drawable/ic_forward"
-                    android:id="@+id/btnProximoTeste"
-                    />
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/designbutton"
+                        android:layout_marginLeft="10dp">
+                        <Button
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@drawable/ic_forward"
+                            android:id="@+id/btnProximoTeste"
+                            android:backgroundTint="@color/bluebr"
+
+                        />
+                    </RelativeLayout>
                 </LinearLayout>
             </RelativeLayout>
 

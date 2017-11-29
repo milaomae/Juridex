@@ -9,9 +9,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/juridex"
         android:label="JURIDEX"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/juridex"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 

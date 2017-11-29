@@ -93,19 +93,30 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
                     txtNivelAtual.setText("Difícil");}
 
 
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        setupFirebaseAuth();
+
+        btnA.setOnClickListener(this);
+        btnB.setOnClickListener(this);
+        btnC.setOnClickListener(this);
+        btnD.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
         if(Common.getFoiTelaJustificativa()) {
             voltouDaTelaJustificativa();
         }
-        else {
-            setupFirebaseAuth();
 
-            btnA.setOnClickListener(this);
-            btnB.setOnClickListener(this);
-            btnC.setOnClickListener(this);
-            btnD.setOnClickListener(this);
-        }
-
-        return view;
     }
 
     public void voltouDaTelaJustificativa(){

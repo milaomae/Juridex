@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.lucas.juridex_v13.R;
+import com.example.lucas.juridex_v13.Utils.UniversalImageLoader;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -48,10 +49,7 @@ public class ProfileActivity extends AppCompatActivity{
         setupActivityWidgets();
         setupBottomNavigationView();
         setupToolBar();
-    }
-
-    private void setProfileImage(){
-
+        setProfileImage();
     }
 
     private void setupActivityWidgets(){
@@ -86,6 +84,10 @@ public class ProfileActivity extends AppCompatActivity{
         menuItem.setChecked(true);
     }
 
-
+    private void setProfileImage(){
+        Log.d(TAG, "setProfileImage: setting profile image.");
+        String imgUrl = "pbs.twimg.com/profile_images/520912344486920192/ATAJ_Rr7_400x400.jpeg";
+        UniversalImageLoader.setImage(imgUrl, mProfilePhoto, null, "https://");
+    }
 
    }

@@ -15,6 +15,7 @@
             android:background="@drawable/grey_border_bottom"/>
 
         <ListView
+            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtSettings"

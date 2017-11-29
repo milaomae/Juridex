@@ -44,7 +44,7 @@
     <!-- cores app -->
     <color name="green">#70c050</color>
 
-    <color name="rect">#64ffffff</color>
+    <color name="rect">#80ffffff</color>
 
     <color name="rectBorder">#64203b50</color>
 
@@ -55,6 +55,8 @@
     <color name="verdeCl">#F4FFDE</color>
     
     <color name="accent_material_dark_1">#80cbc4</color>
+
+    <color name="greenbr">#00600F</color>
     
     <color name="bluegrey">#47525E</color>
 

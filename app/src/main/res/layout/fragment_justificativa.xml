@@ -35,15 +35,20 @@
                     android:text="Justificativa"
                     android:gravity="center"
                     android:textSize="20dp"
-                    android:padding="15dp"/>
+                    android:padding="15dp"
+                    android:textColor="@color/bluebr"/>
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="125dp"
                     android:layout_height="wrap_content"
                     android:text="Voltar"
                     android:background="@drawable/designbutton"
                     android:id="@+id/btnVoltarJustificativa"
-                    android:layout_marginTop="30dp"/>
+                    android:layout_marginTop="30dp"
+                    android:textAllCaps="false"
+                    android:gravity="center"
+                    android:textColor="@color/bluebr"
+                    android:textSize="25dp"/>
             </LinearLayout>
 
 

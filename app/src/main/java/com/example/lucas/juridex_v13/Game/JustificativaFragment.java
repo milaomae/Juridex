@@ -3,6 +3,7 @@ package com.example.lucas.juridex_v13.Game;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,9 +38,16 @@ public class JustificativaFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 ((GameActivity)getActivity()).setViewPager(0);
+                onDestroyView();
             }
         });
 
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d(TAG, "onDestroyView: destroying fragment justificativa");
     }
 }

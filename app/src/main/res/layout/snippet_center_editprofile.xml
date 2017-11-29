@@ -41,12 +41,13 @@
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="25dp"
-                android:src="@drawable/ic_refresh"
-                android:layout_centerVertical="true"/>
+                android:src="@drawable/ic_action_perfil"
+                android:layout_centerVertical="true"
+                android:tint="@color/grey"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/username"
+                android:id="@+id/changeUsername"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="40dp"
                 android:layout_marginLeft="0dp"
@@ -54,6 +55,61 @@
                 android:inputType="textNoSuggestions"/>
 
         </RelativeLayout>
+
+            <!--Diplay email section -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/relLayout2"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/grey_border_bottom"
+                android:id="@+id/relLayout3"
+                >
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_email"
+                    android:layout_centerVertical="true"
+                    android:tint="@color/grey"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/changeEmail"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="0dp"
+                    android:background="@null"
+                    android:inputType="textEmailAddress"/>
+
+            </RelativeLayout>
+
+            <!--Diplay password section -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/relLayout3"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/grey_border_bottom"
+                android:id="@+id/relLayout4">
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_password"
+                    android:layout_centerVertical="true"
+                    android:tint="@color/grey"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/changePassword"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="0dp"
+                    android:background="@null"
+                    android:inputType="textEmailAddress"/>
+
+            </RelativeLayout>
         </RelativeLayout>
 
 
