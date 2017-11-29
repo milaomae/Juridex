@@ -158,7 +158,6 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:minHeight="60dp"
-                        android:background="none"
                         android:id="@+id/btnC"
                         android:textSize="15dp"
                         android:textAllCaps="false"/>
