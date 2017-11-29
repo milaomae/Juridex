@@ -212,6 +212,7 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
                 Common.setAcertos(questoesCorretas);
                 Common.setFoiTelaJustificativa(true);
                 dialog.dismiss();
+                onDestroyView();
                 ((GameActivity)getActivity()).setViewPager(1);
 
             }
