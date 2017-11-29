@@ -99,7 +99,6 @@
                     android:layout_weight="80"
                     android:minHeight="60dp"
                     android:id="@+id/btnA"
-                    android:background="none"
                     android:textSize="15dp"
                     android:textAllCaps="false"/>
                 </LinearLayout>
@@ -128,7 +127,6 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:minHeight="60dp"
-                    android:background="none"
                     android:id="@+id/btnB"
                     android:textSize="15dp"
                     android:textAllCaps="false"/>
@@ -193,7 +191,6 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:minHeight="60dp"
-                        android:background="none"
                         android:id="@+id/btnD"
                         android:textSize="15dp"
                         android:textAllCaps="false"/>
