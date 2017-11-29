@@ -1,7 +1,6 @@
 package com.example.lucas.juridex_v13.Game;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,7 +18,7 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.example.lucas.juridex_v13.Common.Common;
-import com.example.lucas.juridex_v13.FirebaseMethods;
+import com.example.lucas.juridex_v13.Utils.FirebaseMethods;
 import com.example.lucas.juridex_v13.Login.LoginActivity;
 import com.example.lucas.juridex_v13.R;
 import com.example.lucas.juridex_v13.Utils.MyButton;
@@ -33,8 +32,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -48,7 +45,7 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
     private MyTextView txtQuestion, txtQuestaoAtual, txtNivelAtual;
     private int numQuestaoLista;
     private MaterialDialog dialog;
-    private int questoesCorretas, score;
+    private int questoesCorretas, score = 0;
     private ProgressBar mProgressBar;
     private TextView mPleaseWait;
 
@@ -61,19 +58,16 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
     private String userID;
     private FirebaseMethods firebase;
 
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pergunta, container, false);
 
-
         //iniciar variáveis
-        score = 0;
-        questoesCorretas = 0;
-
         mAuth = FirebaseAuth.getInstance();
         firebase = new FirebaseMethods(getActivity());
-
 
         if(mAuth.getCurrentUser() != null){
             userID = mAuth.getCurrentUser().getUid();
@@ -89,111 +83,176 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
         mProgressBar = view.findViewById(R.id.perguntaRequestLoadingProgressbar);
         mPleaseWait = view.findViewById(R.id.pleaseWait);
 
-        //if(nivel.equals("cdc_easy"))
-        txtNivelAtual.setText("Fácil");
+        if(Common.getNivel().equals("cdc_easy")){
+            txtNivelAtual.setText("Fácil");}
+        else
+            if(Common.getNivel().equals("cdc_medium")){
+                txtNivelAtual.setText("Médio");}
+            else
+                if(Common.getNivel().equals("cdc_medium")){
+                    txtNivelAtual.setText("Difícil");}
 
-        setupFirebaseAuth();
 
+        if(Common.getFoiTelaJustificativa()) {
+            voltouDaTelaJustificativa();
+        }
+        else {
+            setupFirebaseAuth();
 
-        btnA.setOnClickListener(this);
-        btnB.setOnClickListener(this);
-        btnC.setOnClickListener(this);
-        btnD.setOnClickListener(this);
-
+            btnA.setOnClickListener(this);
+            btnB.setOnClickListener(this);
+            btnC.setOnClickListener(this);
+            btnD.setOnClickListener(this);
+        }
 
         return view;
+    }
+
+    public void voltouDaTelaJustificativa(){
+            txtQuestion.setText(Common.getQuestaoAtual().getQuestion());
+            btnA.setText(Common.getQuestaoAtual().getAnswera());
+            btnB.setText(Common.getQuestaoAtual().getAnswerb());
+            btnC.setText(Common.getQuestaoAtual().getAnswerc());
+            btnD.setText(Common.getQuestaoAtual().getAnswerd());
+
+            if(Common.getAlternativaEscolhida().equals(Common.getQuestaoAtual().getCorrect())){
+                dialog = new MaterialDialog.Builder(getActivity())
+                        .title("Você acertou!")
+                        .titleColorRes(R.color.acertou)
+                        .content("")
+                        .positiveText("Próxima")
+                        .show();
+            }
+            else{
+                dialog = new MaterialDialog.Builder(getActivity())
+                        .title("Você errou!")
+                        .titleColorRes(R.color.errou)
+                        .content("")
+                        .positiveText("Próxima")
+                        .show();
+
+            }
+
+            dialog.getActionButton(DialogAction.POSITIVE).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                    Common.setFoiTelaJustificativa(false);
+                    //quando terminar as questoes da lista
+                    if(Common.getQuestoesJaLidas().size() != Common.getListaQuestoes().size()){
+                        Log.d(TAG, "onClick: proxima pergunta");
+                        setQuestions();
+
+                    }
+                    else{
+                        ((GameActivity)getActivity()).setViewPager(2);}
+
+
+                }
+            });
+
     }
 
     @Override
     public void onClick(View view) {
         Button btnGeneric = (Button) view;
-        
-        if(btnGeneric.getText().equals(Common.getListaQuestoes().get(numQuestaoLista).getCorrect())){
+
+        //acertou
+        if (btnGeneric.getText().equals(Common.getListaQuestoes().get(numQuestaoLista).getCorrect())) {
+            score += 10;
+            questoesCorretas++;
 
             dialog = new MaterialDialog.Builder(getActivity())
                     .title("Você acertou!")
+                    .titleColorRes(R.color.acertou)
                     .content("")
                     .positiveText("Próxima")
                     .negativeText("Ver Justificativa")
                     .show();
-        }
-        else{
+        } else {
 
             dialog = new MaterialDialog.Builder(getActivity())
                     .title("Você errou!")
+                    .titleColorRes(R.color.errou)
                     .content("")
                     .positiveText("Próxima")
                     .negativeText("Ver Justificativa")
                     .show();
 
         }
+        Common.setAlternativaEscolhida(btnGeneric.getText().toString());
 
         dialog.getActionButton(DialogAction.POSITIVE).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.dismiss();
+                Common.setFoiTelaJustificativa(false);
                 //quando terminar as questoes da lista
-                if(Common.getQuestoesJaLidas().size() != Common.getListaQuestoes().size()){
+                if (Common.getQuestoesJaLidas().size() != Common.getListaQuestoes().size()) {
                     Log.d(TAG, "onClick: proxima pergunta");
-                    score += 10;
-                    questoesCorretas++;
                     setQuestions();
 
-                }
-                else{
+                } else {
+                    score += Common.getScore();
+                    questoesCorretas += Common.getAcertos();
                     Common.setScore(score);
                     Common.setAcertos(questoesCorretas);
-                    ((GameActivity)getActivity()).setViewPager(2);}
+                    ((GameActivity) getActivity()).setViewPager(2);
+                }
 
-
+                dialog.dismiss();
             }
+
         });
+
         dialog.getActionButton(DialogAction.NEGATIVE).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.dismiss();
                // justificativa = questaoF.getJustificativa();
+                Common.setScore(score);
+                Common.setAcertos(questoesCorretas);
+                Common.setFoiTelaJustificativa(true);
+                dialog.dismiss();
                 ((GameActivity)getActivity()).setViewPager(1);
-                Toast.makeText(getActivity(), "justificativa", Toast.LENGTH_SHORT ).show();
+
             }
         });
     }
 
     public void setQuestions(){
-        //chossing random question
-        Random gerador = new Random();
-        boolean encontrou = false;
-        numQuestaoLista = gerador.nextInt(Common.getListaQuestoes().size());
+        //chossing random question;
+
+        boolean encontrou;
+        encontrou = false;
+
         while(!encontrou){
-        if(!Common.getQuestoesJaLidas().contains(numQuestaoLista)) {
-            txtQuestaoAtual.setText((Common.getQuestoesJaLidas().size() + 1) + "  /  " + Common.getListaQuestoes().size());
-            Common.getQuestoesJaLidas().add(numQuestaoLista);
+            numQuestaoLista = randomNumber(Common.getListaQuestoes().size());
+            Log.d(TAG, "setQuestions: gera numero randomico " + numQuestaoLista);
+            if(!Common.getQuestoesJaLidas().contains(numQuestaoLista)) {
+                txtQuestaoAtual.setText((Common.getQuestoesJaLidas().size() + 1) + "  /  " + Common.getListaQuestoes().size());
+                Common.getQuestoesJaLidas().add(numQuestaoLista);
 
-            Question question = Common.getListaQuestoes().get(numQuestaoLista);
-            Common.setQuestaoAtual(question);
+                Question question = Common.getListaQuestoes().get(numQuestaoLista);
+                Common.setQuestaoAtual(question);
 
-            //initialize components
-            txtQuestion.setText(question.getQuestion());
-            btnA.setText(question.getAnswera());
-            btnB.setText(question.getAnswerb());
-            btnC.setText(question.getAnswerc());
-            btnD.setText(question.getAnswerd());
-            encontrou = true;
+                //initialize components
+                txtQuestion.setText(question.getQuestion());
+                btnA.setText(question.getAnswera());
+                btnB.setText(question.getAnswerb());
+                btnC.setText(question.getAnswerc());
+                btnD.setText(question.getAnswerd());
+                encontrou = true;
         }
         }
+
         mProgressBar.setVisibility(View.GONE);
         mPleaseWait.setVisibility(View.GONE);
 
-
-    }
-
-    private void checkCurrentUser(FirebaseUser user){
-        Log.d(TAG, "checkCurrentUser: checking if user is logged in.");
-
-        if(user == null){
-            Intent intent = new Intent(getActivity(), LoginActivity.class);
-            startActivity(intent);
         }
+
+
+    public int randomNumber(int i){
+        Random gerador = new Random();
+        return gerador.nextInt(i);
     }
 
     private void setupFirebaseAuth(){
@@ -210,8 +269,7 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                //check if the user is logged in
-                checkCurrentUser(user);
+
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
@@ -220,8 +278,10 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             Log.d(TAG, "onDataChange: loading question and choosing one");
-                            Common.setListaQuestoes(firebase.loadQuestions("cdc_easy", dataSnapshot));
-                            setQuestions();
+                            Common.setListaQuestoes(firebase.loadQuestions(Common.getNivel(), dataSnapshot));
+                            Common.setQuestoesTotais(Common.getListaQuestoes().size());
+                            if(Common.getQuestoesJaLidas().size() != Common.getListaQuestoes().size()){
+                                setQuestions();}
 
                         }
 
@@ -245,7 +305,6 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
     public void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
-        checkCurrentUser(mAuth.getCurrentUser());
     }
 
     @Override
@@ -254,7 +313,10 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
+
+        if(!Common.getFoiTelaJustificativa()) {
+            Common.cleanCommonVariaveis();
+        }
+
     }
-
-
 }

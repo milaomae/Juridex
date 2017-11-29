@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.lucas.juridex_v13">
 
+    <!-- Include following permission if you load images from Internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Include following permission if you want to cache images on SD card -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,6 +26,8 @@
         <activity android:name=".Premium.PremiumActivity"></activity>
         <activity android:name=".Profile.ProfileActivity"></activity>
             <activity android:name=".Profile.AccountSettingsActivity"></activity>
+            <activity android:name=".Profile.EditProfileActivity"></activity>
+            <activity android:name=".Profile.NextActivity"></activity>
         <activity android:name=".Login.LoginActivity"></activity>
         <activity android:name=".Login.RegisterActivity"></activity>
     </application>

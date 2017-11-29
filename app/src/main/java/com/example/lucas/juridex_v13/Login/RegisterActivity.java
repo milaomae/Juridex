@@ -14,7 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.lucas.juridex_v13.FirebaseMethods;
+import com.example.lucas.juridex_v13.Utils.FirebaseMethods;
 import com.example.lucas.juridex_v13.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

@@ -5,6 +5,7 @@ import android.content.Intent;
 import com.example.lucas.juridex_v13.models.Question;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -21,6 +22,59 @@ public class Common {
     public static int qtdTestesFaceis, qtdTestesMedios, qtdTestesDificeis;
     public static Question questaoAtual;
     public static List<Integer> questoesJaLidas = new ArrayList<>();
+    public static String mSelectedImage;
+    public static boolean foiTelaJustificativa = false;
+    public static String alternativaEscolhida;
+
+    public static HashMap<Integer, ArrayList<String>> respostas;
+
+    public static ArrayList<String> getRespostas(Integer cod) {
+            return respostas;
+    }
+
+    public static void setRespostas(HashMap<Integer, ArrayList<String>> respostas) {
+        Common.respostas = respostas;
+    }
+
+    public static String getAlternativaEscolhida() {
+        return alternativaEscolhida;
+    }
+
+    public static void setAlternativaEscolhida(String alternativaEscolhida) {
+        Common.alternativaEscolhida = alternativaEscolhida;
+    }
+
+    public static boolean getFoiTelaJustificativa() {
+        return foiTelaJustificativa;
+    }
+
+    public static void setFoiTelaJustificativa(boolean foiTelaJustificativa) {
+        Common.foiTelaJustificativa = foiTelaJustificativa;
+    }
+
+    public static String getmSelectedImage() {
+        return mSelectedImage;
+    }
+
+    public static void setmSelectedImage(String mSelectedImage) {
+        Common.mSelectedImage = mSelectedImage;
+    }
+
+    public static void cleanCommonVariaveis(){
+        Common.setListaQuestoes(new ArrayList<Question>());
+        Common.setQuestaoAtual(new Question());
+        Common.setAcertos(0);
+        Common.setNivel("");
+        Common.setQtdTestesDificeis(0);
+        Common.setQtdTestesFaceis(0);
+        Common.setQtdTestesMedios(0);
+        Common.setQuestoesJaLidas(new ArrayList<Integer>());
+        Common.setQuestoesTotais(0);
+        Common.setScore(0);
+        Common.setmSelectedImage("");
+        Common.setFoiTelaJustificativa(false);
+        Common.setAlternativaEscolhida("");
+    }
 
     public static List<Integer> getQuestoesJaLidas() {
         return questoesJaLidas;

@@ -1,45 +1,41 @@
 package com.example.lucas.juridex_v13.Profile;
 
 import android.content.Intent;
-import android.content.IntentSender;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.lucas.juridex_v13.R;
 import com.example.lucas.juridex_v13.Utils.Permissions;
+import com.example.lucas.juridex_v13.Utils.SectionsStatePagerAdapter;
 import com.example.lucas.juridex_v13.Utils.UniversalImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoader;
-
-import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static android.app.Activity.RESULT_OK;
-
 /**
- * Created by Lucas on 26/11/2017.
+ * Created by comae on 29/11/2017.
  */
 
-public class EditProfileFragment extends Fragment {
+public class EditProfileActivity extends AppCompatActivity {
 
     private static final String TAG = "EditProfileFragment";
 
     private final int PICK_IMAGE_REQUEST = 71;
     private Uri filePath;
+
+    private SectionsStatePagerAdapter pagerAdapter;
+    private ViewPager mViewPager;
+    private RelativeLayout mRelativeLayout;
 
     private TextView changeProfilePhoto;
     private CircleImageView profile_photo;
@@ -47,55 +43,69 @@ public class EditProfileFragment extends Fragment {
 
     private static final int VERIFY_PERMISSIONS_REQUEST = 1;
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_editprofile, container, false);
-
-
-        changeProfilePhoto = view.findViewById(R.id.changeProfilePhoto);
-        profile_photo = view.findViewById(R.id.profile_photo);
-        //mProgressBar = view.findViewById(R.id.loginRequestLoadingProgressbar);
-
-        changeProfilePhoto.setVisibility(View.INVISIBLE);
-        setProfileImage();
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_editprofile);
 
         //se as permissões estiverem habilitadas
         if(checkPermissionsArray(Permissions.PERMISSIONS)){
-            changeProfilePhoto.setVisibility(View.VISIBLE);
+            Log.d(TAG, "onCreate: tem permissão");
         }else{
             verifyPermissions(Permissions.PERMISSIONS);
         }
 
+        mViewPager = (ViewPager) findViewById(R.id.container);
+        mRelativeLayout = (RelativeLayout) findViewById(R.id.relLayout1);
+
+        changeProfilePhoto = findViewById(R.id.changeProfilePhoto);
+        profile_photo = findViewById(R.id.profile_photo);
+        //mProgressBar = view.findViewById(R.id.loginRequestLoadingProgressbar);
+
+        setupFragments();
+        setProfileImage();
+
+
         //back arrow for navigating back to "Profile Activity"
-        ImageView backArrow = (ImageView) view.findViewById(R.id.backArrow);
+        ImageView backArrow = (ImageView) findViewById(R.id.backArrow);
         backArrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: navigating back to ProfileActivity");
-                getActivity().finish();
+                Intent intent = new Intent(EditProfileActivity.this, AccountSettingsActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
         changeProfilePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                ((AccountSettingsActivity)getActivity()).setViewPager(2);
-
-
+              setViewPager(0);
             }
         });
 
-        return view;
     }
 
+    private void setupFragments(){
+        pagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
+        pagerAdapter.addFragment(new GalleryFragment(), "galeria"); //fragment 0
+
+
+    }
+
+    public void setViewPager(int fragmentNumber){
+        mRelativeLayout.setVisibility(View.GONE);
+        Log.d(TAG, "setupViewPager: navigation to fragment #:" + fragmentNumber);
+        mViewPager.setAdapter(pagerAdapter);
+        mViewPager.setCurrentItem(fragmentNumber);
+    }
 
     public void verifyPermissions(String[] permissions){
         Log.d(TAG, "verifyPermissions: verifying permissions.");
 
         ActivityCompat.requestPermissions(
-                getActivity(),
+                EditProfileActivity.this,
                 permissions,
                 VERIFY_PERMISSIONS_REQUEST
         );
@@ -116,7 +126,7 @@ public class EditProfileFragment extends Fragment {
     public boolean checkPermissions(String permission){
         Log.d(TAG, "checkPermissions: checking permission: " + permission);
 
-        int permissionRequest = ActivityCompat.checkSelfPermission(getActivity(), permission);
+        int permissionRequest = ActivityCompat.checkSelfPermission(EditProfileActivity.this, permission);
 
         if(permissionRequest != PackageManager.PERMISSION_GRANTED){
             Log.d(TAG, "checkPermissions: \n Permission was not granted for: " + permission);

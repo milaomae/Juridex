@@ -3,27 +3,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include layout="@layout/layout_content_viewpager"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/relLayout1"
         >
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/relLayout1"
+            android:layout_height="wrap_content"
+            android:id="@+id/relLayout2"
             >
             <include layout="@layout/snippet_top_editprofiletoolbar"/>
+
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/relLayout2"
-            android:layout_below="@id/relLayout1"
+            android:id="@+id/relLayout3"
+            android:layout_below="@id/relLayout2"
             >
 
+            <include layout="@layout/snippet_center_editprofile"/>
+
         </RelativeLayout>
+
+       <!-- <ProgressBar
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:id="@+id/loginRequestLoadingProgressbar"
+            android:layout_centerInParent="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please wait..."
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:layout_alignBottom="@+id/loginRequestLoadingProgressbar"
+            android:layout_alignRight="@+id/loginRequestLoadingProgressbar"
+            android:layout_alignLeft="@+id/loginRequestLoadingProgressbar"
+            android:id="@+id/pleaseWait"/> -->
 
     </RelativeLayout>
 

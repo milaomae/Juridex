@@ -25,6 +25,8 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import com.example.lucas.juridex_v13.Utils.BottomNavigationViewHelper;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * Created by Lucas on 25/11/2017.
  */
@@ -36,15 +38,26 @@ public class ProfileActivity extends AppCompatActivity{
 
     private ProgressBar mProgressBar;
 
+    private CircleImageView mProfilePhoto;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         Log.d(TAG, "onCreate: started");
-        mProgressBar = (ProgressBar) findViewById(R.id.profileProgressBar);
-        mProgressBar.setVisibility(View.GONE);
+        setupActivityWidgets();
         setupBottomNavigationView();
         setupToolBar();
+    }
+
+    private void setProfileImage(){
+
+    }
+
+    private void setupActivityWidgets(){
+        mProgressBar = (ProgressBar) findViewById(R.id.profileProgressBar);
+        mProfilePhoto = findViewById(R.id.profileImage);
+        mProgressBar.setVisibility(View.GONE);
     }
 
     private void setupToolBar(){

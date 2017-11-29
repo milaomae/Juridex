@@ -41,17 +41,19 @@ dependencies {
     compile "com.android.support:design:$rootProject.supportLibraryVersion"
     compile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     
-//BottomNavigationView library
+    //BottomNavigationView library
     compile 'com.github.ittianyu:BottomNavigationViewEx:1.2.4'
     compile 'com.android.support:design:26.+'
     
     //Circle ImageView
     compile 'de.hdodenhof:circleimageview:2.2.0'
     //dialog
-
     compile 'com.afollestad.material-dialogs:core:0.9.6.0'
 
     testCompile 'junit:junit:4.12'
     androidTestCompile 'junit:junit:4.12'
+
+    //Universal Image Loader
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 }
 apply plugin: 'com.google.gms.google-services'

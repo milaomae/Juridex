@@ -1,0 +1,79 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@color/bluebr"
+                android:id="@+id/profile_toolbar"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="0dp"
+                        android:id="@+id/iv_closeChoosePhoto"
+                        android:src="@drawable/ic_close"
+                        android:tint="@color/white"
+                        />
+
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Galeria"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        android:layout_marginLeft="25dp"
+                        android:layout_toRightOf="@id/iv_closeChoosePhoto"
+                        android:id="@+id/spinnerDirectory"
+                        android:layout_centerVertical="true"
+                        android:gravity="center_vertical"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="15dp"
+                        android:textSize="20dp"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/txtNext"
+                        android:text="Next"
+                        />
+
+
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.Toolbar>
+
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/ic_settings_black_24dp"
+                android:tint="@color/white"
+                />
+        </android.support.design.widget.AppBarLayout>
+
+
+    </RelativeLayout>
+</merge>

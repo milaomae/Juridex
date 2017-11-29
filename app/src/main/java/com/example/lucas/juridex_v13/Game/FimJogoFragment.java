@@ -43,29 +43,17 @@ public class FimJogoFragment extends Fragment{
         
         //set textos
         setTxts();
-        
+
+        //setar valores das mensagens
+        Common.cleanCommonVariaveis();
+
         //cliques dos botões
         setClicks();
-        
-        //setar valores das mensagens
-        
-        
 
         return view;
     }
 
-    public void limpaCommonVariaveis(){
-        Common.setListaQuestoes(null);
-        Common.setQuestaoAtual(null);
-        Common.setAcertos(0);
-        Common.setNivel(null);
-        Common.setQtdTestesDificeis(0);
-        Common.setQtdTestesFaceis(0);
-        Common.setQtdTestesMedios(0);
-        Common.setQuestoesJaLidas(null);
-        Common.setQuestoesTotais(0);
-        Common.setScore(0);
-    }
+
     
     public void setTxts(){
         if(Common.getAcertos() == Common.getQuestoesTotais())
@@ -116,7 +104,7 @@ public class FimJogoFragment extends Fragment{
                               });                            
                             }                
                 
-                Toast.makeText(getActivity(), "Próximo Teste (nível médio) ", Toast.LENGTH_SHORT ).show();
+                //Toast.makeText(getActivity(), "Próximo Teste (nível médio) ", Toast.LENGTH_SHORT ).show();
             }
         
         });
@@ -128,7 +116,7 @@ public class FimJogoFragment extends Fragment{
                 //encerra o fragment e volta para a tela de níveis(Game Activity)
                 getActivity().getFragmentManager().popBackStack();
                 
-                Toast.makeText(getActivity(), "encerrou fragment", Toast.LENGTH_SHORT ).show();
+                //Toast.makeText(getActivity(), "encerrou fragment", Toast.LENGTH_SHORT ).show();
             }
         
         });
@@ -139,7 +127,7 @@ public class FimJogoFragment extends Fragment{
                //redireciona para a página de questões no mesmo nível atual
                ((GameActivity)getActivity()).setViewPager(0);                
                 
-                Toast.makeText(getActivity(), "encerrou fragment", Toast.LENGTH_SHORT ).show();
+               // Toast.makeText(getActivity(), "encerrou fragment", Toast.LENGTH_SHORT ).show();
             }
         
         });

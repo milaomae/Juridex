@@ -14,16 +14,19 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
+import com.example.lucas.juridex_v13.Common.Common;
 import com.example.lucas.juridex_v13.Login.LoginActivity;
 import com.example.lucas.juridex_v13.Profile.EditProfileFragment;
 import com.example.lucas.juridex_v13.Profile.SignOutFragment;
 import com.example.lucas.juridex_v13.R;
 import com.example.lucas.juridex_v13.Utils.SectionsStatePagerAdapter;
+import com.example.lucas.juridex_v13.Utils.UniversalImageLoader;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import com.example.lucas.juridex_v13.Utils.BottomNavigationViewHelper;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * Created by Lucas on 25/11/2017.
@@ -54,6 +57,8 @@ public class GameActivity extends AppCompatActivity{
         btnMedioUm =  findViewById(R.id.btnmedioUm);
         btnDifilUm =  findViewById(R.id.btndificilUm);
 
+        initImageLoader();
+
         setupFirebaseAuth();
         setupBottomNavigationView();
         setupFragments();
@@ -61,10 +66,24 @@ public class GameActivity extends AppCompatActivity{
         btnFacilUm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Common.setNivel("cdc_easy");
                 setViewPager(0);
             }
         });
 
+        btnMedioUm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Common.setNivel("cdc_medium");
+                setViewPager(0);
+            }
+        });
+
+    }
+
+    private void initImageLoader(){
+        UniversalImageLoader universalImageLoader = new UniversalImageLoader(GameActivity.this);
+        ImageLoader.getInstance().init(universalImageLoader.getConfig());
     }
 
     private void setupFragments(){
@@ -113,6 +132,7 @@ public class GameActivity extends AppCompatActivity{
             }
         };
     }
+
 
     @Override
     public void onStart() {
