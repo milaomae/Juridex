@@ -77,6 +77,7 @@ public class FirebaseMethods {
         Collections.shuffle(Common.questionList);
 
 
+
 }
 
     public boolean checkIfUsernameExists(String username, DataSnapshot dataSnapshot){
