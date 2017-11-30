@@ -158,7 +158,7 @@ public class FirebaseMethods {
 
         myRef.child(mContext.getString(R.string.dbname_users_account_settings))
                 .child(userID)
-                .setValue(user);
+                .setValue(settings);
 
     }
 
@@ -200,7 +200,7 @@ public class FirebaseMethods {
         if(dataSnapshot.child(mContext.getString(R.string.dbname_users_account_settings)).child(userID).hasChildren())
         {
             ret = dataSnapshot.child(mContext.getString(R.string.dbname_users_account_settings)).child(userID).getValue(UserAccountSettings.class).getScore();
-            Log.d(TAG, "getScore: " + ret);
+            Log.d(TAG, "getScoregetScore: " + ret);
         }
         return ret;
     }

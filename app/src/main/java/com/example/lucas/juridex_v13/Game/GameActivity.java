@@ -134,11 +134,34 @@ public class GameActivity extends AppCompatActivity{
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
 
+                Log.d(TAG, "setupFirebaseAuth: setting up firebaseAuth");
+
+                mFirebaseDatabase = FirebaseDatabase.getInstance();
+                myRef = mFirebaseDatabase.getReference();
+
+
                 //check if the user is logged in
                 checkCurrentUser(user);
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+
+                    myRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            Log.d(TAG, "onDataChange: entrou no evento" );
+                            Common.setScoreAntigo(mFirebaseMethods.getScore(dataSnapshot));
+                            Common.settEasy(mFirebaseMethods.getTestesEasy(dataSnapshot));
+                            Common.settMedium(mFirebaseMethods.getTestesMedium(dataSnapshot));
+                            Common.settHard(mFirebaseMethods.getTestesHard(dataSnapshot));
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -146,26 +169,8 @@ public class GameActivity extends AppCompatActivity{
                 // ...
             }
         };
-        Log.d(TAG, "setupFirebaseAuth: setting up firebaseAuth");
 
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = mFirebaseDatabase.getReference();
 
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d(TAG, "onDataChange: entrou no evento" );
-                Common.setScoreAntigo(mFirebaseMethods.getScore(dataSnapshot));
-                Common.settEasy(mFirebaseMethods.getTestesEasy(dataSnapshot));
-                Common.settMedium(mFirebaseMethods.getTestesMedium(dataSnapshot));
-                Common.settHard(mFirebaseMethods.getTestesHard(dataSnapshot));
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
     }
 

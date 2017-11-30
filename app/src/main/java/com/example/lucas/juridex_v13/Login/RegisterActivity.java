@@ -140,7 +140,8 @@ public class RegisterActivity extends AppCompatActivity{
 
                     }
                     String mUsername = "";
-                    mUsername = username + append;
+
+                        mUsername = username + append;
                     //add new user to the database
                     firebaseMethods.addNewUser(mUsername, email, "");
 
