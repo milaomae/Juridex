@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.lucas.juridex_v13.Common.Common;
 import com.example.lucas.juridex_v13.Login.LoginActivity;
 import com.example.lucas.juridex_v13.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -52,6 +53,12 @@ public class SignOutFragment extends Fragment {
                 Log.d(TAG, "onClick: attempting to sign out.");
                 mProgressBar.setVisibility(View.VISIBLE);
                 txtSignOut.setVisibility(View.VISIBLE);
+
+                //setta as variáveis do usuário quando ele desloga...
+                Common.setScoreAntigo(0);
+                Common.settEasy(0);
+                Common.settHard(0);
+                Common.settMedium(0);
 
                 mAuth.signOut();
                 getActivity().finish();
