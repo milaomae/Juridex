@@ -63,6 +63,7 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView: createView");
         View view = inflater.inflate(R.layout.fragment_pergunta, container, false);
 
         //iniciar variáveis
@@ -98,6 +99,7 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onActivityCreated: onActivity created");
         super.onActivityCreated(savedInstanceState);
 
         setupFirebaseAuth();
@@ -112,11 +114,7 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onResume() {
         super.onResume();
-
-        if(Common.getFoiTelaJustificativa()) {
-            voltouDaTelaJustificativa();
-        }
-
+        Log.d(TAG, "onResume: on resume do fragment");
     }
 
     public void voltouDaTelaJustificativa(){
@@ -223,7 +221,7 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
                 Common.setAcertos(questoesCorretas);
                 Common.setFoiTelaJustificativa(true);
                 dialog.dismiss();
-                onDestroyView();
+                
                 ((GameActivity)getActivity()).setViewPager(1);
 
             }
@@ -324,10 +322,6 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
         super.onStop();
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
-        }
-
-        if(!Common.getFoiTelaJustificativa()) {
-            Common.cleanCommonVariaveis();
         }
 
     }

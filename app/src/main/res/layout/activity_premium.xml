@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="layout.PremiumFragment"
     android:orientation="vertical"
     android:background="@drawable/fundo">
 
@@ -150,12 +149,8 @@
 
     </RelativeLayout>
 
-
-
-
-
-
-
+    <!--bottom navigation -->
+    <include layout="@layout/bottom_navigation_view"/>
 
 
 </RelativeLayout>

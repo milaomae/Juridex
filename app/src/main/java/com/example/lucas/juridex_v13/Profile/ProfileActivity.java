@@ -12,14 +12,22 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.lucas.juridex_v13.Game.GameActivity;
+import com.example.lucas.juridex_v13.Login.LoginActivity;
 import com.example.lucas.juridex_v13.R;
+import com.example.lucas.juridex_v13.Utils.FirebaseMethods;
 import com.example.lucas.juridex_v13.Utils.UniversalImageLoader;
+import com.example.lucas.juridex_v13.models.User;
+import com.example.lucas.juridex_v13.models.UserAccountSettings;
+import com.example.lucas.juridex_v13.models.UserSettings;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
@@ -37,8 +45,16 @@ public class ProfileActivity extends AppCompatActivity{
 
     private static final int ACTIVITY_NUM = 1;
 
+    //firebase
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference myRef;
+    private FirebaseMethods mFirebaseMethods;
+
     private ProgressBar mProgressBar;
 
+    private TextView txtNome, txtExperiencia, txtQtdTotalTestes, txtFacil, txtMedio, txtDificil;
     private CircleImageView mProfilePhoto;
 
     @Override
@@ -46,10 +62,22 @@ public class ProfileActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         Log.d(TAG, "onCreate: started");
+
+        txtNome = findViewById(R.id.txtNome);
+        txtExperiencia = findViewById(R.id.txtExperiencia);
+        txtQtdTotalTestes = findViewById(R.id.txtQtdTotalTestes);
+        txtFacil = findViewById(R.id.txtFacil);
+        txtMedio = findViewById(R.id.txtMedio);
+        txtDificil = findViewById(R.id.txtDificil);
+
+        mFirebaseMethods = new FirebaseMethods(ProfileActivity.this);
+
         setupActivityWidgets();
         setupBottomNavigationView();
         setupToolBar();
         setProfileImage();
+
+        setupFirebaseAuth();
     }
 
     private void setupActivityWidgets(){
@@ -90,4 +118,75 @@ public class ProfileActivity extends AppCompatActivity{
         UniversalImageLoader.setImage(imgUrl, mProfilePhoto, null, "https://");
     }
 
+    private void setProfileWidgets(UserSettings userSettings){
+        Log.d(TAG, "setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.toString());
+
+        User user = userSettings.getUser();
+        UserAccountSettings settings = userSettings.getSettings();
+
+        UniversalImageLoader.setImage(settings.getPhoto(), mProfilePhoto, null, "");
+
+        txtNome.setText(user.getUsername());
+        txtExperiencia.setText(String.valueOf(settings.getScore()));
+        txtQtdTotalTestes.setText(String.valueOf(settings.getTestes_easy() + settings.getTestes_medium() + settings.getTestes_hard()));
+        txtFacil.setText(String.valueOf(settings.getTestes_easy()));
+        txtMedio.setText(String.valueOf(settings.getTestes_medium()));
+        txtDificil.setText(String.valueOf(settings.getTestes_hard()));
+
+    }
+
+    //firebase
+
+    private void setupFirebaseAuth(){
+        Log.d(TAG, "setupFirebaseAuth: setting up firebaseAuth");
+
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getReference();
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+
+                if (user != null) {
+                    // User is signed in
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+
+
+                } else {
+                    // User is signed out
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
+                // ...
+            }
+        };
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                setProfileWidgets(mFirebaseMethods.getUserSettings(dataSnapshot));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
    }

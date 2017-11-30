@@ -14,6 +14,7 @@ import com.example.lucas.juridex_v13.R;
 import com.example.lucas.juridex_v13.models.Question;
 import com.example.lucas.juridex_v13.models.User;
 import com.example.lucas.juridex_v13.models.UserAccountSettings;
+import com.example.lucas.juridex_v13.models.UserSettings;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -151,7 +152,7 @@ public class FirebaseMethods {
                 .child(userID)
                 .setValue(user);
 
-        UserAccountSettings settings = new UserAccountSettings(profile_photo, username, 0, 0, 0, 0);
+        UserAccountSettings settings = new UserAccountSettings(profile_photo, 0, 0, 0, 0);
 
         myRef.child(mContext.getString(R.string.dbname_users_account_settings))
                 .child(userID)
@@ -180,6 +181,143 @@ public class FirebaseMethods {
                 .setValue(url);
     }
 
+    public void updateEmail(String email){
+        Log.d(TAG, "updateEmail: upadting email to: " + email);
+
+        myRef.child(mContext.getString(R.string.dbname_users))
+                .child(userID)
+                .child(mContext.getString(R.string.field_email))
+                .setValue(email);
+
+    }
+
+    public void updateUserAccountSettings(String photo, long score, long testes_easy, long testes_medium, long testes_hard){
+
+        Log.d(TAG, "updateUserAccountSettings: updating user account settings.");
+
+        if(photo != null){
+            myRef.child(mContext.getString(R.string.dbname_user_account_settings))
+                    .child(userID)
+                    .child("photo")
+                    .setValue(photo);
+        }
+        if(score >= 0){
+            myRef.child(mContext.getString(R.string.dbname_user_account_settings))
+                    .child(userID)
+                    .child("score")
+                    .setValue(score);
+        }
+        if(testes_easy >= 0){
+            myRef.child(mContext.getString(R.string.dbname_user_account_settings))
+                    .child(userID)
+                    .child("testes_easy")
+                    .setValue(testes_easy);
+        }
+        if(testes_medium >= 0){
+            myRef.child(mContext.getString(R.string.dbname_user_account_settings))
+                    .child(userID)
+                    .child("testes_medium")
+                    .setValue(testes_medium);
+        }
+        if(testes_hard >= 0){
+            myRef.child(mContext.getString(R.string.dbname_user_account_settings))
+                    .child(userID)
+                    .child("testes_hard")
+                    .setValue(testes_hard);
+        }
+
+
+
+
+    }
+
+    public void updateUsername(String username){
+        Log.d(TAG, "updateUsername: upadting username to: " + username);
+
+        myRef.child(mContext.getString(R.string.dbname_users))
+                .child(userID)
+                .child(mContext.getString(R.string.field_username))
+                .setValue(username);
+
+        myRef.child(mContext.getString(R.string.dbname_user_account_settings))
+                .child(userID)
+                .child(mContext.getString(R.string.field_username))
+                .setValue(username);
+    }
+
+    public UserSettings getUserSettings(DataSnapshot dataSnapshot){
+        Log.d(TAG, "getUserAccountSettings: retrieving user account settings from firebase");
+
+        UserAccountSettings settings = new UserAccountSettings();
+        User user = new User();
+
+        for(DataSnapshot ds: dataSnapshot.getChildren()){
+
+            //user account settings node
+            if(ds.getKey().equals(mContext.getString(R.string.dbname_users_account_settings))) {
+                Log.d(TAG, "getUserAccountSettings: datasnapshot " + ds);
+
+                try {
+                    user.setEmail(ds.child(userID)
+                            .getValue(User.class)
+                            .getEmail());
+
+                    settings.setPhoto(ds.child(userID)
+                            .getValue(UserAccountSettings.class)
+                            .getPhoto());
+
+                    user.setUsername(ds.child(userID)
+                            .getValue(User.class)
+                            .getUsername());
+
+                    settings.setScore(ds.child(userID)
+                            .getValue(UserAccountSettings.class)
+                            .getScore());
+
+                    settings.setTestes_easy(ds.child(userID)
+                            .getValue(UserAccountSettings.class)
+                            .getTestes_easy());
+
+                    settings.setTestes_medium(ds.child(userID)
+                            .getValue(UserAccountSettings.class)
+                            .getTestes_medium());
+
+                    settings.setTestes_hard(ds.child(userID)
+                            .getValue(UserAccountSettings.class)
+                            .getTestes_hard());
+
+
+                    Log.d(TAG, "getUserAccountSettings: retrieved user_account_settings information: " + settings.toString());
+                } catch (NullPointerException e) {
+                    Log.e(TAG, "getUserAccountSettings: NullPointerException: " + e.getMessage());
+                }
+            }
+                Log.d(TAG, "getUserSettings: snapshot key: " + ds.getKey());
+                if(ds.getKey().equals(mContext.getString(R.string.dbname_users))) {
+                    Log.d(TAG, "getUserAccountSettings: users node datasnapshot: " + ds);
+
+                    user.setUsername(
+                            ds.child(userID)
+                                    .getValue(User.class)
+                                    .getUsername()
+                    );
+                    user.setEmail(
+                            ds.child(userID)
+                                    .getValue(User.class)
+                                    .getEmail()
+                    );
+                    user.setUser_id(
+                            ds.child(userID)
+                                    .getValue(User.class)
+                                    .getUser_id()
+                    );
+
+                    Log.d(TAG, "getUserAccountSettings: retrieved users information: " + user.toString());
+                }
+            }
+            return new UserSettings(user, settings);
+
+    }
 
 
 }

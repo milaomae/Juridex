@@ -23,10 +23,16 @@ import android.widget.RelativeLayout;
 import com.example.lucas.juridex_v13.Game.GameActivity;
 import com.example.lucas.juridex_v13.R;
 import com.example.lucas.juridex_v13.Utils.BottomNavigationViewHelper;
+import com.example.lucas.juridex_v13.Utils.FirebaseMethods;
 import com.example.lucas.juridex_v13.Utils.Permissions;
 import com.example.lucas.juridex_v13.Utils.SectionsStatePagerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import java.util.ArrayList;
@@ -47,9 +53,7 @@ public class AccountSettingsActivity extends AppCompatActivity{
 
     private static final int ACTIVITY_NUM = 1;
 
-    //firebase
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,6 +63,7 @@ public class AccountSettingsActivity extends AppCompatActivity{
         Log.d(TAG, "onCreate: started.");
         mViewPager = (ViewPager) findViewById(R.id.container);
         mRelativeLayout = (RelativeLayout) findViewById(R.id.relLayout1);
+
 
         setupSettingList();
         setupBottomNavigationView();
@@ -129,4 +134,6 @@ public class AccountSettingsActivity extends AppCompatActivity{
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
     }
+
+
 }

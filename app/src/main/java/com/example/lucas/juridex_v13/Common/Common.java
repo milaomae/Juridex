@@ -29,7 +29,7 @@ public class Common {
     public static HashMap<Integer, ArrayList<String>> respostas;
 
     public static ArrayList<String> getRespostas(Integer cod) {
-            return respostas;
+            return respostas.get(cod);
     }
 
     public static void setRespostas(HashMap<Integer, ArrayList<String>> respostas) {
