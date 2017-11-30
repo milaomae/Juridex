@@ -227,6 +227,7 @@ public class FimJogoFragment extends Fragment{
               String nivel = Common.getNivel();
               Common.cleanCommonVariaveis();
               Common.setNivel(nivel);
+              Log.d(TAG, "onClick: nivel " + nivel);
                //redireciona para a página de questões no mesmo nível atual
               ((GameActivity)getActivity()).setViewPager(0);
                 

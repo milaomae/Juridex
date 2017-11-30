@@ -107,18 +107,7 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
         btnB.setOnClickListener(this);
         btnC.setOnClickListener(this);
         btnD.setOnClickListener(this);
-
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume: on resume do fragment");
-
-
-
-    }
-
 
     @Override
     public void onClick(View view) {
@@ -152,9 +141,9 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
         dialog.getActionButton(DialogAction.POSITIVE).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Common.setFoiTelaJustificativa(false);
+
                 //quando terminar as questoes da lista
-                if (Common.getQuestoesJaLidas().size() != Common.getListaQuestoes().size()) {
+                if (!(Common.getQuestoesJaLidas().size() == Common.getListaQuestoes().size())) {
                     Log.d(TAG, "onClick: proxima pergunta");
                     setQuestions();
 
@@ -201,14 +190,19 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
         boolean encontrou;
         encontrou = false;
 
+        if(!(Common.getQuestoesJaLidas().size() == Common.getListaQuestoes().size())){
         while(!encontrou){
             numQuestaoLista = randomNumber(Common.getListaQuestoes().size());
             Log.d(TAG, "setQuestions: gera numero randomico " + numQuestaoLista);
             if(!Common.getQuestoesJaLidas().contains(numQuestaoLista)) {
-                txtQuestaoAtual.setText((Common.getQuestoesJaLidas().size() + 1) + "  /  " + Common.getListaQuestoes().size());
+                txtQuestaoAtual.setText(Common.getQuestoesJaLidas().size()+1 + "  /  " + Common.getListaQuestoes().size());
                 Common.getQuestoesJaLidas().add(numQuestaoLista);
+                Log.d(TAG, "setQuestions: questoesJaLidas " + Common.getQuestoesJaLidas());
 
-                Question question = Common.getListaQuestoes().get(numQuestaoLista);
+                Question question;
+
+                question = Common.getListaQuestoes().get(numQuestaoLista);
+
                 Common.setQuestaoAtual(question);
 
                 //initialize components
@@ -218,6 +212,7 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
                 btnC.setText(question.getAnswerc());
                 btnD.setText(question.getAnswerd());
                 encontrou = true;
+            }
         }
         }
 
@@ -268,8 +263,6 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
                 Common.setListaQuestoes(firebase.loadQuestions(Common.getNivel(), dataSnapshot));
                 Common.setQuestoesTotais(Common.getListaQuestoes().size());
                 setQuestions();
-
-
             }
 
             @Override
