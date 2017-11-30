@@ -90,12 +90,6 @@ public class FimJogoFragment extends Fragment{
 
         //update score usuário
         setupFirebaseAuth();
-
-        //set textos
-        setTxts();
-
-        //cliques dos botões
-        setClicks();
     }
 
 
@@ -237,15 +231,15 @@ public class FimJogoFragment extends Fragment{
                     mFirebaseMethods.updateScore(Common.getScore() + scoreAntigo);
 
                     if(Common.getNivel().equals("cdc_easy")){
-                        Common.setQtdTestesFaceis(Common.getQtdTestesFaceis()+ (int) tEasy);
+                        Common.setQtdTestesFaceis(Common.getQtdTestesFaceis() + (int) tEasy);
                         mFirebaseMethods.updateTestesEasy(Common.getQtdTestesFaceis());
                     }
                     if(Common.getNivel().equals("cdc_medium")){
-                        Common.setQtdTestesMedios(Common.getQtdTestesMedios()+ (int) tMedium);
+                        Common.setQtdTestesMedios(Common.getQtdTestesMedios()+  (int) tMedium);
                         mFirebaseMethods.updateTestesMedium(Common.getQtdTestesMedios());
                     }
                     if(Common.getNivel().equals("cdc_hard")){
-                        Common.setQtdTestesDificeis(Common.getQtdTestesDificeis()+ (int) tHard);
+                        Common.setQtdTestesDificeis(Common.getQtdTestesDificeis() + (int) tHard);
                         mFirebaseMethods.updateTestesHard(Common.getQtdTestesDificeis());
                     }
 
@@ -256,6 +250,13 @@ public class FimJogoFragment extends Fragment{
                 // ...
             }
         };
+
+
+        //set textos
+        setTxts();
+
+        //cliques dos botões
+        setClicks();
 
     }
 
