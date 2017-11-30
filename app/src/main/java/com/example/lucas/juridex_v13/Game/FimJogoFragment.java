@@ -47,7 +47,7 @@ public class FimJogoFragment extends Fragment{
     private Button btnProximoTeste, btnVoltarTelaNiveis, btnReiniciarTeste;
     private MaterialDialog dialog;
 
-    long scoreAntigo, tEasy, tMedium, tHard;
+
 
     //firebase
     private FirebaseAuth mAuth;
@@ -72,6 +72,7 @@ public class FimJogoFragment extends Fragment{
         btnReiniciarTeste = view.findViewById(R.id.btnReiniciarTeste);
         mFirebaseMethods = new FirebaseMethods(getActivity());
         mUserSettings = new UserSettings();
+
 
         return view;
     }
@@ -199,25 +200,6 @@ public class FimJogoFragment extends Fragment{
     //firebase
 
     private void setupFirebaseAuth(){
-        Log.d(TAG, "setupFirebaseAuth: setting up firebaseAuth");
-        scoreAntigo = 0; tEasy = 0; tMedium = 0; tHard = 0;
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = mFirebaseDatabase.getReference();
-
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                scoreAntigo = mFirebaseMethods.getScore(dataSnapshot);
-                tEasy = mFirebaseMethods.getTestesEasy(dataSnapshot);
-                tMedium = mFirebaseMethods.getTestesMedium(dataSnapshot);
-                tHard = mFirebaseMethods.getTestesHard(dataSnapshot);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -228,18 +210,19 @@ public class FimJogoFragment extends Fragment{
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
 
-                    mFirebaseMethods.updateScore(Common.getScore() + scoreAntigo);
+                    Log.d(TAG, "onAuthStateChanged: score antigo " + Common.getScoreAntigo());
+                    mFirebaseMethods.updateScore(Common.getScore() + Common.getScoreAntigo());
 
                     if(Common.getNivel().equals("cdc_easy")){
-                        Common.setQtdTestesFaceis(Common.getQtdTestesFaceis() + (int) tEasy);
+                        Common.setQtdTestesFaceis(1 + (int) Common.gettEasy());
                         mFirebaseMethods.updateTestesEasy(Common.getQtdTestesFaceis());
                     }
                     if(Common.getNivel().equals("cdc_medium")){
-                        Common.setQtdTestesMedios(Common.getQtdTestesMedios()+  (int) tMedium);
+                        Common.setQtdTestesMedios(1 +  (int) Common.gettMedium());
                         mFirebaseMethods.updateTestesMedium(Common.getQtdTestesMedios());
                     }
                     if(Common.getNivel().equals("cdc_hard")){
-                        Common.setQtdTestesDificeis(Common.getQtdTestesDificeis() + (int) tHard);
+                        Common.setQtdTestesDificeis(1 + (int) Common.gettHard());
                         mFirebaseMethods.updateTestesHard(Common.getQtdTestesDificeis());
                     }
 

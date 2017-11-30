@@ -18,10 +18,16 @@ import com.example.lucas.juridex_v13.Common.Common;
 import com.example.lucas.juridex_v13.Login.LoginActivity;
 import com.example.lucas.juridex_v13.Profile.SignOutFragment;
 import com.example.lucas.juridex_v13.R;
+import com.example.lucas.juridex_v13.Utils.FirebaseMethods;
 import com.example.lucas.juridex_v13.Utils.SectionsStatePagerAdapter;
 import com.example.lucas.juridex_v13.Utils.UniversalImageLoader;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import com.example.lucas.juridex_v13.Utils.BottomNavigationViewHelper;
@@ -38,6 +44,9 @@ public class GameActivity extends AppCompatActivity{
     //firebase
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference myRef;
+    private FirebaseMethods mFirebaseMethods;
 
     private ImageButton btnFacilUm, btnMedioUm, btnDifilUm;
     private SectionsStatePagerAdapter pagerAdapter;
@@ -49,11 +58,11 @@ public class GameActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        Common.cleanCommonVariaveis();
-
         Log.d(TAG, "onCreate: started");
         mViewPager = findViewById(R.id.container);
         mRelativeLayout = findViewById(R.id.relLayout2);
+
+        mFirebaseMethods = new FirebaseMethods(GameActivity.this);
 
         btnFacilUm =  findViewById(R.id.btnfacilUm);
         btnMedioUm =  findViewById(R.id.btnmedioUm);
@@ -68,6 +77,7 @@ public class GameActivity extends AppCompatActivity{
         btnFacilUm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Common.cleanCommonVariaveis();
                 Common.setNivel("cdc_easy");
                 setViewPager(0);
             }
@@ -76,6 +86,7 @@ public class GameActivity extends AppCompatActivity{
         btnMedioUm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Common.cleanCommonVariaveis();
                 Common.setNivel("cdc_medium");
                 setViewPager(0);
             }
@@ -115,6 +126,8 @@ public class GameActivity extends AppCompatActivity{
         Log.d(TAG, "setupFirebaseAuth: setting up firebaseAuth");
 
         mAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getReference();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -133,6 +146,27 @@ public class GameActivity extends AppCompatActivity{
                 // ...
             }
         };
+        Log.d(TAG, "setupFirebaseAuth: setting up firebaseAuth");
+
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getReference();
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d(TAG, "onDataChange: entrou no evento" );
+                Common.setScoreAntigo(mFirebaseMethods.getScore(dataSnapshot));
+                Common.settEasy(mFirebaseMethods.getTestesEasy(dataSnapshot));
+                Common.settMedium(mFirebaseMethods.getTestesMedium(dataSnapshot));
+                Common.settHard(mFirebaseMethods.getTestesHard(dataSnapshot));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
 

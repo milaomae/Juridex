@@ -29,6 +29,40 @@ public class Common {
     public static boolean foiTelaJustificativa = false;
     public static String alternativaEscolhida;
 
+    public static long scoreAntigo, tEasy, tMedium, tHard;
+
+    public static long getScoreAntigo() {
+        return scoreAntigo;
+    }
+
+    public static void setScoreAntigo(long scoreAntigo) {
+        Common.scoreAntigo = scoreAntigo;
+    }
+
+    public static long gettEasy() {
+        return tEasy;
+    }
+
+    public static void settEasy(long tEasy) {
+        Common.tEasy = tEasy;
+    }
+
+    public static long gettMedium() {
+        return tMedium;
+    }
+
+    public static void settMedium(long tMedium) {
+        Common.tMedium = tMedium;
+    }
+
+    public static long gettHard() {
+        return tHard;
+    }
+
+    public static void settHard(long tHard) {
+        Common.tHard = tHard;
+    }
+
     public static HashMap<Integer, ArrayList<String>> respostas;
 
     public static UserSettings getUserSettings() {
@@ -85,6 +119,10 @@ public class Common {
         Common.setmSelectedImage("");
         Common.setFoiTelaJustificativa(false);
         Common.setAlternativaEscolhida("");
+//        Common.setScoreAntigo(0);
+//        Common.settEasy(0);
+//        Common.settHard(0);
+//        Common.settMedium(0);
     }
 
     public static List<Integer> getQuestoesJaLidas() {

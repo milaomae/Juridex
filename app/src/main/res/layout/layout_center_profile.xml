@@ -102,6 +102,7 @@
                     android:layout_below="@id/textView6"
                     android:text="100"
                     android:layout_marginLeft="16dp"
+                    android:layout_marginRight="5dp"
                     android:textSize="18dp"
                     android:textColor="@color/bluebr"
                     android:layout_marginBottom="8dp"
@@ -125,11 +126,11 @@
                     android:layout_width="25dp"
                     android:layout_below="@id/textView6"
                     android:layout_height="25dp"
-                    android:background="@color/green"
                     android:layout_marginLeft="12dp"
                     android:layout_marginBottom="8dp"
                     android:layout_marginTop="8dp"
                     android:id="@+id/circleImageView2"
+                    android:background="@color/green"
                     android:layout_toLeftOf="@+id/txtMedio"/>
 
                 <TextView
