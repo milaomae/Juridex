@@ -55,7 +55,7 @@
 
             </LinearLayout>
 
-            <android.support.constraint.ConstraintLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/contLayout"
@@ -84,6 +84,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Total:"
+                    android:layout_below="@id/textView6"
                     android:layout_marginLeft="44dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     android:textSize="18dp"
@@ -98,105 +99,89 @@
                     android:id="@+id/txtQtdTotalTestes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/textView6"
                     android:text="100"
-                    app:layout_constraintLeft_toRightOf="@+id/textView7"
                     android:layout_marginLeft="16dp"
                     android:textSize="18dp"
                     android:textColor="@color/bluebr"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginBottom="8dp"
                     android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/textView6"
-                    app:layout_constraintVertical_bias="0.666" />
+                    android:layout_toLeftOf="@+id/txtFacil"/>
 
                 <TextView
                     android:id="@+id/txtFacil"
+                    android:layout_below="@id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="10"
-                    app:layout_constraintLeft_toRightOf="@+id/txtQtdTotalTestes"
-                    android:layout_marginLeft="38dp"
+                    android:layout_marginLeft="50dp"
                     android:layout_marginTop="8dp"
                     android:textSize="18dp"
                     android:textColor="@color/bluebr"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginBottom="8dp"
-                    app:layout_constraintVertical_bias="0.666"
-                    app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                    android:layout_toLeftOf="@+id/circleImageView2"/>
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="25dp"
+                    android:layout_below="@id/textView6"
                     android:layout_height="25dp"
                     android:background="@color/green"
-                    app:layout_constraintRight_toLeftOf="@+id/txtMedio"
-                    android:layout_marginRight="8dp"
-                    app:layout_constraintLeft_toRightOf="@+id/txtFacil"
-                    android:layout_marginLeft="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginLeft="12dp"
                     android:layout_marginBottom="8dp"
                     android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/textView6"
-                    android:id="@+id/circleImageView2" />
+                    android:id="@+id/circleImageView2"
+                    android:layout_toLeftOf="@+id/txtMedio"/>
 
                 <TextView
                     android:id="@+id/txtMedio"
+                    android:layout_below="@id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="50"
-                    app:layout_constraintLeft_toRightOf="@+id/txtFacil"
-                    android:layout_marginLeft="43dp"
+                    android:layout_marginLeft="12dp"
                     android:layout_marginTop="8dp"
                     android:textSize="18dp"
                     android:textColor="@color/bluebr"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginBottom="8dp"
-                    app:layout_constraintVertical_bias="0.666"
-                    app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                    android:layout_toLeftOf="@+id/circleImageView3"/>
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="25dp"
+                    android:layout_below="@id/textView6"
                     android:layout_height="25dp"
                     android:background="@color/yellow"
-                    app:layout_constraintRight_toLeftOf="@+id/txtDificil"
-                    android:layout_marginRight="8dp"
-                    app:layout_constraintLeft_toRightOf="@+id/txtMedio"
-                    android:layout_marginLeft="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginBottom="8dp"
                     android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/textView6"
-                    app:layout_constraintHorizontal_bias="0.454" />
+                    android:id="@+id/circleImageView3"
+                    android:layout_toLeftOf="@+id/txtDificil"/>
 
                 <TextView
                     android:id="@+id/txtDificil"
+                    android:layout_below="@id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="40"
-                    app:layout_constraintLeft_toRightOf="@+id/txtMedio"
-                    android:layout_marginLeft="43dp"
+                    android:layout_marginLeft="12dp"
                     android:layout_marginTop="8dp"
                     android:textSize="18dp"
                     android:textColor="@color/bluebr"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginBottom="8dp"
-                    app:layout_constraintVertical_bias="0.666"
-                    app:layout_constraintTop_toBottomOf="@+id/textView6"
-                    app:layout_constraintRight_toLeftOf="@+id/circleImageView"
-                    android:layout_marginRight="8dp" />
+                    android:layout_toLeftOf="@+id/circleImageView"
+                    />
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="25dp"
+                    android:layout_below="@id/textView6"
                     android:layout_height="25dp"
                     android:background="@color/red_logout"
                     android:id="@+id/circleImageView"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginLeft="8dp"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
                     android:layout_marginBottom="8dp"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintTop_toBottomOf="@+id/textView6" />
-            </android.support.constraint.ConstraintLayout>
+                    android:layout_marginTop="8dp"/>
+            </RelativeLayout>
             
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -213,7 +198,7 @@
                     android:layout_marginLeft="10dp"
                     android:id="@+id/rank"/>
 
-                <GridView
+                <ListView
                     android:layout_below="@+id/rank"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -223,7 +208,7 @@
                     android:horizontalSpacing="0dp"
                     android:stretchMode="columnWidth"
                     android:gravity="center"
-                    ></GridView>
+                    ></ListView>
 
             </RelativeLayout>
 

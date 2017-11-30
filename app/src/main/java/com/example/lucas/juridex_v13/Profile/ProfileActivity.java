@@ -10,7 +10,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +24,7 @@ import com.example.lucas.juridex_v13.Game.GameActivity;
 import com.example.lucas.juridex_v13.Login.LoginActivity;
 import com.example.lucas.juridex_v13.R;
 import com.example.lucas.juridex_v13.Utils.FirebaseMethods;
+import com.example.lucas.juridex_v13.Utils.GridImageAdapter;
 import com.example.lucas.juridex_v13.Utils.UniversalImageLoader;
 import com.example.lucas.juridex_v13.models.User;
 import com.example.lucas.juridex_v13.models.UserAccountSettings;
@@ -34,6 +39,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 
 import com.example.lucas.juridex_v13.Utils.BottomNavigationViewHelper;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -58,6 +67,7 @@ public class ProfileActivity extends AppCompatActivity{
 
     private TextView txtNome, txtExperiencia, txtQtdTotalTestes, txtFacil, txtMedio, txtDificil;
     private CircleImageView mProfilePhoto;
+    private ListView listView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,7 +87,7 @@ public class ProfileActivity extends AppCompatActivity{
         txtFacil = findViewById(R.id.txtFacil);
         txtMedio = findViewById(R.id.txtMedio);
         txtDificil = findViewById(R.id.txtDificil);
-
+        listView = findViewById(R.id.gridView);
 
 
         mFirebaseMethods = new FirebaseMethods(ProfileActivity.this);
@@ -142,12 +152,41 @@ public class ProfileActivity extends AppCompatActivity{
         txtFacil.setText(String.valueOf(settings.getTestes_easy()));
         txtMedio.setText(String.valueOf(settings.getTestes_medium()));
         txtDificil.setText(String.valueOf(settings.getTestes_hard()));
+    }
+
+    public void setGridView(List<UserSettings> listUserSettings){
+        Log.d(TAG, "setGridView: setting rank " + listUserSettings.get(0));
+        List<UserSettings> rank = new ArrayList<>();
+        UserSettings userMaiorScore = listUserSettings.get(0);
+        //lista por ordem decrescente os usuários
+        for (int j=0; j < listUserSettings.size(); j++) {
+
+            //pega o maior score
+            for (int i = 0; i < listUserSettings.size(); i++) {
+                if (userMaiorScore.getSettings().getScore() < listUserSettings.get(i).getSettings().getScore()) {
+                    userMaiorScore = listUserSettings.get(i);
+                    Log.d(TAG, "setGridView: maior score: " + userMaiorScore.getSettings().getScore());
+                }
+            }
+            listUserSettings.remove(userMaiorScore);
+            rank.add(userMaiorScore);
+            userMaiorScore = listUserSettings.get(0);
+        }
+
+        ArrayList<String> options = new ArrayList<>();
+
+        for (int aux = 0; aux < rank.size(); aux++) {
+            options.add(rank.get(aux).getUser().getUsername() + "          " + rank.get(aux).getSettings().getScore());
+        }
+
+        ArrayAdapter adapter = new ArrayAdapter(ProfileActivity.this, android.R.layout.simple_list_item_1, options);
+        listView.setAdapter(adapter);
 
 
     }
 
-    //firebase
 
+    //firebase
     private void setupFirebaseAuth(){
         Log.d(TAG, "setupFirebaseAuth: setting up firebaseAuth");
 
@@ -176,8 +215,9 @@ public class ProfileActivity extends AppCompatActivity{
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 setProfileWidgets(mFirebaseMethods.getUserSettings(dataSnapshot));
+                //setGridView(mFirebaseMethods.getUsersRank(dataSnapshot));
+
             }
 
             @Override

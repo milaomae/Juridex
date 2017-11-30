@@ -25,6 +25,8 @@ import com.example.lucas.juridex_v13.Utils.MyTextView;
 import com.example.lucas.juridex_v13.models.User;
 import com.example.lucas.juridex_v13.models.UserAccountSettings;
 import com.example.lucas.juridex_v13.models.UserSettings;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -44,6 +46,8 @@ public class FimJogoFragment extends Fragment{
     private TextView txtMensagem, txtResultado;
     private Button btnProximoTeste, btnVoltarTelaNiveis, btnReiniciarTeste;
     private MaterialDialog dialog;
+
+    long scoreAntigo, tEasy, tMedium, tHard;
 
     //firebase
     private FirebaseAuth mAuth;
@@ -86,7 +90,6 @@ public class FimJogoFragment extends Fragment{
 
         //update score usuário
         setupFirebaseAuth();
-        saveDataUsuario();
 
         //set textos
         setTxts();
@@ -95,45 +98,6 @@ public class FimJogoFragment extends Fragment{
         setClicks();
     }
 
-    public void saveDataUsuario(){
-        final long score = (long) Common.getScore();
-
-
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds : dataSnapshot.child(userID).getChildren()){
-                    if(Common.getNivel().equals("cdc_easy")){
-                        Log.d(TAG, "onDataChange: " + ds.getValue(UserAccountSettings.class).getPhoto());
-                         mFirebaseMethods.updateUserAccountSettings(ds.getValue(UserAccountSettings.class).getPhoto()
-                                 , score
-                                 , ds.getValue(UserAccountSettings.class).getTestes_easy()+1
-                                 , ds.getValue(UserAccountSettings.class).getTestes_medium()
-                                 , ds.getValue(UserAccountSettings.class).getTestes_hard());
-                    }
-                    if(Common.getNivel().equals("cdc_medium")){
-                        mFirebaseMethods.updateUserAccountSettings(ds.getValue(UserAccountSettings.class).getPhoto() , score*2 , ds.getValue(UserAccountSettings.class).getTestes_easy(),
-                                ds.getValue(UserAccountSettings.class).getTestes_medium() + 1, ds.getValue(UserAccountSettings.class).getTestes_hard());
-                    }
-                    if(Common.getNivel().equals("cdc_hard")){
-                        mFirebaseMethods.updateUserAccountSettings(ds.getValue(UserAccountSettings.class).getPhoto() , score*3 , ds.getValue(UserAccountSettings.class).getTestes_easy(),
-                                ds.getValue(UserAccountSettings.class).getTestes_medium(), ds.getValue(UserAccountSettings.class).getTestes_hard()+1);
-
-                    }
-
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-
-
-    }
 
     
     public void setTxts(){
@@ -242,9 +206,24 @@ public class FimJogoFragment extends Fragment{
 
     private void setupFirebaseAuth(){
         Log.d(TAG, "setupFirebaseAuth: setting up firebaseAuth");
-
+        scoreAntigo = 0; tEasy = 0; tMedium = 0; tHard = 0;
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                scoreAntigo = mFirebaseMethods.getScore(dataSnapshot);
+                tEasy = mFirebaseMethods.getTestesEasy(dataSnapshot);
+                tMedium = mFirebaseMethods.getTestesMedium(dataSnapshot);
+                tHard = mFirebaseMethods.getTestesHard(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -255,7 +234,20 @@ public class FimJogoFragment extends Fragment{
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
 
+                    mFirebaseMethods.updateScore(Common.getScore() + scoreAntigo);
 
+                    if(Common.getNivel().equals("cdc_easy")){
+                        Common.setQtdTestesFaceis(Common.getQtdTestesFaceis()+ (int) tEasy);
+                        mFirebaseMethods.updateTestesEasy(Common.getQtdTestesFaceis());
+                    }
+                    if(Common.getNivel().equals("cdc_medium")){
+                        Common.setQtdTestesMedios(Common.getQtdTestesMedios()+ (int) tMedium);
+                        mFirebaseMethods.updateTestesMedium(Common.getQtdTestesMedios());
+                    }
+                    if(Common.getNivel().equals("cdc_hard")){
+                        Common.setQtdTestesDificeis(Common.getQtdTestesDificeis()+ (int) tHard);
+                        mFirebaseMethods.updateTestesHard(Common.getQtdTestesDificeis());
+                    }
 
                 } else {
                     // User is signed out

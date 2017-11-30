@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.lucas.juridex_v13.Common.Common;
@@ -63,6 +64,7 @@ public class FirebaseMethods {
         if (mAuth.getCurrentUser() != null) {
             userID = mAuth.getCurrentUser().getUid();
         }
+
     }
 
     public List<Question> loadQuestions(String nivel,DataSnapshot dataSnapshot) {
@@ -77,7 +79,6 @@ public class FirebaseMethods {
         Collections.shuffle(arrayQuestions);
 
     return arrayQuestions;
-
 }
 
     public boolean checkIfUsernameExists(String username, DataSnapshot dataSnapshot){
@@ -176,7 +177,7 @@ public class FirebaseMethods {
     private void setProfilePhoto(String url){
         Log.d(TAG, "setProfilePhoto: setting new profile image: " + url);
 
-        myRef.child(mContext.getString(R.string.dbname_user_account_settings))
+        myRef.child(mContext.getString(R.string.dbname_users_account_settings))
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .child(mContext.getString(R.string.profile_photo))
                 .setValue(url);
@@ -192,42 +193,124 @@ public class FirebaseMethods {
 
     }
 
+    public long getScore(DataSnapshot dataSnapshot) {
+        Log.d(TAG, "getScore: get score");
+        long ret = 0;
+
+        if(dataSnapshot.child(mContext.getString(R.string.dbname_users_account_settings)).child(userID).hasChildren())
+        {
+            ret = dataSnapshot.child(mContext.getString(R.string.dbname_users_account_settings)).child(userID).getValue(UserAccountSettings.class).getScore();
+            Log.d(TAG, "getScore: " + ret);
+        }
+        return ret;
+    }
+
+    public long getTestesEasy(DataSnapshot dataSnapshot) {
+        Log.d(TAG, "getTestesEasy: getTestesEasy");
+        long ret = 0;
+
+        if(dataSnapshot.child(mContext.getString(R.string.dbname_users_account_settings)).child(userID).hasChildren())
+        {
+            ret = dataSnapshot.child(mContext.getString(R.string.dbname_users_account_settings)).child(userID).getValue(UserAccountSettings.class).getTestes_easy();
+            Log.d(TAG, "getTestesEasy: " + ret);
+        }
+        return ret;
+    }
+
+    public long getTestesMedium(DataSnapshot dataSnapshot) {
+        Log.d(TAG, "getTestesMedium: getTestesMedium");
+        long ret = 0;
+
+        if(dataSnapshot.child(mContext.getString(R.string.dbname_users_account_settings)).child(userID).hasChildren())
+        {
+            ret = dataSnapshot.child(mContext.getString(R.string.dbname_users_account_settings)).child(userID).getValue(UserAccountSettings.class).getTestes_medium();
+            Log.d(TAG, "getTestesMedium: " + ret);
+        }
+        return ret;
+    }
+
+    public long getTestesHard(DataSnapshot dataSnapshot) {
+        Log.d(TAG, "getTestesHard: getTestesHard");
+        long ret = 0;
+
+        if(dataSnapshot.child(mContext.getString(R.string.dbname_users_account_settings)).child(userID).hasChildren())
+        {
+            ret = dataSnapshot.child(mContext.getString(R.string.dbname_users_account_settings)).child(userID).getValue(UserAccountSettings.class).getTestes_hard();
+            Log.d(TAG, "getTestesHard: " + ret);
+        }
+        return ret;
+    }
+
+
+    public void updateScore(long score){
+        Log.d(TAG, "updateScore: upadting score to: " + score);
+
+        myRef.child(mContext.getString(R.string.dbname_users_account_settings))
+                .child(userID)
+                .child("score")
+                .setValue(score);
+
+    }
+
+    public void updateTestesMedium(long testes_medium){
+        Log.d(TAG, "updateTestesMedium: upadting testes_medium to: " + testes_medium );
+
+        myRef.child(mContext.getString(R.string.dbname_users_account_settings))
+                .child(userID)
+                .child("testes_medium")
+                .setValue(testes_medium);
+
+    }
+    public void updateTestesEasy(long testes_easy) {
+        Log.d(TAG, "updateTestesEasy: upadting testes_easy to: " + testes_easy);
+
+        myRef.child(mContext.getString(R.string.dbname_users_account_settings))
+                .child(userID)
+                .child("testes_easy")
+                .setValue(testes_easy);
+    }
+    public void updateTestesHard(long testes_hard){
+        Log.d(TAG, "updateTestesHard: upadting testes_hard to: " + testes_hard);
+
+        myRef.child(mContext.getString(R.string.dbname_users_account_settings))
+                .child(userID)
+                .child("testes_hard")
+                .setValue(testes_hard);
+    }
+
     public void updateUserAccountSettings(String photo, long score, long testes_easy, long testes_medium, long testes_hard){
         Log.d(TAG, "updateUserAccountSettings: updating user account settings.");
 
         if(photo != null){
-            myRef.child(mContext.getString(R.string.dbname_user_account_settings))
+            myRef.child(mContext.getString(R.string.dbname_users_account_settings))
                     .child(userID)
                     .child("photo")
                     .setValue(photo);
         }
         if(score >= 0){
-            myRef.child(mContext.getString(R.string.dbname_user_account_settings))
+            myRef.child(mContext.getString(R.string.dbname_users_account_settings))
                     .child(userID)
                     .child("score")
                     .setValue(score);
         }
         if(testes_easy >= 0){
-            myRef.child(mContext.getString(R.string.dbname_user_account_settings))
+            myRef.child(mContext.getString(R.string.dbname_users_account_settings))
                     .child(userID)
                     .child("testes_easy")
                     .setValue(testes_easy);
         }
         if(testes_medium >= 0){
-            myRef.child(mContext.getString(R.string.dbname_user_account_settings))
+            myRef.child(mContext.getString(R.string.dbname_users_account_settings))
                     .child(userID)
                     .child("testes_medium")
                     .setValue(testes_medium);
         }
         if(testes_hard >= 0){
-            myRef.child(mContext.getString(R.string.dbname_user_account_settings))
+            myRef.child(mContext.getString(R.string.dbname_users_account_settings))
                     .child(userID)
                     .child("testes_hard")
                     .setValue(testes_hard);
         }
-
-
-
 
     }
 
@@ -239,7 +322,7 @@ public class FirebaseMethods {
                 .child(mContext.getString(R.string.field_username))
                 .setValue(username);
 
-        myRef.child(mContext.getString(R.string.dbname_user_account_settings))
+        myRef.child(mContext.getString(R.string.dbname_users))
                 .child(userID)
                 .child(mContext.getString(R.string.field_username))
                 .setValue(username);
@@ -305,9 +388,78 @@ public class FirebaseMethods {
                 }
             }
             return new UserSettings(user, settings);
-
-
     }
+
+//    public List<UserSettings> getUsersRank(DataSnapshot dataSnapshot){
+//        Log.d(TAG, "getUsersRank: retrieving settings from firebase");
+//
+//        List<UserSettings> list = new ArrayList<>();
+//        UserAccountSettings settings = new UserAccountSettings();
+//        User user = new User();
+//        String usersIDs = "";
+//
+//
+//        Log.d(TAG, "getUsersRank: " + myRef.push());
+//
+//        for(DataSnapshot ds: dataSnapshot.getChildren()){
+//            Log.d(TAG, "getUsersRank: for iniciado");
+//
+//            //user account settings node
+//            if(ds.getKey().equals(mContext.getString(R.string.dbname_users_account_settings))) {
+//                Log.d(TAG, "getUserAccountSettings: datasnapshot " + ds.getKey());
+//
+//                try {
+//                    settings.setPhoto(ds.child(usersIDs)
+//                            .getValue(UserAccountSettings.class)
+//                            .getPhoto());
+//
+//                    settings.setScore(ds.child(usersIDs)
+//                            .getValue(UserAccountSettings.class)
+//                            .getScore());
+//
+//                    settings.setTestes_easy(ds.child(usersIDs)
+//                            .getValue(UserAccountSettings.class)
+//                            .getTestes_easy());
+//
+//                    settings.setTestes_medium(ds.child(usersIDs)
+//                            .getValue(UserAccountSettings.class)
+//                            .getTestes_medium());
+//
+//                    settings.setTestes_hard(ds.child(usersIDs)
+//                            .getValue(UserAccountSettings.class)
+//                            .getTestes_hard());
+//
+//
+//                    Log.d(TAG, "getUserAccountSettings: retrieved user_account_settings information: " + settings.toString());
+//                } catch (NullPointerException e) {
+//                    Log.e(TAG, "getUserAccountSettings: NullPointerException: " + e.getMessage());
+//                }
+//            }
+//            Log.d(TAG, "getUserSettings: snapshot key: " + ds.getKey());
+//            if(ds.getKey().equals(mContext.getString(R.string.dbname_users))) {
+//                Log.d(TAG, "getUserAccountSettings: users node datasnapshot: " + ds);
+//
+//                    user.setUsername(
+//                            ds.child(usersIDs)
+//                                    .getValue(User.class)
+//                                    .getUsername()
+//                    );
+//                    Log.d(TAG, "getUserSettings: " + user.getUsername());
+//                    user.setEmail(
+//                            ds.child(usersIDs)
+//                                    .getValue(User.class)
+//                                    .getEmail()
+//                    );
+//
+//                Log.d(TAG, "getUserAccountSettings: retrieved users information: " + user.toString());
+//            }
+//             list.add(new UserSettings(user,settings));
+//        }
+//
+//        return list;
+//
+//
+//    }
 
 
 }
