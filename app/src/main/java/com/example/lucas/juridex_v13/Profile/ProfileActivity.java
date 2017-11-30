@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.lucas.juridex_v13.Common.Common;
 import com.example.lucas.juridex_v13.Game.GameActivity;
 import com.example.lucas.juridex_v13.Login.LoginActivity;
 import com.example.lucas.juridex_v13.R;
@@ -51,6 +52,7 @@ public class ProfileActivity extends AppCompatActivity{
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;
     private FirebaseMethods mFirebaseMethods;
+    private String userID;
 
     private ProgressBar mProgressBar;
 
@@ -63,12 +65,20 @@ public class ProfileActivity extends AppCompatActivity{
         setContentView(R.layout.activity_profile);
         Log.d(TAG, "onCreate: started");
 
+        mAuth = FirebaseAuth.getInstance();
+
+        if (mAuth.getCurrentUser() != null) {
+            userID = mAuth.getCurrentUser().getUid();
+        }
+
         txtNome = findViewById(R.id.txtNome);
         txtExperiencia = findViewById(R.id.txtExperiencia);
         txtQtdTotalTestes = findViewById(R.id.txtQtdTotalTestes);
         txtFacil = findViewById(R.id.txtFacil);
         txtMedio = findViewById(R.id.txtMedio);
         txtDificil = findViewById(R.id.txtDificil);
+
+
 
         mFirebaseMethods = new FirebaseMethods(ProfileActivity.this);
 
@@ -118,7 +128,7 @@ public class ProfileActivity extends AppCompatActivity{
         UniversalImageLoader.setImage(imgUrl, mProfilePhoto, null, "https://");
     }
 
-    private void setProfileWidgets(UserSettings userSettings){
+    public void setProfileWidgets(UserSettings userSettings){
         Log.d(TAG, "setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.toString());
 
         User user = userSettings.getUser();
@@ -132,6 +142,7 @@ public class ProfileActivity extends AppCompatActivity{
         txtFacil.setText(String.valueOf(settings.getTestes_easy()));
         txtMedio.setText(String.valueOf(settings.getTestes_medium()));
         txtDificil.setText(String.valueOf(settings.getTestes_hard()));
+
 
     }
 
@@ -165,6 +176,7 @@ public class ProfileActivity extends AppCompatActivity{
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 setProfileWidgets(mFirebaseMethods.getUserSettings(dataSnapshot));
             }
 

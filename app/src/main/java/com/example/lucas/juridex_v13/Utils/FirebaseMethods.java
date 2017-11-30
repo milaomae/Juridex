@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.lucas.juridex_v13.Common.Common;
 import com.example.lucas.juridex_v13.Profile.AccountSettingsActivity;
 import com.example.lucas.juridex_v13.R;
 import com.example.lucas.juridex_v13.models.Question;
@@ -146,7 +147,7 @@ public class FirebaseMethods {
     }
 
     public void addNewUser(String username,String email, String profile_photo){
-        User user = new User( userID, email, username);
+        User user = new User(email, username);
 
         myRef.child(mContext.getString(R.string.dbname_users))
                 .child(userID)
@@ -192,7 +193,6 @@ public class FirebaseMethods {
     }
 
     public void updateUserAccountSettings(String photo, long score, long testes_easy, long testes_medium, long testes_hard){
-
         Log.d(TAG, "updateUserAccountSettings: updating user account settings.");
 
         if(photo != null){
@@ -248,6 +248,7 @@ public class FirebaseMethods {
     public UserSettings getUserSettings(DataSnapshot dataSnapshot){
         Log.d(TAG, "getUserAccountSettings: retrieving user account settings from firebase");
 
+        UserSettings userSettings = new UserSettings();
         UserAccountSettings settings = new UserAccountSettings();
         User user = new User();
 
@@ -258,17 +259,9 @@ public class FirebaseMethods {
                 Log.d(TAG, "getUserAccountSettings: datasnapshot " + ds);
 
                 try {
-                    user.setEmail(ds.child(userID)
-                            .getValue(User.class)
-                            .getEmail());
-
                     settings.setPhoto(ds.child(userID)
                             .getValue(UserAccountSettings.class)
                             .getPhoto());
-
-                    user.setUsername(ds.child(userID)
-                            .getValue(User.class)
-                            .getUsername());
 
                     settings.setScore(ds.child(userID)
                             .getValue(UserAccountSettings.class)
@@ -301,21 +294,18 @@ public class FirebaseMethods {
                                     .getValue(User.class)
                                     .getUsername()
                     );
+                    Log.d(TAG, "getUserSettings: " + user.getUsername());
                     user.setEmail(
                             ds.child(userID)
                                     .getValue(User.class)
                                     .getEmail()
-                    );
-                    user.setUser_id(
-                            ds.child(userID)
-                                    .getValue(User.class)
-                                    .getUser_id()
                     );
 
                     Log.d(TAG, "getUserAccountSettings: retrieved users information: " + user.toString());
                 }
             }
             return new UserSettings(user, settings);
+
 
     }
 

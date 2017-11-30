@@ -75,6 +75,8 @@ public class AccountSettingsActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "onClick: navigation back to 'ProfileActivity'");
+                Intent intent = new Intent(AccountSettingsActivity.this, ProfileActivity.class);
+                startActivity(intent);
                 finish();
             }
         });
@@ -86,8 +88,8 @@ public class AccountSettingsActivity extends AppCompatActivity{
     private void setupFragments(){
         pagerAdapter = new SectionsStatePagerAdapter(getSupportFragmentManager());
         pagerAdapter.addFragment(new EditProfileFragment(), getString(R.string.editprofile)); //fragment 0
-        pagerAdapter.addFragment(new SignOutFragment(), getString(R.string.signout)); //fragment 1
-        pagerAdapter.addFragment(new GalleryFragment(), "galeria"); //fragment 2
+        pagerAdapter.addFragment(new SignOutFragment(), getString(R.string.signout)); //fragment 0
+        pagerAdapter.addFragment(new GalleryFragment(), "galeria"); //fragment 1
 
 
     }
@@ -114,7 +116,7 @@ public class AccountSettingsActivity extends AppCompatActivity{
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Log.d(TAG, "onItemClick: navigation to fragment: " + i);
-                if( i != 0)
+                if(i != 0)
                     setViewPager(i);
                 else{
                     Intent intent = new Intent(AccountSettingsActivity.this, EditProfileActivity.class);

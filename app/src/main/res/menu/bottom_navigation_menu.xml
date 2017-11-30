@@ -4,18 +4,22 @@
     <item
         android:id="@+id/ic_home"
         android:icon="@drawable/ic_action_home"
+        android:iconTintMode="src_over"
         android:title="Home"
-        android:iconTint="@color/yellowbr">
+        android:iconTint="@color/yellowbr"
+        >
     </item>
     <item
         android:id="@+id/ic_profile"
         android:icon="@drawable/ic_action_perfil"
         android:title="Profile"
+        android:iconTintMode="src_over"
         android:iconTint="@color/yellowbr">
     </item>
     <item
         android:id="@+id/ic_premium"
         android:icon="@drawable/ic_action_premium"
+        android:iconTintMode="src_in"
         android:title="Premium"
         android:iconTint="@color/yellowbr">
     </item>

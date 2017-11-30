@@ -69,30 +69,47 @@ public class FimJogoFragment extends Fragment{
         mFirebaseMethods = new FirebaseMethods(getActivity());
         mUserSettings = new UserSettings();
 
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        if (mAuth.getCurrentUser() != null) {
+            userID = mAuth.getCurrentUser().getUid();
+        }
+
+        mFirebaseMethods = new FirebaseMethods(getActivity());
+
         //update score usuário
-    setupFirebaseAuth();
+        setupFirebaseAuth();
+        saveDataUsuario();
 
         //set textos
         setTxts();
 
         //cliques dos botões
         setClicks();
-
-        return view;
     }
 
     public void saveDataUsuario(){
         final long score = (long) Common.getScore();
 
 
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 for(DataSnapshot ds : dataSnapshot.child(userID).getChildren()){
                     if(Common.getNivel().equals("cdc_easy")){
-                         mFirebaseMethods.updateUserAccountSettings(ds.getValue(UserAccountSettings.class).getPhoto() , score , ds.getValue(UserAccountSettings.class).getTestes_easy()+1,
-                                 ds.getValue(UserAccountSettings.class).getTestes_medium(), ds.getValue(UserAccountSettings.class).getTestes_hard());
+                        Log.d(TAG, "onDataChange: " + ds.getValue(UserAccountSettings.class).getPhoto());
+                         mFirebaseMethods.updateUserAccountSettings(ds.getValue(UserAccountSettings.class).getPhoto()
+                                 , score
+                                 , ds.getValue(UserAccountSettings.class).getTestes_easy()+1
+                                 , ds.getValue(UserAccountSettings.class).getTestes_medium()
+                                 , ds.getValue(UserAccountSettings.class).getTestes_hard());
                     }
                     if(Common.getNivel().equals("cdc_medium")){
                         mFirebaseMethods.updateUserAccountSettings(ds.getValue(UserAccountSettings.class).getPhoto() , score*2 , ds.getValue(UserAccountSettings.class).getTestes_easy(),
@@ -207,9 +224,11 @@ public class FimJogoFragment extends Fragment{
           @Override
             public void onClick(View view) {
               //setar valores das mensagens
+              String nivel = Common.getNivel();
               Common.cleanCommonVariaveis();
+              Common.setNivel(nivel);
                //redireciona para a página de questões no mesmo nível atual
-               ((GameActivity)getActivity()).setViewPager(0);
+              ((GameActivity)getActivity()).setViewPager(0);
                 
                // Toast.makeText(getActivity(), "encerrou fragment", Toast.LENGTH_SHORT ).show();
             }
@@ -223,10 +242,8 @@ public class FimJogoFragment extends Fragment{
     private void setupFirebaseAuth(){
         Log.d(TAG, "setupFirebaseAuth: setting up firebaseAuth");
 
-        mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference();
-        userID = mAuth.getCurrentUser().getUid();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -236,7 +253,7 @@ public class FimJogoFragment extends Fragment{
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    saveDataUsuario();
+
 
 
                 } else {

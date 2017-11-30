@@ -44,7 +44,7 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
     private MyButton btnA, btnB, btnC, btnD;
     private MyTextView txtQuestion, txtQuestaoAtual, txtNivelAtual;
     private int numQuestaoLista;
-    private MaterialDialog dialog;
+    private MaterialDialog dialog, dialog2;
     private int questoesCorretas, score = 0;
     private ProgressBar mProgressBar;
     private TextView mPleaseWait;
@@ -101,7 +101,6 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         Log.d(TAG, "onActivityCreated: onActivity created");
         super.onActivityCreated(savedInstanceState);
-
         setupFirebaseAuth();
 
         btnA.setOnClickListener(this);
@@ -115,52 +114,11 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
     public void onResume() {
         super.onResume();
         Log.d(TAG, "onResume: on resume do fragment");
-    }
-
-    public void voltouDaTelaJustificativa(){
-            txtQuestion.setText(Common.getQuestaoAtual().getQuestion());
-            btnA.setText(Common.getQuestaoAtual().getAnswera());
-            btnB.setText(Common.getQuestaoAtual().getAnswerb());
-            btnC.setText(Common.getQuestaoAtual().getAnswerc());
-            btnD.setText(Common.getQuestaoAtual().getAnswerd());
-
-            if(Common.getAlternativaEscolhida().equals(Common.getQuestaoAtual().getCorrect())){
-                dialog = new MaterialDialog.Builder(getActivity())
-                        .title("Você acertou!")
-                        .titleColorRes(R.color.acertou)
-                        .content("")
-                        .positiveText("Próxima")
-                        .show();
-            }
-            else{
-                dialog = new MaterialDialog.Builder(getActivity())
-                        .title("Você errou!")
-                        .titleColorRes(R.color.errou)
-                        .content("")
-                        .positiveText("Próxima")
-                        .show();
-
-            }
-
-            dialog.getActionButton(DialogAction.POSITIVE).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    dialog.dismiss();
-                    Common.setFoiTelaJustificativa(false);
-                    //quando terminar as questoes da lista
-                    if(Common.getQuestoesJaLidas().size() != Common.getListaQuestoes().size()){
-                        Log.d(TAG, "onClick: proxima pergunta");
-                        setQuestions();
-
-                    }
-                    else{
-                        ((GameActivity)getActivity()).setViewPager(2);}
 
 
-                }
-            });
 
     }
+
 
     @Override
     public void onClick(View view) {
@@ -206,6 +164,7 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
                     Common.setScore(score);
                     Common.setAcertos(questoesCorretas);
                     ((GameActivity) getActivity()).setViewPager(2);
+
                 }
 
                 dialog.dismiss();
@@ -219,10 +178,18 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
                // justificativa = questaoF.getJustificativa();
                 Common.setScore(score);
                 Common.setAcertos(questoesCorretas);
-                Common.setFoiTelaJustificativa(true);
-                dialog.dismiss();
-                
-                ((GameActivity)getActivity()).setViewPager(1);
+                //((GameActivity) getActivity()).setViewPager(1);
+                dialog2 = new MaterialDialog.Builder(getActivity())
+                        .title("Justificativa")
+                        .content(Common.getQuestaoAtual().getJustificativa())
+                        .positiveText("Fechar")
+                        .show();
+                    dialog2.getActionButton(DialogAction.POSITIVE).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dialog2.dismiss();
+                        }
+                    });
 
             }
         });
@@ -284,23 +251,7 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     // Read from the database
-                    myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            Log.d(TAG, "onDataChange: loading question and choosing one");
-                            Common.setListaQuestoes(firebase.loadQuestions(Common.getNivel(), dataSnapshot));
-                            Common.setQuestoesTotais(Common.getListaQuestoes().size());
-                            if(Common.getQuestoesJaLidas().size() != Common.getListaQuestoes().size()){
-                                setQuestions();}
 
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError error) {
-                            // Failed to read value
-                            Log.w(TAG, "Failed to read value.", error.toException());
-                        }
-                    });
 
                 } else {
                     // User is signed out
@@ -309,6 +260,24 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
                 // ...
             }
         };
+
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d(TAG, "onDataChange: loading question and choosing one");
+                Common.setListaQuestoes(firebase.loadQuestions(Common.getNivel(), dataSnapshot));
+                Common.setQuestoesTotais(Common.getListaQuestoes().size());
+                setQuestions();
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
     }
 
     @Override
@@ -325,4 +294,6 @@ public class QuestaoFragment extends Fragment implements View.OnClickListener{
         }
 
     }
+
+
 }

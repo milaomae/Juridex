@@ -6,12 +6,10 @@ package com.example.lucas.juridex_v13.models;
 
 public class User {
 
-    private String user_id;
     private String email;
     private String username;
 
-    public User(String user_id, String email, String username) {
-        this.user_id = user_id;
+    public User(String email, String username) {
         this.email = email;
         this.username = username;
     }
@@ -19,13 +17,6 @@ public class User {
     public User() {
         }
 
-    public String getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(String user_id) {
-        this.user_id = user_id;
-    }
 
     public String getEmail() {
         return email;
@@ -46,8 +37,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "user_id='" + user_id + '\'' +
-                ", email='" + email + '\'' +
+                " email='" + email + '\'' +
                 ", username='" + username + '\'' +
                 '}';
     }

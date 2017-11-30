@@ -3,6 +3,7 @@ package com.example.lucas.juridex_v13.Common;
 import android.content.Intent;
 
 import com.example.lucas.juridex_v13.models.Question;
+import com.example.lucas.juridex_v13.models.UserSettings;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +14,8 @@ import java.util.List;
  */
 
 public class Common {
+
+    public static UserSettings userSettings;
 
     public static int acertos;
     public static int questoesTotais;
@@ -27,6 +30,14 @@ public class Common {
     public static String alternativaEscolhida;
 
     public static HashMap<Integer, ArrayList<String>> respostas;
+
+    public static UserSettings getUserSettings() {
+        return userSettings;
+    }
+
+    public static void setUserSettings(UserSettings userSettings) {
+        Common.userSettings = userSettings;
+    }
 
     public static ArrayList<String> getRespostas(Integer cod) {
             return respostas.get(cod);

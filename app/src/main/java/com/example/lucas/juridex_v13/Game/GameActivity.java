@@ -16,7 +16,6 @@ import android.widget.RelativeLayout;
 
 import com.example.lucas.juridex_v13.Common.Common;
 import com.example.lucas.juridex_v13.Login.LoginActivity;
-import com.example.lucas.juridex_v13.Profile.EditProfileFragment;
 import com.example.lucas.juridex_v13.Profile.SignOutFragment;
 import com.example.lucas.juridex_v13.R;
 import com.example.lucas.juridex_v13.Utils.SectionsStatePagerAdapter;

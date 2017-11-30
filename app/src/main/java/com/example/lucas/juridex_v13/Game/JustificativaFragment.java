@@ -37,9 +37,8 @@ public class JustificativaFragment extends Fragment{
         btnVoltarJustificativa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((GameActivity)getActivity()).setViewPager(0);
-                onDestroyView();
-            }
+                Log.d(TAG, "onClick: redireciona para a pagina de questões");
+                ((GameActivity)getActivity()).setViewPager(0);}
         });
 
         return view;

@@ -145,6 +145,12 @@ public class EditProfileActivity extends AppCompatActivity  implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_editprofile);
 
+        mAuth = FirebaseAuth.getInstance();
+
+        if (mAuth.getCurrentUser() != null) {
+            userID = mAuth.getCurrentUser().getUid();
+        }
+
         mFirebaseMethods = new FirebaseMethods(EditProfileActivity.this);
 
         //se as permissões estiverem habilitadas
@@ -164,7 +170,6 @@ public class EditProfileActivity extends AppCompatActivity  implements
         //mProgressBar = view.findViewById(R.id.loginRequestLoadingProgressbar);
 
         setupFragments();
-        //setProfileImage();
         setupFirebaseAuth();
 
         //back arrow for navigating back to "Profile Activity"
@@ -208,10 +213,9 @@ public class EditProfileActivity extends AppCompatActivity  implements
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //case1 the user made a change to their username
-                if(mUserSettings.getUser().getUsername() != null) {
-                    if (!mUserSettings.getUser().getUsername().equals(displayUsername)) {
+                if (!mUserSettings.getUser().getUsername().equals(displayUsername)) {
                         checkIfUsernameExists(displayUsername);
-                    }
+
                 }
                 else
                     checkIfUsernameExists(displayUsername);
@@ -250,14 +254,14 @@ public class EditProfileActivity extends AppCompatActivity  implements
         Log.d(TAG, "setProfileWidgets: setting widgets with data retrieving from firebase database: " + userSettings.toString());
 
         mUserSettings = userSettings;
-
-        UserAccountSettings settings = new UserAccountSettings();
-        User user = new User();
+        User user = userSettings.getUser();
+        UserAccountSettings settings = userSettings.getSettings();
 
         UniversalImageLoader.setImage(settings.getPhoto(), profile_photo, null, "");
 
-        changeUsername.setText(user.getUsername().toString());
-        changeEmail.setText(user.getEmail().toString());
+        if(user.getUsername() != null)
+            changeUsername.setText(user.getUsername());
+        changeEmail.setText(user.getEmail());
 
     }
 
@@ -374,6 +378,19 @@ public class EditProfileActivity extends AppCompatActivity  implements
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
 
 
+                    myRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            setProfileWidgets(mFirebaseMethods.getUserSettings(dataSnapshot));
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -382,17 +399,6 @@ public class EditProfileActivity extends AppCompatActivity  implements
             }
         };
 
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                setProfileWidgets(mFirebaseMethods.getUserSettings(dataSnapshot));
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
     }
 
 
